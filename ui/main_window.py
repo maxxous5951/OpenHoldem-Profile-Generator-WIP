@@ -5,8 +5,8 @@ from PyQt6.QtWidgets import (QMainWindow, QTabWidget, QVBoxLayout, QHBoxLayout,
                            QWidget, QPushButton, QTextEdit, QScrollArea, 
                            QFileDialog, QMessageBox, QGroupBox, QComboBox)
 
-from generators.preflop_generator import PreflopProfileGenerator
-from generators.flop_generator import FlopProfileGenerator
+from generators.preflop import PreflopProfileGenerator
+from generators.flop import FlopProfileGenerator
 from generators.turn_generator import TurnProfileGenerator
 from generators.river_generator import RiverProfileGenerator
 
