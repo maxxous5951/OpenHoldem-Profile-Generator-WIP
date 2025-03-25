@@ -26,13 +26,13 @@ class BaseProfileGenerator(ABC):
     
     def calculate_raise_size(self, base_size, num_limpers=0, aggressive_factor=1.0):
         """
-        Calcule la taille d'une relance en fonction de la taille de base, 
-        du nombre de limpers et du facteur d'agressivité
+        Calcule la taille d'une relance en fonction de la taille de base 
+        et du nombre de limpers, sans appliquer le facteur d'agressivité
         
         Args:
             base_size (str): Taille de base en BB
             num_limpers (int): Nombre de limpers
-            aggressive_factor (float): Facteur d'agressivité (0.5-2.0)
+            aggressive_factor (float): Paramètre ignoré, gardé pour compatibilité
             
         Returns:
             float: Taille de la relance calculée
@@ -42,12 +42,10 @@ class BaseProfileGenerator(ABC):
         if num_limpers > 0:
             size += num_limpers
         
-        # Ajuster la taille en fonction de l'agressivité
-        # Plus agressif = sizing plus grand (±20%)
-        size *= (0.8 + (aggressive_factor * 0.4))
+        # Pas d'ajustement basé sur l'agressivité
         
         return round(size, 1)
-    
+        
     def get_position_map(self, num_players):
         """
         Renvoie une carte des positions qui existent en fonction du nombre de joueurs
