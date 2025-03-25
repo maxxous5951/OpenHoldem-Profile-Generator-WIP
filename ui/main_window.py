@@ -44,6 +44,52 @@ class OpenHoldemProfileGenerator(QMainWindow):
         self.num_players = 9
         self.game_type = "Cash Game"
         
+        # Paramètres généraux preflop
+        self.aggression = 50      # 0-100
+        self.tightness = 50       # 0-100
+        self.limp_frequency = 30  # 0-100
+        self.threebet_frequency = 40  # 0-100
+        self.fourbet_frequency = 30  # 0-100
+        self.squeeze_frequency = 35  # 0-100
+        self.open_raise_size = "2.5"  # BB
+        
+        # Ranges preflop détaillées par position
+        self.ep1_range = 10    # UTG
+        self.ep2_range = 12    # UTG+1
+        self.ep3_range = 14    # UTG+2
+        self.mp1_range = 16
+        self.mp2_range = 18
+        self.mp3_range = 20    # HJ
+        self.co_range = 25     # CO
+        self.btn_range = 30    # BTN
+        self.sb_range = 35     # SB
+        self.bb_range = 40     # BB
+        
+        # Sizing preflop par position
+        self.ep1_sizing = "3.0"  # UTG
+        self.ep2_sizing = "3.0"  # UTG+1
+        self.ep3_sizing = "3.0"  # UTG+2
+        self.mp1_sizing = "2.5"
+        self.mp2_sizing = "2.5"
+        self.mp3_sizing = "2.5"  # HJ
+        self.co_sizing = "2.5"   # CO
+        self.btn_sizing = "2.5"  # BTN
+        self.sb_sizing = "2.5"   # SB
+        
+        # Autres paramètres preflop
+        self.call_3bet_range = 15
+        self.fourbet_range = 8
+        self.ip_3bet_adjust = 20
+        self.vs_lp_3bet_adjust = 15
+        self.call_4bet_range = 5
+        self.fivebet_range = 3
+        self.short_stack_4bet = 30
+        self.squeeze_1caller = 12
+        self.squeeze_multi = 8
+        self.squeeze_sizing = "3.0"
+        self.blinds_squeeze = 25
+        self.btn_squeeze = 20
+        
         # Flop variables
         self.ip_cbet_freq = 70
         self.oop_cbet_freq = 60
@@ -286,12 +332,31 @@ class OpenHoldemProfileGenerator(QMainWindow):
             "fourbet_frequency": 30,  # Fixed value for now
             "squeeze_frequency": 35,  # Fixed value for now
             "open_raise_size": "2.5",
-            "ep_range": self.ep_range_slider.value(),
-            "mp_range": self.mp_range_slider.value(),
-            "lp_range": self.lp_range_slider.value(),
-            "ep_sizing": self.ep_sizing_combo.currentText(),
-            "mp_sizing": self.mp_sizing_combo.currentText(),
-            "lp_sizing": self.lp_sizing_combo.currentText(),
+            
+            # Ranges détaillées par position
+            "ep1_range": self.ep1_range_slider.value(),
+            "ep2_range": self.ep2_range_slider.value(),
+            "ep3_range": self.ep3_range_slider.value(),
+            "mp1_range": self.mp1_range_slider.value(),
+            "mp2_range": self.mp2_range_slider.value(),
+            "mp3_range": self.mp3_range_slider.value(),
+            "co_range": self.co_range_slider.value(),
+            "btn_range": self.btn_range_slider.value(),
+            "sb_range": self.sb_range_slider.value(),
+            "bb_range": self.bb_range_slider.value(),
+            
+            # Sizing par position
+            "ep1_sizing": self.ep1_sizing_combo.currentText(),
+            "ep2_sizing": self.ep2_sizing_combo.currentText(),
+            "ep3_sizing": self.ep3_sizing_combo.currentText(),
+            "mp1_sizing": self.mp1_sizing_combo.currentText(),
+            "mp2_sizing": self.mp2_sizing_combo.currentText(),
+            "mp3_sizing": self.mp3_sizing_combo.currentText(),
+            "co_sizing": self.co_sizing_combo.currentText(),
+            "btn_sizing": self.btn_sizing_combo.currentText(),
+            "sb_sizing": self.sb_sizing_combo.currentText(),
+            
+            # Autres paramètres preflop
             "call_3bet_range": self.call_3bet_range_slider.value(),
             "fourbet_range": self.fourbet_range_slider.value(),
             "ip_3bet_adjust": self.ip_3bet_adjust_slider.value(),
@@ -304,6 +369,7 @@ class OpenHoldemProfileGenerator(QMainWindow):
             "squeeze_sizing": self.squeeze_sizing_combo.currentText(),
             "blinds_squeeze": self.blinds_squeeze_slider.value(),
             "btn_squeeze": self.btn_squeeze_slider.value(),
+            
             # Ajouter toutes les variables push/fold
             "push_1bb_ep": self.push_1bb_ep,
             "push_1bb_mp": self.push_1bb_mp,
