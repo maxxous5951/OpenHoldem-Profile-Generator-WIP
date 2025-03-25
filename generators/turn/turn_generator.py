@@ -144,7 +144,7 @@ class TurnProfileGenerator(BaseTurnGenerator):
 
         code += "##f$FacingDelayedCbet##\n"
         code += "// Detect facing delayed c-bet scenarios\n"
-        code += "WHEN NOT BotRaisedBeforeFlop AND BotAction_PREFLOP = Call AND BotAction_FLOP = Check AND BotsActionsOnThisRoundIncludingChecks = 0 AND Bets > 0 RETURN true FORCE\n"
+        code += "WHEN BotsLastPreflopAction = Call AND BotsActionsOnThisRoundIncludingChecks = 0 AND NoBettingOnFlop AND BotCalledOnTurn AND Bets = 1 Return true Force\n"
         code += "WHEN Others RETURN false FORCE\n\n"
 
         code += "##f$FacingCheckRaiseToSecondBarrel##\n"
