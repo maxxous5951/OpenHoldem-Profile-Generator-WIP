@@ -140,22 +140,22 @@ class RiverProfileGenerator(BaseRiverGenerator):
 
         code += "##f$FacingThirdBarrel##\n"
         code += "// Detect facing third barrel scenarios\n"
-        code += "WHEN NOT BotRaisedBeforeFlop AND BotAction_PREFLOP = Call AND BotAction_FLOP = Call AND BotAction_TURN = Call AND BotsActionsOnThisRoundIncludingChecks = 0 AND Bets > 0 RETURN true FORCE\n"
+        code += "WHEN BotsLastPreflopAction = Call AND BotsActionsOnThisRoundIncludingChecks = 0 AND BotCalledOnFlop AND BotCalledOnTurn AND Bets = 1 Return true Force\n"
         code += "WHEN Others RETURN false FORCE\n\n"
 
         code += "##f$FacingDelayedSecondBarrel##\n"
         code += "// Detect facing delayed second barrel scenarios\n"
-        code += "WHEN NOT BotRaisedBeforeFlop AND BotAction_PREFLOP = Call AND BotAction_FLOP = Call AND BotAction_TURN = Check AND BotsActionsOnThisRoundIncludingChecks = 0 AND Bets > 0 RETURN true FORCE\n"
+        code += "WHEN BotsLastPreflopAction = Call AND BotsActionsOnThisRoundIncludingChecks = 0 AND NoBettingOnFlop AND BotCalledOnTurn AND Bets = 1 Return true Force\n"
         code += "WHEN Others RETURN false FORCE\n\n"
 
         code += "##f$FacingCheckRaiseToThirdBarrel##\n"
         code += "// Detect facing check-raise to third barrel scenarios\n"
-        code += "WHEN BotRaisedBeforeFlop AND BotRaisedOnFlop AND BotRaisedOnTurn AND BotActionsRiver = 1 AND BotsActionsOnThisRound = 1 AND RaisesSinceLastPlay = 1 RETURN true FORCE\n"
+        code += "WHEN BotRaisedBeforeFlop AND BotRaisedOnFlop AND BotRaisedOnTurn AND BotsActionsOnThisRound = 1 AND RaisesSinceLastPlay = 1 RETURN true FORCE\n"
         code += "WHEN Others RETURN false FORCE\n\n"
 
         code += "##f$FacingRaiseToThirdBarrel##\n"
         code += "// Detect facing raise to third barrel scenarios\n"
-        code += "WHEN BotRaisedBeforeFlop AND BotRaisedOnFlop AND BotRaisedOnTurn AND BotRaisedOnRiver AND RaisesSinceLastPlay = 1 RETURN true FORCE\n"
+        code += "WHEN BotsLastPreflopAction = Raise AND BotsActionsOnThisRoundIncludingChecks = 1 AND BotRaisedOnFlop AND BotRaisedOnTurn AND f$BotRaisedOnRiver AND NOT f$InPosition AND RaisesSinceLastPlay = 1 Return true Force\n"
         code += "WHEN Others RETURN false FORCE\n\n"
         
         return code
