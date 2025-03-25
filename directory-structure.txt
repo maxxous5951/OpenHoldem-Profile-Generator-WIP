@@ -1,0 +1,21 @@
+openholdem_profile_generator/
+├── generators/
+│   ├── __init__.py
+│   ├── preflop_generator.py  (inchangé)
+│   ├── flop_generator.py     (inchangé)
+│   ├── turn_generator.py     (inchangé)
+│   └── river_generator.py    (inchangé)
+├── ui/
+│   ├── __init__.py
+│   ├── main_window.py        (nouvelle classe principale)
+│   ├── config_tab.py         (onglet configuration)
+│   ├── preflop_tab.py        (onglet preflop)
+│   ├── flop_tab.py           (onglet flop)
+│   ├── turn_tab.py           (onglet turn)
+│   ├── river_tab.py          (onglet river)
+│   ├── push_fold_tab.py      (onglet push/fold)
+│   └── components.py         (composants réutilisables)
+├── utils.py                  (fonctions utilitaires)
+├── resources/
+│   └── style.qss            (feuille de style CSS pour Qt)
+└── main.py                   (point d'entrée simplifié)
