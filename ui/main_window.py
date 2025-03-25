@@ -7,8 +7,8 @@ from PyQt6.QtWidgets import (QMainWindow, QTabWidget, QVBoxLayout, QHBoxLayout,
 
 from generators.preflop import PreflopProfileGenerator
 from generators.flop import FlopProfileGenerator
-from generators.turn_generator import TurnProfileGenerator
-from generators.river_generator import RiverProfileGenerator
+from generators.turn import TurnProfileGenerator
+from generators.river import RiverProfileGenerator
 
 from ui.config_tab import create_config_tab
 from ui.preflop_tab import create_preflop_tab
