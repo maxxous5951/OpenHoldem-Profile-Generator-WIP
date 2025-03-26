@@ -2,7 +2,8 @@
 Onglet des paramètres preflop pour l'application OpenHoldem Profile Generator
 """
 from PyQt6.QtWidgets import (QGridLayout, QLabel, QSlider, QComboBox, 
-                            QGroupBox, QTabWidget, QWidget, QVBoxLayout)
+                            QGroupBox, QTabWidget, QWidget, QVBoxLayout,
+                            QHBoxLayout, QPushButton)
 from PyQt6.QtCore import Qt
 from ui.components import create_scroll_area
 
@@ -17,6 +18,22 @@ def create_preflop_tab(main_window):
         QScrollArea: Zone de défilement contenant l'onglet preflop
     """
     preflop_scroll, preflop_widget, preflop_layout = create_scroll_area()
+    
+    # Bouton de sélection de profil
+    profile_frame = QWidget()
+    profile_layout = QHBoxLayout(profile_frame)
+    profile_layout.setContentsMargins(0, 0, 0, 10)
+    
+    main_window.profile_label = QLabel("Profil actuel: Personnalisé")
+    profile_layout.addWidget(main_window.profile_label)
+    
+    profile_layout.addStretch(1)
+    
+    select_profile_button = QPushButton("Select a predefined profile")
+    select_profile_button.clicked.connect(lambda: main_window.show_profile_selector())
+    profile_layout.addWidget(select_profile_button)
+    
+    preflop_layout.addWidget(profile_frame)
     
     # Créer un sous-onglet pour organiser les différentes sections
     preflop_tabs = QTabWidget()
