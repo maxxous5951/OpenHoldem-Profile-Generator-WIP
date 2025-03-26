@@ -1,21 +1,67 @@
 openholdem_profile_generator/
-├── generators/
-│   ├── __init__.py
-│   ├── preflop_generator.py  (inchangé)
-│   ├── flop_generator.py     (inchangé)
-│   ├── turn_generator.py     (inchangé)
-│   └── river_generator.py    (inchangé)
-├── ui/
-│   ├── __init__.py
-│   ├── main_window.py        (nouvelle classe principale)
-│   ├── config_tab.py         (onglet configuration)
-│   ├── preflop_tab.py        (onglet preflop)
-│   ├── flop_tab.py           (onglet flop)
-│   ├── turn_tab.py           (onglet turn)
-│   ├── river_tab.py          (onglet river)
-│   ├── push_fold_tab.py      (onglet push/fold)
-│   └── components.py         (composants réutilisables)
-├── utils.py                  (fonctions utilitaires)
-├── resources/
-│   └── style.qss            (feuille de style CSS pour Qt)
-└── main.py                   (point d'entrée simplifié)
+│
+├── README.md                     # Main project documentation
+│
+├── main.py                       # Main entry point of the application
+├── utils.py                      # Utility functions for the application
+│
+├── player_profiles.py            # Definition of predefined player profiles
+├── profile_manager.py            # Management of profile application
+├── profile_selector.py           # Profile selection interface
+│
+├── generators/                   # Code generator modules for profiles
+│   ├── __init__.py               # Initialization of generators package
+│   │
+│   ├── preflop/                  # Generators for preflop strategy
+│   │   ├── __init__.py           # Exports from preflop module
+│   │   ├── base_generator.py     # Base class for preflop generators
+│   │   ├── open_raise_generator.py  # Generator for open raise strategies
+│   │   ├── preflop_generator.py  # Main preflop generator
+│   │   ├── push_fold_generator.py  # Generator for push/fold strategies
+│   │   ├── squeeze_generator.py  # Generator for squeeze strategies
+│   │   └── three_bet_generator.py  # Generator for 3-bet and 4-bet strategies
+│   │
+│   ├── flop/                     # Generators for flop strategy
+│   │   ├── __init__.py           # Exports from flop module
+│   │   ├── base_generator.py     # Base class for flop generators
+│   │   ├── board_texture_generator.py  # Generator for board texture analysis
+│   │   ├── cbet_generator.py     # Generator for C-Bet strategies
+│   │   ├── facing_bets_generator.py  # Generator for responding to bets
+│   │   ├── flop_generator.py     # Main flop generator
+│   │   └── hand_categories_generator.py  # Generator for hand categories
+│   │
+│   ├── turn/                     # Generators for turn strategy
+│   │   ├── __init__.py           # Exports from turn module
+│   │   ├── base_generator.py     # Base class for turn generators
+│   │   ├── board_texture_generator.py  # Generator for turn board texture analysis
+│   │   ├── facing_bets_generator.py  # Generator for responding to bets
+│   │   ├── hand_categories_generator.py  # Generator for hand categories
+│   │   ├── probe_generator.py    # Generator for probe betting
+│   │   ├── second_barrel_generator.py  # Generator for second barrel strategies
+│   │   └── turn_generator.py     # Main turn generator
+│   │
+│   ├── river/                    # Generators for river strategy
+│   │   ├── __init__.py           # Exports from river module
+│   │   ├── base_generator.py     # Base class for river generators
+│   │   ├── board_texture_generator.py  # Generator for river board texture analysis
+│   │   ├── facing_bets_generator.py  # Generator for responding to bets
+│   │   ├── hand_categories_generator.py  # Generator for hand categories
+│   │   ├── probe_generator.py    # Generator for probe betting
+│   │   ├── river_generator.py    # Main river generator
+│   │   └── third_barrel_generator.py  # Generator for third barrel strategies
+│   │
+│   └── river_generator.py        # Alternative version of river generator
+│
+├── ui/                           # User interface
+│   ├── __init__.py               # Initialization of UI package
+│   ├── components.py             # Reusable interface components
+│   ├── config_tab.py             # Configuration tab
+│   ├── flop_tab.py               # Flop settings tab
+│   ├── main_window.py            # Main interface class
+│   ├── preflop_tab.py            # Preflop settings tab
+│   ├── push_fold_tab.py          # Push/fold settings tab
+│   ├── river_tab.py              # River settings tab
+│   └── turn_tab.py               # Turn settings tab
+│
+└── resources/                    # Resources for the application
+    └── style.qss                 # CSS style sheet for Qt
