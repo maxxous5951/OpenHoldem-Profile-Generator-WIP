@@ -1,0 +1,170 @@
+##f$custom_library_notes##
+//*****************************************************************************
+//
+// This library is for custom user-defined functions.
+//   * to keep the bot-logic clean
+//   * to keep the standardized OpenPL-library as is.
+//   * to share technical functions between multiple bots without copy-and-paste.
+//
+// This file will be loaded after the OpenPPL-library and before user-defined bot-logic.
+//
+// The functions in this library will be read-only. They will be loaded once,
+// won't be shown in the editor and won't be saved on exit (similar to OpenPPL).
+//
+//*****************************************************************************
+##f$BotRaisedOnRiver##
+(didraisround4 || didbetsizeround4)
+
+
+##f$EffectiveStack##
+When bblind <= 0 Return -1 Force
+When (balance + currentbet) < f$TheBiggestActiveOpponentsChips Return (balance + currentbet) / bblind Force
+When Others Return f$TheBiggestActiveOpponentsStack Force
+
+##f$InPosition##
+// Helper function to determine if we're in position vs the 3bettor
+WHEN LastAggressorActsAfterUs RETURN false FORCE
+WHEN Others RETURN true FORCE
+
+
+//******************************************************************************
+//		 			M O S T   C O M M O N   S C E N A R I O S							
+//					=========================================
+//****************************************************************************** 
+//******************************************************************************
+//						P R E F L O P   S C E N A R I O S							
+//						=================================
+//******************************************************************************
+##f$OpenRaiseOrOpenLimp##
+//naming correction - Thx to ferfran 
+//No action (limp or raise) before us. Hero can Open the game by Raising or Limping
+WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 0 AND Calls = 0 Return true Force
+
+##f$LimpOrIsolateLimpers##
+//1 or more limps before us. Hero can Limp too or Raise to isolate the limpers
+WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 0 AND Calls >= 1 Return true Force
+
+##f$ThreeBetColdCall##
+//1 Raise before Hero first action and No villains call. Hero can 3Bet, ColdCall or Fold
+WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 1 AND CallsSinceLastRaise = 0 Return true Force
+
+##f$SqueezeColdCall##
+//1 Raise before Hero first action and 1 or more villains calls. Hero can Squeeze, ColdCall or Fold
+WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 1 AND CallsSinceLastRaise >= 1 Return true Force
+
+##f$Facing3BetBeforeFirstAction##
+//3bet or sqeeze before Hero first action. Hero can 4Bet, ColdCall or Fold
+WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 2 Return true Force
+
+##f$Facing4BetBeforeFirstAction##
+//4bet before Hero first action. Hero can 5Bet, ColdCall or Fold
+WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 3 Return true Force
+
+##f$Facing5BetBeforeFirstAction##
+//5bet before Hero first action. Hero can 5Bet, ColdCall or Fold
+WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 4 Return true Force
+
+##f$Facing3Bet##
+//Hero is the Original Raiser and Facing 3Bet. Hero can 4Bet, ColdCall or Fold
+WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 1 AND Calls = 0 AND RaisesSinceLastPlay = 1 Return true Force
+
+##f$FacingSqueeze##
+//Hero is the Original Raiser and Facing Squeeze by an opponent. Hero can 4Bet, ColdCall or Fold
+WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 1 AND Calls >= 1 AND RaisesSinceLastPlay = 1 Return true Force
+
+##f$Facing4Bet##
+//Hero 3bet and facing 4bet. Hero can 5bet, ColdCall or Fold
+WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 2 AND RaisesSinceLastPlay = 1 Return true Force
+
+##f$Facing5Bet##
+//Hero 4bet and facing 5bet. Hero can Push, ColdCall or Fold
+WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 2 AND NumberOfRaisesBeforeFlop = 2 AND RaisesSinceLastPlay = 1 Return true Force
+
+//******************************************************************************
+//							F L O P   S C E N A R I O S
+//							===========================
+//******************************************************************************
+##f$DonkBet##
+//Hero is not the original raiser and Donkbet the flop
+WHEN BotsLastPreflopAction = Call AND BotsActionsOnThisRoundIncludingChecks = 0 AND NumberOfRaisesBeforeFlop >= 1 AND Bets = 0 AND NOT f$InPosition Return true Force
+
+##f$FacingFlopCbet##
+//Hero is not the original raiser and facing cbet
+WHEN BotsLastPreflopAction = Call AND BotsActionsOnThisRoundIncludingChecks = 0 AND NumberOfRaisesBeforeFlop >= 1 AND Bets = 1 Return true Force
+
+##f$FlopCbetIP##
+//Continuation Bet In Position
+WHEN BotsLastPreflopAction = Raise AND BotsActionsOnThisRoundIncludingChecks = 0 AND Bets = 0 AND f$InPosition Return true Force
+
+##f$FlopCbetOOP##
+//Continuation Bet Out Of Position
+WHEN BotsLastPreflopAction = Raise AND BotsActionsOnThisRoundIncludingChecks = 0 AND Bets = 0 AND NOT f$InPosition Return true Force
+
+##f$FacingDonkBet##
+//Hero is the original raiser and facing a Donkbet
+WHEN BotsLastPreflopAction = Raise AND BotsActionsOnThisRoundIncludingChecks = 0 AND Bets = 1 Return true Force
+
+##f$FacingCheckRaiseToCbet##
+//Hero cbet and facing a CheckRaise
+WHEN BotsLastPreflopAction = Raise AND BotsActionsOnThisRoundIncludingChecks = 1 AND BotsLastAction = Bet AND f$InPosition AND RaisesSinceLastPlay = 1 Return true Force
+
+##f$FacingRaiseToCbet##
+//Hero cbet and facing a Raise
+WHEN BotsLastPreflopAction = Raise AND BotsActionsOnThisRoundIncludingChecks = 1 AND BotsLastAction = Bet AND NOT f$InPosition AND RaisesSinceLastPlay = 1 Return true Force
+
+//******************************************************************************
+//							T U R N   S C E N A R I O S
+//							===========================
+//******************************************************************************
+##f$FacingSecondBarrel##
+//Hero facing a Second Barrel by an opponent
+WHEN BotsLastPreflopAction = Call AND BotsActionsOnThisRoundIncludingChecks = 0 AND BotCalledOnFlop AND Bets = 1 Return true Force
+
+##f$FacingDelayedCbet##
+//Hero facing a Delayed Cbet by an opponent -------------> NEW, Need Config and Turn Logic
+WHEN BotsLastPreflopAction = Call AND BotsActionsOnThisRoundIncludingChecks = 0 AND NoBettingOnFlop AND Bets = 1 Return true Force
+
+##f$DelayedCbet##
+//Hero is the preflop aggressor but don't cbet on flop
+WHEN BotsLastPreflopAction = Raise AND BotsActionsOnThisRoundIncludingChecks = 0 AND NOT BotRaisedOnFlop AND Bets = 0 Return true Force
+
+##f$SecondBarrel##
+//Hero raise preflop, cbet on flop.
+WHEN BotsLastPreflopAction = Raise AND BotsActionsOnThisRoundIncludingChecks = 0 AND BotRaisedOnFlop AND Bets = 0 Return true Force
+
+##f$FacingCheckRaiseToSecondBarrel##
+//Hero facing CheckRaise to the Second Barrel
+//Hero 2cbet and facing a CheckRaise
+WHEN BotsLastPreflopAction = Raise AND BotsActionsOnThisRoundIncludingChecks = 1 AND BotRaisedOnFlop AND BotRaisedOnTurn AND f$InPosition AND RaisesSinceLastPlay = 1 Return true Force
+
+##f$FacingRaiseToSecondBarrel##
+//Hero facing a Raise to the Second Barrel
+WHEN BotsLastPreflopAction = Raise AND BotsActionsOnThisRoundIncludingChecks = 1 AND BotRaisedOnFlop AND BotRaisedOnTurn AND NOT f$InPosition AND RaisesSinceLastPlay = 1 Return true Force
+
+//******************************************************************************
+//							R I V E R  S C E N A R I O S						
+//							============================
+//******************************************************************************
+##f$FacingThirdBarrel##
+//Hero facing Third Barrel by an opponent
+WHEN BotsLastPreflopAction = Call AND BotsActionsOnThisRoundIncludingChecks = 0 AND BotCalledOnFlop AND BotCalledOnTurn AND Bets = 1 Return true Force
+
+##f$FacingDelayedSecondBarrel##
+//Hero facing Delayed Second Barrel by an opponent -------------> NEW, Need Config and River Logic
+WHEN BotsLastPreflopAction = Call AND BotsActionsOnThisRoundIncludingChecks = 0 AND NoBettingOnFlop AND BotCalledOnTurn AND Bets = 1 Return true Force
+
+##f$DelayedSecondBarrel##
+//Hero is the preflop aggressor but cbet only on turn
+WHEN BotsLastPreflopAction = Raise AND BotsActionsOnThisRoundIncludingChecks = 0 AND NOT BotRaisedOnFlop AND BotRaisedOnTurn AND Bets = 0 Return true Force
+
+##f$ThirdBarrel##
+//Hero raise preflop, cbet on flop and on turn.
+WHEN BotsLastPreflopAction = Raise AND BotsActionsOnThisRoundIncludingChecks = 0 AND BotRaisedOnFlop AND BotRaisedOnTurn AND Bets = 0 Return true Force
+
+##f$FacingCheckRaiseToThirdBarrel##
+//Hero facing a CheckRaise to the Third barrel
+WHEN BotsLastPreflopAction = Raise AND BotsActionsOnThisRoundIncludingChecks = 1 AND BotRaisedOnFlop AND BotRaisedOnTurn AND f$BotRaisedOnRiver AND f$InPosition AND RaisesSinceLastPlay = 1 Return true Force
+
+##f$FacingRaiseToThirdBarrel##
+//Hero facing a Raise to the Third Barrel
+WHEN BotsLastPreflopAction = Raise AND BotsActionsOnThisRoundIncludingChecks = 1 AND BotRaisedOnFlop AND BotRaisedOnTurn AND f$BotRaisedOnRiver AND NOT f$InPosition AND RaisesSinceLastPlay = 1 Return true Force
