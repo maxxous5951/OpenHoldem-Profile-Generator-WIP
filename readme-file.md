@@ -2,7 +2,6 @@
 
 A powerful GUI application that allows poker players to generate customized OpenHoldem poker profiles with fine-grained control over strategy parameters at every stage of the game.
 
-![OpenHoldem Profile Generator](https://example.com/images/openpg-screenshot.png) *(Screenshot example)*
 
 ## Overview
 
@@ -38,7 +37,7 @@ The generator creates optimized OpenHoldem (.ohf) format profiles that can be di
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/OpenHoldem-Profile-Generator.git
+   git clone https://github.com/maxxous5951/OpenHoldem-Profile-Generator.git
    cd OpenHoldem-Profile-Generator
    ```
 
