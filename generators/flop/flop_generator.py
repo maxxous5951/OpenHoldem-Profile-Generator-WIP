@@ -361,7 +361,7 @@ class FlopProfileGenerator(BaseFlopGenerator):
         code += "// Check-raise strategy on favorable boards\n"
         code += "WHEN f$FlopStrongHands RaisePot FORCE\n"
         code += "WHEN f$FlopStrongDraws AND handrank169 <= 25 RaisePot FORCE\n" 
-        code += "WHEN f$FlopValueHands AND LastAggressorPosition >= (nchairsdealt - 2) RaisePot FORCE\n"
+        code += "WHEN f$FlopValueHands AND LastRaiserPosition >= (nplayersdealt - 2) RaisePot FORCE\n"
         code += "WHEN Others Check FORCE\n\n"
         
         # Fonctions pour bet after check selon la texture
@@ -459,7 +459,7 @@ class FlopProfileGenerator(BaseFlopGenerator):
         code += "WHEN HaveTwoPair RETURN true FORCE\n"
         code += "WHEN HaveStraight RETURN true FORCE\n"
         code += "WHEN HaveFlush RETURN true FORCE\n"
-        code += "WHEN f$PairedBoard AND HavePair AND rankhiplayer > PairOnBoardRank RETURN true FORCE\n"
+        code += "WHEN f$PairedBoard AND HavePair AND rankhiplayer > f$PairOnBoardRank RETURN true FORCE\n"
         code += "WHEN f$MonotoneBoard AND (FirstHoleCardSuit = DominantSuitCommon AND SecondHoleCardSuit = DominantSuitCommon) RETURN true FORCE\n"
         code += "WHEN f$ConnectedBoard AND nstraightfill <= 1 RETURN true FORCE\n"
         code += "WHEN Others RETURN false FORCE\n\n"
