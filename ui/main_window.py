@@ -29,6 +29,10 @@ class OpenHoldemProfileGenerator(QMainWindow):
         # Configuration variables
         self.initialize_variables()
         
+        # Initialiser le gestionnaire de profils
+        from profile_manager import ProfileManager
+        self.profile_manager = ProfileManager(self)
+        
         # Create the generators
         self.preflop_generator = PreflopProfileGenerator()
         self.flop_generator = FlopProfileGenerator()
@@ -38,6 +42,27 @@ class OpenHoldemProfileGenerator(QMainWindow):
         # Setup the UI
         self.create_ui()
         
+    def show_profile_selector(self):
+        """Affiche le dialogue de sélection de profil"""
+        from profile_selector import ProfileSelector
+        selected_profile = ProfileSelector.get_profile(self)
+        if selected_profile:
+            self.update_profile(selected_profile)
+    
+    def update_profile(self, profile_info):
+        """Met à jour l'interface avec le profil sélectionné"""
+        # Créer le gestionnaire de profils s'il n'existe pas encore
+        if not hasattr(self, 'profile_manager'):
+            from profile_manager import ProfileManager
+            self.profile_manager = ProfileManager(self)
+        
+        # Appliquer le profil
+        self.profile_manager.apply_profile(profile_info)
+        
+        # Mettre à jour le label
+        if hasattr(self, "profile_label"):
+            self.profile_label.setText(f"Profil actuel: {profile_info.get('profile_name', 'Personnalisé')}") 
+                
     def initialize_variables(self):
         """Initialize all configuration variables with default values"""
         # Configuration variables
