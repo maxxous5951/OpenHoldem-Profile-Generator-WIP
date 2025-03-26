@@ -88,13 +88,13 @@ class BoardTextureGenerator(BaseFlopGenerator):
         code += "##f$ConnectedBoard##\n"
         code += "// Board with connected cards (exactly consecutive)\n"
         code += "WHEN nstraightcommon = 3 RETURN true FORCE\n"
-        code += "WHEN (TopFlopCard - MiddleFlopCard = 1) AND (MiddleFlopCard - LowestFlopCard = 1) RETURN true FORCE\n"
+        code += "WHEN (TopFlopCard - f$MiddleFlopCard = 1) AND (f$MiddleFlopCard - LowestFlopCard = 1) RETURN true FORCE\n"
         code += "WHEN Others RETURN false FORCE\n\n"
         
         # Semi-Connected Board (cartes avec 1 gap maximum)
         code += "##f$SemiConnectedBoard##\n"
         code += "// Board with semi-connected cards (1 gap max)\n"
-        code += "WHEN (TopFlopCard - MiddleFlopCard <= 2) AND (MiddleFlopCard - LowestFlopCard <= 2) RETURN true FORCE\n"
+        code += "WHEN (TopFlopCard - f$MiddleFlopCard <= 2) AND (f$MiddleFlopCard - LowestFlopCard <= 2) RETURN true FORCE\n"
         code += "WHEN (TopFlopCard - LowestFlopCard <= 4) AND NOT f$ConnectedBoard RETURN true FORCE\n"
         code += "WHEN Others RETURN false FORCE\n\n"
         
@@ -115,13 +115,45 @@ class BoardTextureGenerator(BaseFlopGenerator):
         # Low Card Board (uniquement des cartes 9-)
         code += "##f$LowCardBoard##\n"
         code += "// Board with only low cards (9 or lower)\n"
-        code += "WHEN TopFlopCard <= nine RETURN true FORCE\n"
+        code += "WHEN TopFlopCard <= 9 RETURN true FORCE\n"
         code += "WHEN Others RETURN false FORCE\n\n"
         
         # Middle Card Board (uniquement des cartes moyennes T-5)
         code += "##f$MiddleCardBoard##\n"
         code += "// Board with only middle cards (T-5)\n"
-        code += "WHEN TopFlopCard <= ten AND LowestFlopCard >= five RETURN true FORCE\n"
+        code += "WHEN TopFlopCard <= ten AND LowestFlopCard >= 5 RETURN true FORCE\n"
+        code += "WHEN Others RETURN false FORCE\n\n"
+        
+        # Fonction auxiliaire pour la carte du milieu
+        code += "##f$MiddleFlopCard##\n"
+        code += "// Returns the middle ranked card on the flop\n"
+        code += "WHEN ($$cr0 > $$cr1 AND $$cr0 < $$cr2) OR ($$cr0 < $$cr1 AND $$cr0 > $$cr2) RETURN $$cr0 FORCE\n"
+        code += "WHEN ($$cr1 > $$cr0 AND $$cr1 < $$cr2) OR ($$cr1 < $$cr0 AND $$cr1 > $$cr2) RETURN $$cr1 FORCE\n"
+        code += "WHEN Others RETURN $$cr2 FORCE\n\n"
+        
+        # Fonction auxiliaire pour le rang de la paire sur le board
+        code += "##f$PairOnBoardRank##\n"
+        code += "// Returns the rank of the paired card on the board, or 0 if no pair\n"
+        code += "WHEN $$cr0 = $$cr1 RETURN $$cr0 FORCE\n"
+        code += "WHEN $$cr0 = $$cr2 RETURN $$cr0 FORCE\n"
+        code += "WHEN $$cr1 = $$cr2 RETURN $$cr1 FORCE\n"
+        code += "WHEN PairOnBoard AND $$cr3 = $$cr0 RETURN $$cr0 FORCE\n"
+        code += "WHEN PairOnBoard AND $$cr3 = $$cr1 RETURN $$cr1 FORCE\n"
+        code += "WHEN PairOnBoard AND $$cr3 = $$cr2 RETURN $$cr2 FORCE\n"
+        code += "WHEN PairOnBoard AND $$cr4 = $$cr0 RETURN $$cr0 FORCE\n"
+        code += "WHEN PairOnBoard AND $$cr4 = $$cr1 RETURN $$cr1 FORCE\n"
+        code += "WHEN PairOnBoard AND $$cr4 = $$cr2 RETURN $$cr2 FORCE\n"
+        code += "WHEN PairOnBoard AND $$cr4 = $$cr3 RETURN $$cr3 FORCE\n"
+        code += "WHEN Others RETURN 0 FORCE\n\n"
+        
+        # Fonction pour vérifier si un straight draw est possible
+        code += "##f$StraightDrawPossible##\n"
+        code += "// Checks if a straight draw is possible on the board\n"
+        code += "WHEN nstraightfill <= 2 RETURN true FORCE\n"
+        code += "WHEN nstraightfillcommon <= 1 RETURN true FORCE\n"
+        code += "WHEN StraightPossible RETURN true FORCE\n"
+        code += "WHEN OpenEndedStraightDrawPossibleOnFlop RETURN true FORCE\n"
+        code += "WHEN nstraightcommon >= 2 RETURN true FORCE\n"
         code += "WHEN Others RETURN false FORCE\n\n"
         
         # CLASSIFICATION PAR POTENTIEL DE DRAW
@@ -138,7 +170,7 @@ class BoardTextureGenerator(BaseFlopGenerator):
         # Static Board (peu de possibilités de draw)
         code += "##f$StaticBoard##\n"
         code += "// Board with few possible draws\n"
-        code += "WHEN NOT FlushDrawPossible AND NOT StraightDrawPossible RETURN true FORCE\n"
+        code += "WHEN NOT FlushDrawPossible AND NOT f$StraightDrawPossible RETURN true FORCE\n"
         code += "WHEN f$RainbowBoard AND (TopFlopCard - LowestFlopCard) > 4 RETURN true FORCE\n"
         code += "WHEN f$RainbowBoard AND f$PairedBoard RETURN true FORCE\n"
         code += "WHEN Others RETURN false FORCE\n\n"
@@ -183,7 +215,7 @@ class BoardTextureGenerator(BaseFlopGenerator):
         code += "##f$CallerFavorableBoard##\n"
         code += "// Board that favors the caller's range\n"
         code += "WHEN f$LowCardBoard AND f$ConnectedBoard RETURN true FORCE\n"
-        code += "WHEN f$PairedBoard AND rankhicommon <= nine RETURN true FORCE\n"
+        code += "WHEN f$PairedBoard AND rankhicommon <= 9 RETURN true FORCE\n"
         code += "WHEN f$MiddleCardBoard AND f$ConnectedBoard RETURN true FORCE\n"
         code += "WHEN f$MonotoneBoard AND rankhicommon <= ten RETURN true FORCE\n"
         code += "WHEN Others RETURN false FORCE\n\n"
@@ -207,7 +239,7 @@ class BoardTextureGenerator(BaseFlopGenerator):
         code += "WHEN HaveTrips RETURN 4 FORCE\n"
         code += "WHEN HaveTwoPair RETURN 3 FORCE\n"
         code += "WHEN HaveOverPair RETURN 2 FORCE\n"
-        code += "WHEN HavePair AND rankhiplayer > PairOnBoardRank RETURN 1 FORCE\n"
+        code += "WHEN HavePair AND rankhiplayer > f$PairOnBoardRank RETURN 1 FORCE\n"
         code += "WHEN Others RETURN 0 FORCE\n\n"
         
         # Évaluation des mains sur board connected
