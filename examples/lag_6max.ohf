@@ -1,0 +1,1553 @@
+//*****************************************************************************
+//  OHPG LAG / Cash 6-max
+//  Généré par OpenHoldem Profile Generator (ohpg) v2.0.0 le 2026-10-19
+//
+//  Format : cash, 6 joueurs, ante 0.0 BB
+//  Prérequis : charger la bibliothèque OpenPPL officielle (OpenPPL_Library) avant ce fichier.
+//  Ce profil ne redéfinit AUCUN symbole de la bibliothèque ; ses fonctions auxiliaires sont préfixées f$Gen_.
+//  Stratégie mixte : randomhand / randomround (valeurs 0..1 d'OpenHoldem).
+//*****************************************************************************
+
+##listOpenEP##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 A5s QTs KQo
+    A8s A4s A7s A3s 55 K9s A2s A6s J9s T9s ATo
+
+##listOpenEPEdge##
+    Q9s 44 KJo 98s 87s K8s
+
+##listOpenMP##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 A5s QTs KQo
+    A8s A4s A7s A3s 55 K9s A2s A6s J9s T9s ATo Q9s 44 KJo 98s 87s K8s A9o 33 J8s T8s KTo
+
+##listOpenMPEdge##
+    K7s QJo 76s K6s Q8s 22 K5s 65s
+
+##listOpenCO##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 A5s QTs KQo
+    A8s A4s A7s A3s 55 K9s A2s A6s J9s T9s ATo Q9s 44 KJo 98s 87s K8s A9o 33 J8s T8s KTo K7s QJo
+    76s K6s Q8s 22 K5s 65s 97s 54s QTo Q7s K4s A8o K3s T7s K2s 86s
+
+##listOpenCOEdge##
+    JTo J7s Q6s 75s A7o Q5s 64s K9o J6s Q4s T6s A5o
+
+##listOpenBTN##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 A5s QTs KQo
+    A8s A4s A7s A3s 55 K9s A2s A6s J9s T9s ATo Q9s 44 KJo 98s 87s K8s A9o 33 J8s T8s KTo K7s QJo
+    76s K6s Q8s 22 K5s 65s 97s 54s QTo Q7s K4s A8o K3s T7s K2s 86s JTo J7s Q6s 75s A7o Q5s 64s
+    K9o J6s Q4s T6s A5o 96s Q3s 53s A6o Q9o J5s Q2s 85s A4o K8o J4s 43s A3o T9o J9o 95s A2o Q8o
+    K7o K6o
+
+##listOpenBTNEdge##
+    J3s J2s T5s K5o J8o T4s Q7o T8o T3s K4o Q6o T2s K3o 98o Q5o J7o 94s
+
+##listOpenSB##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 A5s QTs KQo
+    A8s A4s A7s A3s 55 K9s A2s A6s J9s T9s ATo Q9s 44 KJo 98s 87s K8s A9o 33 J8s T8s KTo K7s QJo
+    76s K6s Q8s 22 K5s 65s 97s 54s QTo Q7s K4s A8o K3s T7s K2s 86s JTo J7s Q6s 75s A7o Q5s 64s
+    K9o J6s Q4s T6s A5o 96s Q3s 53s A6o Q9o J5s Q2s 85s A4o K8o J4s
+
+##listOpenSBEdge##
+    43s A3o T9o J9o 95s A2o Q8o K7o K6o J3s J2s T5s K5o J8o T4s
+
+##listIso1EP##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 A5s QTs KQo
+    A8s A4s A7s A3s
+
+##listIso1EPEdge##
+    55 K9s A2s A6s J9s T9s ATo
+
+##listIso1MP##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 A5s QTs KQo
+    A8s A4s A7s A3s 55 K9s A2s
+
+##listIso1MPEdge##
+    A6s J9s T9s ATo Q9s 44 KJo 98s
+
+##listIso1CO##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 A5s QTs KQo
+    A8s A4s A7s A3s 55 K9s A2s A6s J9s T9s ATo Q9s 44 KJo
+
+##listIso1COEdge##
+    98s 87s K8s A9o 33 J8s T8s KTo K7s QJo
+
+##listIso1BTN##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 A5s QTs KQo
+    A8s A4s A7s A3s 55 K9s A2s A6s J9s T9s ATo Q9s 44 KJo 98s 87s K8s A9o 33 J8s T8s KTo K7s QJo
+    76s K6s Q8s
+
+##listIso1BTNEdge##
+    22 K5s 65s 97s 54s QTo Q7s K4s A8o K3s T7s K2s 86s
+
+##listIso1SB##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 A5s QTs KQo
+    A8s A4s A7s A3s 55 K9s A2s A6s J9s T9s
+
+##listIso1SBEdge##
+    ATo Q9s 44 KJo 98s 87s K8s A9o 33
+
+##listIso2EP##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66
+
+##listIso2EPEdge##
+    A5s QTs KQo A8s A4s A7s
+
+##listIso2MP##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 A5s QTs KQo
+    A8s
+
+##listIso2MPEdge##
+    A4s A7s A3s 55 K9s A2s A6s
+
+##listIso2BTN##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 A5s QTs KQo
+    A8s A4s A7s A3s 55 K9s A2s A6s J9s T9s ATo Q9s 44 KJo 98s 87s
+
+##listIso2BTNEdge##
+    K8s A9o 33 J8s T8s KTo K7s QJo 76s K6s
+
+##listIso2SB##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 A5s QTs KQo
+    A8s A4s A7s A3s 55
+
+##listIso2SBEdge##
+    K9s A2s A6s J9s T9s ATo Q9s
+
+##listIso3EP##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77
+
+##listIso3EPEdge##
+    KTs QJs A9s AJo
+
+##listIso3MP##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s
+
+##listIso3MPEdge##
+    AJo JTs 66 A5s QTs
+
+##listIso3CO##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 A5s QTs
+
+##listIso3COEdge##
+    KQo A8s A4s A7s A3s 55
+
+##listIso3BTN##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 A5s QTs KQo
+    A8s A4s A7s A3s 55 K9s
+
+##listIso3BTNEdge##
+    A2s A6s J9s T9s ATo Q9s 44 KJo
+
+##listIso3SB##
+    AA KK QQ JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs
+
+##listIso3SBEdge##
+    66 A5s QTs KQo A8s
+
+##listVEPEPSV##
+    AA KK QQ JJ TT 99 A5s A4s A3s A2s
+
+##listVEPEPV##
+    AA KK QQ JJ TT 99
+
+##listVEPEPB##
+    A5s A4s A3s A2s A6s
+
+##listVEPEPBp##
+    A7s K9s K8s
+
+##listVEPEPC##
+    AKs AQs AKo AJs KQs 88 ATs
+
+##listVEPEPCp##
+    AQo KJs
+
+##listVMPEPSV##
+    AA KK QQ JJ TT 99 88 A5s A4s A3s A2s A6s
+
+##listVMPEPV##
+    AA KK QQ JJ TT 99 88
+
+##listVMPEPB##
+    A5s A4s A3s A2s A6s A7s
+
+##listVMPEPBp##
+    K9s K8s K7s K6s
+
+##listVMPEPC##
+    AKs AQs AKo AJs KQs ATs AQo
+
+##listVMPEPCp##
+    KJs 77
+
+##listVMPMPSV##
+    AA KK QQ JJ TT 99 88 AKs AQs A5s A4s A3s A2s A6s A7s
+
+##listVMPMPV##
+    AA KK QQ JJ TT 99 88 AKs AQs
+
+##listVMPMPB##
+    A5s A4s A3s A2s A6s A7s K9s
+
+##listVMPMPBp##
+    K8s K7s K6s Q9s J9s
+
+##listVMPMPC##
+    AKo AJs KQs ATs AQo KJs 77 KTs
+
+##listVMPMPCp##
+    QJs A9s AJo
+
+##listVCOEPSV##
+    AA KK QQ JJ TT 99 88 AKs A5s A4s A3s A2s A6s A7s K9s
+
+##listVCOEPV##
+    AA KK QQ JJ TT 99 88 AKs
+
+##listVCOEPB##
+    A5s A4s A3s A2s A6s A7s K9s K8s
+
+##listVCOEPBp##
+    K7s K6s Q9s J9s T9s 98s
+
+##listVCOEPC##
+    AQs AKo AJs KQs ATs AQo KJs 77 KTs QJs A9s
+
+##listVCOEPCp##
+    AJo JTs 66 QTs
+
+##listVCOMPSV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 A5s A4s A3s A2s A6s A7s K9s K8s
+
+##listVCOMPV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77
+
+##listVCOMPB##
+    A5s A4s A3s A2s A6s A7s K9s K8s K7s K6s
+
+##listVCOMPBp##
+    Q9s J9s T9s 98s 87s 76s
+
+##listVCOMPC##
+    AKo AJs KQs ATs AQo KJs KTs QJs A9s AJo JTs 66 QTs
+
+##listVCOMPCp##
+    KQo A8s 55 44
+
+##listVBTNEPSV##
+    AA KK QQ JJ TT 99 88 AKs AQs A5s A4s A3s A2s A6s A7s K9s K8s K7s
+
+##listVBTNEPB##
+    A5s A4s A3s A2s A6s A7s K9s K8s K7s K6s Q9s
+
+##listVBTNEPBp##
+    J9s T9s 98s 87s 76s 65s 54s
+
+##listVBTNEPC##
+    AKo AJs KQs ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 QTs
+
+##listVBTNMPSV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs A5s A4s A3s A2s A6s A7s K9s K8s K7s K6s Q9s
+
+##listVBTNMPV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs
+
+##listVBTNMPB##
+    A5s A4s A3s A2s A6s A7s K9s K8s K7s K6s Q9s J9s T9s
+
+##listVBTNMPBp##
+    98s 87s 76s 65s 54s J8s T8s 97s 86s
+
+##listVBTNMPC##
+    AKo KQs ATs AQo KJs KTs QJs A9s AJo JTs 66 QTs KQo A8s
+
+##listVBTNMPCp##
+    55 ATo 44 KJo 33
+
+##listVBTNCOSV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs ATs A5s A4s A3s A2s A6s A7s K9s K8s K7s K6s Q9s J9s
+
+##listVBTNCOV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs ATs
+
+##listVBTNCOB##
+    A5s A4s A3s A2s A6s A7s K9s K8s K7s K6s Q9s J9s T9s 98s
+
+##listVBTNCOBp##
+    87s 76s 65s 54s J8s T8s 97s 86s 75s A9s
+
+##listVBTNCOC##
+    AKo KQs AQo KJs KTs QJs AJo JTs 66 QTs KQo A8s 55 ATo
+
+##listVBTNCOCp##
+    44 KJo A9o 33 KTo
+
+##listVSBEPSV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 A5s A4s A3s A2s A6s A7s K9s K8s K7s K6s
+
+##listVSBEPBp##
+    98s 87s 76s 65s 54s J8s T8s 97s
+
+##listVSBEPC##
+    AKo AJs KQs ATs
+
+##listVSBEPCp##
+    KJs
+
+##listVSBMPBp##
+    87s 76s 65s 54s J8s T8s 97s 86s 75s KJo
+
+##listVSBMPC##
+    AKo KQs AQo KJs
+
+##listVSBMPCp##
+    KTs
+
+##listVSBCOSV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo A5s A4s A3s A2s A6s A7s K9s K8s K7s K6s Q9s J9s
+
+##listVSBCOV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo
+
+##listVSBCOB##
+    A5s A4s A3s A2s A6s A7s K9s K8s K7s K6s Q9s J9s T9s 98s 87s
+
+##listVSBCOBp##
+    76s 65s 54s J8s T8s 97s 86s 75s KJo QJo
+
+##listVSBCOC##
+    KQs ATs AQo KJs KTs QJs
+
+##listVSBCOCp##
+    A9s JTs
+
+##listVSBBTNSV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs A5s A4s A3s A2s A6s A7s K9s K8s K7s K6s Q9s
+    J9s T9s 98s 87s
+
+##listVSBBTNV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs
+
+##listVSBBTNB##
+    A5s A4s A3s A2s A6s A7s K9s K8s K7s K6s Q9s J9s T9s 98s 87s 76s 65s 54s J8s
+
+##listVSBBTNBp##
+    T8s 97s 86s 75s KJo QJo A9s A8s K5s Q8s 64s 53s
+
+##listVSBBTNC##
+    KQs KJs KTs QJs AJo JTs 66
+
+##listVSBBTNCp##
+    QTs KQo
+
+##listVBBEPB##
+    A5s A4s A3s A2s A6s A7s K9s K8s K7s
+
+##listVBBEPBp##
+    K6s Q9s J9s T9s 98s 87s
+
+##listVBBEPC##
+    AQs AKo AJs KQs ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 QTs KQo A8s 55 ATo 44 KJo A9o 33 J8s
+    T8s KTo QJo 76s
+
+##listVBBEPCp##
+    Q8s 22 K5s 65s 97s 54s QTo Q7s K4s K3s
+
+##listVBBMPSV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 A5s A4s A3s A2s A6s A7s K9s K8s K7s
+
+##listVBBMPC##
+    AKo AJs KQs ATs AQo KJs KTs QJs A9s AJo JTs 66 QTs KQo A8s 55 ATo 44 KJo A9o 33 J8s T8s KTo
+    QJo Q8s 22 K5s 97s QTo Q7s K4s A8o K3s
+
+##listVBBMPCp##
+    T7s K2s 86s JTo J7s Q6s 75s A7o Q5s 64s J6s
+
+##listVBBCOSV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs A5s A4s A3s A2s A6s A7s K9s K8s K7s K6s
+
+##listVBBCOB##
+    A5s A4s A3s A2s A6s A7s K9s K8s K7s K6s Q9s J9s
+
+##listVBBCOBp##
+    T9s 98s 87s 76s 65s 54s J8s T8s
+
+##listVBBCOC##
+    AKo KQs ATs AQo KJs KTs QJs A9s AJo JTs 66 QTs KQo A8s 55 ATo 44 KJo A9o 33 KTo QJo Q8s 22
+    K5s 97s QTo Q7s K4s A8o K3s T7s K2s 86s JTo J7s Q6s
+
+##listVBBCOCp##
+    75s A7o Q5s 64s K9o J6s Q4s T6s A5o 96s Q3s 53s
+
+##listVBBBTNSV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo ATs A5s A4s A3s A2s A6s A7s K9s K8s K7s K6s Q9s J9s
+
+##listVBBBTNV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo ATs
+
+##listVBBBTNC##
+    KQs AQo KJs KTs QJs A9s AJo JTs 66 QTs KQo A8s 55 ATo 44 A9o 33 KTo QJo Q8s 22 K5s QTo Q7s
+    K4s A8o K3s T7s K2s JTo J7s Q6s A7o Q5s 64s K9o J6s Q4s T6s A5o 96s Q3s 53s A6o
+
+##listVBBBTNCp##
+    Q9o J5s Q2s 85s A4o K8o J4s 43s A3o T9o J9o 95s A2o J3s
+
+##listVBBSBSV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo A5s A4s A3s A2s A6s A7s K9s K8s K7s K6s Q9s J9s
+
+##listVBBSBV##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
+
+##listVBBSBBp##
+    76s 65s 54s J8s T8s 97s 86s 75s KJo A9s
+
+##listVBBSBC##
+    KQs ATs KJs KTs QJs AJo JTs 66 QTs KQo A8s 55 ATo 44 A9o 33 KTo QJo Q8s 22 K5s QTo Q7s K4s
+    A8o K3s T7s K2s JTo J7s Q6s A7o Q5s 64s K9o J6s Q4s T6s A5o 96s Q3s 53s A6o Q9o J5s Q2s
+
+##listVBBSBCp##
+    85s A4o K8o J4s 43s A3o T9o J9o 95s A2o Q8o K7o K6o J3s J2s T5s
+
+##listSq1EPB##
+    A5s A4s
+
+##listSq1EPBp##
+    A3s A2s
+
+##listSq1COBp##
+    A7s K9s K8s K7s
+
+##listSq1COC##
+    AKs AQs AKo AJs KQs ATs AQo KJs 77
+
+##listSq1COCp##
+    KTs QJs A9s
+
+##listSq1SBC##
+    AKs AQs AKo AJs KQs ATs AQo KJs 77 KTs
+
+##listSq1BBC##
+    AKs AQs AKo AJs KQs ATs AQo KJs 77 KTs QJs A9s AJo JTs
+
+##listSq1BBCp##
+    66 QTs KQo A8s 55
+
+##listSq2EPSV##
+    AA KK QQ JJ TT
+
+##listSq2EPB##
+    A5s A4s A3s
+
+##listSq2EPC##
+    AKs AQs AKo 99 AJs
+
+##listSq2EPCp##
+    KQs 88
+
+##listSq2COB##
+    A5s A4s A3s A2s
+
+##listSq2COBp##
+    A6s A7s
+
+##listSq2COC##
+    AKs AQs AKo 99 AJs KQs 88
+
+##listSq2COCp##
+    ATs KJs
+
+##listSq2SBC##
+    AKs AQs AKo 99 AJs KQs 88 ATs
+
+##listSq2BBC##
+    AKs AQs AKo 99 AJs KQs 88 ATs AQo KJs 77
+
+##listF3EPSV##
+    AA KK QQ JJ A5s A4s A3s A2s
+
+##listF3EPV##
+    AA KK QQ JJ
+
+##listF3EPC##
+    AKs TT AQs AKo 99 AJs KQs 88
+
+##listF3EPCp##
+    ATs AQo KJs
+
+##listF3MPC##
+    AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77
+
+##listF3MPCp##
+    KTs QJs A9s JTs
+
+##listF3COC##
+    AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 QTs KQo A8s A7s
+
+##listF3COCp##
+    55 K9s A6s J9s T9s ATo Q9s 44
+
+##listF3BTNC##
+    AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 QTs KQo A8s A7s 55 K9s
+    A6s J9s T9s ATo Q9s 44 KJo 98s 87s K8s A9o 33 J8s T8s
+
+##listF3BTNCp##
+    KTo K7s QJo 76s K6s Q8s 22 K5s 65s 97s 54s QTo
+
+##listF3SBC##
+    AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 QTs KQo A8s A7s 55
+
+##listF3SBCp##
+    K9s A6s J9s T9s ATo Q9s 44 KJo
+
+##listF3SqEPSV##
+    AA KK QQ A5s A4s A3s
+
+##listF3SqEPV##
+    AA KK QQ
+
+##listF3SqEPC##
+    JJ AKs TT AQs AKo 99
+
+##listF3SqEPCp##
+    AJs KQs
+
+##listF3SqMPC##
+    JJ AKs TT AQs AKo 99 AJs KQs
+
+##listF3SqMPCp##
+    88 ATs AQo
+
+##listF3SqCOC##
+    JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s
+
+##listF3SqCOCp##
+    AJo JTs 66 QTs A8s
+
+##listF3SqBTNC##
+    JJ AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s AJo JTs 66 QTs KQo A8s A7s 55 K9s
+    A2s
+
+##listF3SqBTNCp##
+    A6s J9s T9s ATo Q9s 44 KJo 98s 87s
+
+##listF3SqSBCp##
+    AJo JTs 66 QTs KQo
+
+##listColdF3V##
+    AA KK AKs
+
+##listColdF3C##
+    QQ JJ TT 99 88 AQs
+
+##listF4S8C##
+    AKs AQs AKo 99 AJs KQs 88 ATs AQo KJs 77 KTs QJs A9s
+
+##listF4S25V##
+    AA KK QQ AKs
+
+##listF4S25C##
+    JJ TT AQs AKo 99 AJs KQs
+
+##listF4S25Cp##
+    88 ATs
+
+##listF4S40C##
+    JJ AKs TT AQs AKo
+
+##listF4S40Cp##
+    99 AJs
+
+##listF4S10000C##
+    JJ AKs TT AQs
+
+##listF4S10000Cp##
+    AKo
+
+##listColdF4C8##
+    JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs
+
+##listColdF4C12##
+    JJ TT 99 88 AKs AQs 77 AJs AKo
+
+##listColdF4C18##
+    JJ TT 99 88 AKs AQs 77
+
+##listColdF4C25##
+    QQ JJ TT 99 88
+
+##listColdF4J40##
+    AA KK
+
+##listColdF4C40##
+    QQ JJ TT 99
+
+##listColdF4C10000##
+    QQ JJ TT
+
+##listAllinCall8##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo
+
+##listAllinCall12##
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
+
+##f$Gen_EffStack##
+// Stack effectif en BB (petit stack entre nous et le plus gros adversaire encore en jeu)
+WHEN Others RETURN EffectiveMaxStacksizeOfActiveOpponents FORCE
+
+##f$Gen_IP##
+// Vrai si nous agirons en dernier postflop
+WHEN StillToActPostflop = 0 RETURN true FORCE
+WHEN Others RETURN false FORCE
+
+##f$Gen_PotOdds##
+// Équité nécessaire pour payer : AmountToCall / (PotSize + AmountToCall)
+WHEN AmountToCall <= 0 RETURN 0 FORCE
+WHEN Others RETURN AmountToCall / (PotSize + AmountToCall) FORCE
+
+##f$Gen_Multiway##
+WHEN Opponents >= 2 RETURN true FORCE
+WHEN Others RETURN false FORCE
+
+##f$preflop##
+// OHPG : fonction préflop. Chaque bloc WHEN sans action est un scénario ; il se termine par un fold/check.
+// === OUVERTURE (personne n'est entré dans le pot) ===
+WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 0 AND Calls = 0
+    WHEN InEarlyPosition AND listOpenEP RaiseTo 2.5 FORCE
+    WHEN InEarlyPosition AND listOpenEPEdge AND randomhand < 0.50 RaiseTo 2.5 FORCE
+    WHEN InMiddlePosition AND listOpenMP RaiseTo 2.5 FORCE
+    WHEN InMiddlePosition AND listOpenMPEdge AND randomhand < 0.50 RaiseTo 2.5 FORCE
+    WHEN InCutOff AND listOpenCO RaiseTo 2.3 FORCE
+    WHEN InCutOff AND listOpenCOEdge AND randomhand < 0.50 RaiseTo 2.3 FORCE
+    WHEN InButton AND listOpenBTN RaiseTo 2.3 FORCE
+    WHEN InButton AND listOpenBTNEdge AND randomhand < 0.50 RaiseTo 2.3 FORCE
+    WHEN InSmallBlind AND listOpenSB RaiseTo 3 FORCE
+    WHEN InSmallBlind AND listOpenSBEdge AND randomhand < 0.50 RaiseTo 3 FORCE
+    WHEN Others Fold FORCE
+// === LIMPERS DEVANT : isolation / overlimp ===
+WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 0 AND Calls >= 1
+    WHEN Calls = 1 AND InEarlyPosition AND listIso1EP RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 1 AND InEarlyPosition AND listIso1EPEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 1 AND InMiddlePosition AND listIso1MP RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 1 AND InMiddlePosition AND listIso1MPEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 1 AND InCutOff AND listIso1CO RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 1 AND InCutOff AND listIso1COEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 1 AND InButton AND listIso1BTN RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 1 AND InButton AND listIso1BTNEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 1 AND InSmallBlind AND listIso1SB RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 1 AND InSmallBlind AND listIso1SBEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 1 AND InBigBlind AND listIso1CO RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 1 AND InBigBlind AND listIso1COEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 2 AND InEarlyPosition AND listIso2EP RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 2 AND InEarlyPosition AND listIso2EPEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 2 AND InMiddlePosition AND listIso2MP RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 2 AND InMiddlePosition AND listIso2MPEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 2 AND InCutOff AND listIso1MP RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 2 AND InCutOff AND listIso1MPEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 2 AND InButton AND listIso2BTN RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 2 AND InButton AND listIso2BTNEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 2 AND InSmallBlind AND listIso2SB RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 2 AND InSmallBlind AND listIso2SBEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 2 AND InBigBlind AND listIso1MP RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls = 2 AND InBigBlind AND listIso1MPEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls >= 3 AND InEarlyPosition AND listIso3EP RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls >= 3 AND InEarlyPosition AND listIso3EPEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls >= 3 AND InMiddlePosition AND listIso3MP RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls >= 3 AND InMiddlePosition AND listIso3MPEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls >= 3 AND InCutOff AND listIso3CO RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls >= 3 AND InCutOff AND listIso3COEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls >= 3 AND InButton AND listIso3BTN RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls >= 3 AND InButton AND listIso3BTNEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls >= 3 AND InSmallBlind AND listIso3SB RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls >= 3 AND InSmallBlind AND listIso3SBEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls >= 3 AND InBigBlind AND listIso3CO RaiseTo (3.5 + Calls) FORCE
+    WHEN Calls >= 3 AND InBigBlind AND listIso3COEdge AND randomhand < 0.50 RaiseTo (3.5 + Calls) FORCE
+    WHEN InBigBlind Check FORCE
+    WHEN Others Fold FORCE
+// === FACE À UNE OUVERTURE (aucun caller) : 3bet value + bluffs, call, fold ===
+WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 1 AND CallsSinceLastRaise = 0
+    WHEN InEarlyPosition AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND f$Gen_EffStack <= 20 AND listVEPEPSV RaiseMax FORCE
+    WHEN InEarlyPosition AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVEPEPV RaiseTo (BetSize * 4) FORCE
+    WHEN InEarlyPosition AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVEPEPB RaiseTo (BetSize * 4) FORCE
+    WHEN InEarlyPosition AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVEPEPBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InEarlyPosition AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVEPEPC Call FORCE
+    WHEN InEarlyPosition AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVEPEPCp AND randomhand < 0.50 Call FORCE
+    WHEN InMiddlePosition AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND f$Gen_EffStack <= 20 AND listVMPEPSV RaiseMax FORCE
+    WHEN InMiddlePosition AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVMPEPV RaiseTo (BetSize * 4) FORCE
+    WHEN InMiddlePosition AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVMPEPB RaiseTo (BetSize * 4) FORCE
+    WHEN InMiddlePosition AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVMPEPBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InMiddlePosition AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVMPEPC Call FORCE
+    WHEN InMiddlePosition AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVMPEPCp AND randomhand < 0.50 Call FORCE
+    WHEN InMiddlePosition AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND f$Gen_EffStack <= 20 AND listVMPMPSV RaiseMax FORCE
+    WHEN InMiddlePosition AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVMPMPV RaiseTo (BetSize * 4) FORCE
+    WHEN InMiddlePosition AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVMPMPB RaiseTo (BetSize * 4) FORCE
+    WHEN InMiddlePosition AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVMPMPBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InMiddlePosition AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVMPMPC Call FORCE
+    WHEN InMiddlePosition AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVMPMPCp AND randomhand < 0.50 Call FORCE
+    WHEN InCutOff AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND f$Gen_EffStack <= 20 AND listVCOEPSV RaiseMax FORCE
+    WHEN InCutOff AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVCOEPV RaiseTo (BetSize * 3) FORCE
+    WHEN InCutOff AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVCOEPB RaiseTo (BetSize * 3) FORCE
+    WHEN InCutOff AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVCOEPBp AND randomhand < 0.50 RaiseTo (BetSize * 3) FORCE
+    WHEN InCutOff AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVCOEPC Call FORCE
+    WHEN InCutOff AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVCOEPCp AND randomhand < 0.50 Call FORCE
+    WHEN InCutOff AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND f$Gen_EffStack <= 20 AND listVCOMPSV RaiseMax FORCE
+    WHEN InCutOff AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVCOMPV RaiseTo (BetSize * 3) FORCE
+    WHEN InCutOff AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVCOMPB RaiseTo (BetSize * 3) FORCE
+    WHEN InCutOff AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVCOMPBp AND randomhand < 0.50 RaiseTo (BetSize * 3) FORCE
+    WHEN InCutOff AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVCOMPC Call FORCE
+    WHEN InCutOff AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVCOMPCp AND randomhand < 0.50 Call FORCE
+    WHEN InButton AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND f$Gen_EffStack <= 20 AND listVBTNEPSV RaiseMax FORCE
+    WHEN InButton AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVMPMPV RaiseTo (BetSize * 3) FORCE
+    WHEN InButton AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVBTNEPB RaiseTo (BetSize * 3) FORCE
+    WHEN InButton AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (BetSize * 3) FORCE
+    WHEN InButton AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVBTNEPC Call FORCE
+    WHEN InButton AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVCOMPCp AND randomhand < 0.50 Call FORCE
+    WHEN InButton AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND f$Gen_EffStack <= 20 AND listVBTNMPSV RaiseMax FORCE
+    WHEN InButton AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNMPV RaiseTo (BetSize * 3) FORCE
+    WHEN InButton AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNMPB RaiseTo (BetSize * 3) FORCE
+    WHEN InButton AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNMPBp AND randomhand < 0.50 RaiseTo (BetSize * 3) FORCE
+    WHEN InButton AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNMPC Call FORCE
+    WHEN InButton AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNMPCp AND randomhand < 0.50 Call FORCE
+    WHEN InButton AND CutOffRaising AND f$Gen_EffStack <= 20 AND listVBTNCOSV RaiseMax FORCE
+    WHEN InButton AND CutOffRaising AND listVBTNCOV RaiseTo (BetSize * 3) FORCE
+    WHEN InButton AND CutOffRaising AND listVBTNCOB RaiseTo (BetSize * 3) FORCE
+    WHEN InButton AND CutOffRaising AND listVBTNCOBp AND randomhand < 0.50 RaiseTo (BetSize * 3) FORCE
+    WHEN InButton AND CutOffRaising AND listVBTNCOC Call FORCE
+    WHEN InButton AND CutOffRaising AND listVBTNCOCp AND randomhand < 0.50 Call FORCE
+    WHEN InSmallBlind AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND f$Gen_EffStack <= 20 AND listVSBEPSV RaiseMax FORCE
+    WHEN InSmallBlind AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVCOMPV RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVBTNMPB RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVSBEPBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVSBEPC Call FORCE
+    WHEN InSmallBlind AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVSBEPCp AND randomhand < 0.50 Call FORCE
+    WHEN InSmallBlind AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND f$Gen_EffStack <= 20 AND listVBTNCOSV RaiseMax FORCE
+    WHEN InSmallBlind AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNCOV RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNCOB RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVSBMPBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVSBMPC Call FORCE
+    WHEN InSmallBlind AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVSBMPCp AND randomhand < 0.50 Call FORCE
+    WHEN InSmallBlind AND CutOffRaising AND f$Gen_EffStack <= 20 AND listVSBCOSV RaiseMax FORCE
+    WHEN InSmallBlind AND CutOffRaising AND listVSBCOV RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND CutOffRaising AND listVSBCOB RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND CutOffRaising AND listVSBCOBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND CutOffRaising AND listVSBCOC Call FORCE
+    WHEN InSmallBlind AND CutOffRaising AND listVSBCOCp AND randomhand < 0.50 Call FORCE
+    WHEN InSmallBlind AND ButtonRaising AND f$Gen_EffStack <= 20 AND listVSBBTNSV RaiseMax FORCE
+    WHEN InSmallBlind AND ButtonRaising AND listVSBBTNV RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND ButtonRaising AND listVSBBTNB RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND ButtonRaising AND listVSBBTNBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND ButtonRaising AND listVSBBTNC Call FORCE
+    WHEN InSmallBlind AND ButtonRaising AND listVSBBTNCp AND randomhand < 0.50 Call FORCE
+    WHEN InBigBlind AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND f$Gen_EffStack <= 20 AND listVCOEPSV RaiseMax FORCE
+    WHEN InBigBlind AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVCOEPV RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVBBEPB RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVBBEPBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVBBEPC Call FORCE
+    WHEN InBigBlind AND (EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising) AND listVBBEPCp AND randomhand < 0.50 Call FORCE
+    WHEN InBigBlind AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND f$Gen_EffStack <= 20 AND listVBBMPSV RaiseMax FORCE
+    WHEN InBigBlind AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVCOMPV RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNEPB RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBBMPC Call FORCE
+    WHEN InBigBlind AND (MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBBMPCp AND randomhand < 0.50 Call FORCE
+    WHEN InBigBlind AND CutOffRaising AND f$Gen_EffStack <= 20 AND listVBBCOSV RaiseMax FORCE
+    WHEN InBigBlind AND CutOffRaising AND listVBTNMPV RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND CutOffRaising AND listVBBCOB RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND CutOffRaising AND listVBBCOBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND CutOffRaising AND listVBBCOC Call FORCE
+    WHEN InBigBlind AND CutOffRaising AND listVBBCOCp AND randomhand < 0.50 Call FORCE
+    WHEN InBigBlind AND ButtonRaising AND f$Gen_EffStack <= 20 AND listVBBBTNSV RaiseMax FORCE
+    WHEN InBigBlind AND ButtonRaising AND listVBBBTNV RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND ButtonRaising AND listVBTNCOB RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND ButtonRaising AND listVSBMPBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND ButtonRaising AND listVBBBTNC Call FORCE
+    WHEN InBigBlind AND ButtonRaising AND listVBBBTNCp AND randomhand < 0.50 Call FORCE
+    WHEN InBigBlind AND SmallBlindRaising AND f$Gen_EffStack <= 20 AND listVBBSBSV RaiseMax FORCE
+    WHEN InBigBlind AND SmallBlindRaising AND listVBBSBV RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND SmallBlindRaising AND listVSBCOB RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND SmallBlindRaising AND listVBBSBBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND SmallBlindRaising AND listVBBSBC Call FORCE
+    WHEN InBigBlind AND SmallBlindRaising AND listVBBSBCp AND randomhand < 0.50 Call FORCE
+    WHEN Others Fold FORCE
+// === SQUEEZE : une ouverture et un ou plusieurs callers ===
+WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 1 AND CallsSinceLastRaise >= 1
+    WHEN CallsSinceLastRaise = 1 AND InEarlyPosition AND f$Gen_EffStack <= 20 AND listVEPEPV RaiseMax FORCE
+    WHEN CallsSinceLastRaise = 1 AND InEarlyPosition AND listVEPEPV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InEarlyPosition AND listSq1EPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InEarlyPosition AND listSq1EPBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InEarlyPosition AND listVEPEPC Call FORCE
+    WHEN CallsSinceLastRaise = 1 AND InEarlyPosition AND listVEPEPCp AND randomhand < 0.50 Call FORCE
+    WHEN CallsSinceLastRaise = 1 AND InMiddlePosition AND f$Gen_EffStack <= 20 AND listVEPEPV RaiseMax FORCE
+    WHEN CallsSinceLastRaise = 1 AND InMiddlePosition AND listVEPEPV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InMiddlePosition AND listSq1EPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InMiddlePosition AND listSq1EPBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InMiddlePosition AND listVEPEPC Call FORCE
+    WHEN CallsSinceLastRaise = 1 AND InMiddlePosition AND listVEPEPCp AND randomhand < 0.50 Call FORCE
+    WHEN CallsSinceLastRaise = 1 AND InCutOff AND f$Gen_EffStack <= 20 AND listVMPEPV RaiseMax FORCE
+    WHEN CallsSinceLastRaise = 1 AND InCutOff AND listVMPEPV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InCutOff AND listVEPEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InCutOff AND listSq1COBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InCutOff AND listSq1COC Call FORCE
+    WHEN CallsSinceLastRaise = 1 AND InCutOff AND listSq1COCp AND randomhand < 0.50 Call FORCE
+    WHEN CallsSinceLastRaise = 1 AND InButton AND f$Gen_EffStack <= 20 AND listVMPEPV RaiseMax FORCE
+    WHEN CallsSinceLastRaise = 1 AND InButton AND listVMPEPV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InButton AND listVEPEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InButton AND listSq1COBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InButton AND listSq1COC Call FORCE
+    WHEN CallsSinceLastRaise = 1 AND InButton AND listSq1COCp AND randomhand < 0.50 Call FORCE
+    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND f$Gen_EffStack <= 20 AND listVMPEPV RaiseMax FORCE
+    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listVMPEPV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listVEPEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listSq1COBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listSq1SBC Call FORCE
+    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listVMPMPCp AND randomhand < 0.50 Call FORCE
+    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND f$Gen_EffStack <= 20 AND listVMPEPV RaiseMax FORCE
+    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listVMPEPV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listVEPEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listSq1COBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listSq1BBC Call FORCE
+    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listSq1BBCp AND randomhand < 0.50 Call FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InEarlyPosition AND f$Gen_EffStack <= 20 AND listSq2EPSV RaiseMax FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InEarlyPosition AND listSq2EPSV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InEarlyPosition AND listSq2EPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InEarlyPosition AND listSq2EPC Call FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InEarlyPosition AND listSq2EPCp AND randomhand < 0.50 Call FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InMiddlePosition AND f$Gen_EffStack <= 20 AND listSq2EPSV RaiseMax FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InMiddlePosition AND listSq2EPSV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InMiddlePosition AND listSq2EPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InMiddlePosition AND listSq2EPC Call FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InMiddlePosition AND listSq2EPCp AND randomhand < 0.50 Call FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InCutOff AND f$Gen_EffStack <= 20 AND listSq2EPSV RaiseMax FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InCutOff AND listSq2EPSV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InCutOff AND listSq2COB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InCutOff AND listSq2COBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InCutOff AND listSq2COC Call FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InCutOff AND listSq2COCp AND randomhand < 0.50 Call FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InButton AND f$Gen_EffStack <= 20 AND listSq2EPSV RaiseMax FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InButton AND listSq2EPSV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InButton AND listSq2COB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InButton AND listSq2COBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InButton AND listSq2COC Call FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InButton AND listSq2COCp AND randomhand < 0.50 Call FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND f$Gen_EffStack <= 20 AND listSq2EPSV RaiseMax FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listSq2EPSV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listSq2COB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listSq2COBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listSq2SBC Call FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listVEPEPCp AND randomhand < 0.50 Call FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND f$Gen_EffStack <= 20 AND listSq2EPSV RaiseMax FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listSq2EPSV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listSq2COB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listSq2COBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listSq2BBC Call FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listIso3EPEdge AND randomhand < 0.50 Call FORCE
+    WHEN Others Fold FORCE
+// === NOUS AVONS OUVERT ET FACE À UN 3BET : 4bet value/bluff, call, fold ===
+WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 1 AND RaisesSinceLastPlay = 1 AND Calls = 0
+    WHEN InEarlyPosition AND f$Gen_EffStack <= 30 AND listF3EPSV RaiseMax FORCE
+    WHEN InEarlyPosition AND listF3EPV RaiseTo (BetSize * 2.5) FORCE
+    WHEN InEarlyPosition AND listSq1EPB RaiseTo (BetSize * 2.5) FORCE
+    WHEN InEarlyPosition AND listSq1EPBp AND randomhand < 0.50 RaiseTo (BetSize * 2.5) FORCE
+    WHEN InEarlyPosition AND listF3EPC Call FORCE
+    WHEN InEarlyPosition AND listF3EPCp AND randomhand < 0.50 Call FORCE
+    WHEN InMiddlePosition AND f$Gen_EffStack <= 30 AND listF3EPSV RaiseMax FORCE
+    WHEN InMiddlePosition AND listF3EPV RaiseTo (BetSize * 2.5) FORCE
+    WHEN InMiddlePosition AND listSq1EPB RaiseTo (BetSize * 2.5) FORCE
+    WHEN InMiddlePosition AND listSq1EPBp AND randomhand < 0.50 RaiseTo (BetSize * 2.5) FORCE
+    WHEN InMiddlePosition AND listF3MPC Call FORCE
+    WHEN InMiddlePosition AND listF3MPCp AND randomhand < 0.50 Call FORCE
+    WHEN InCutOff AND f$Gen_EffStack <= 30 AND listF3EPSV RaiseMax FORCE
+    WHEN InCutOff AND listF3EPV RaiseTo (BetSize * 2.2) FORCE
+    WHEN InCutOff AND listSq1EPB RaiseTo (BetSize * 2.2) FORCE
+    WHEN InCutOff AND listSq1EPBp AND randomhand < 0.50 RaiseTo (BetSize * 2.2) FORCE
+    WHEN InCutOff AND listF3COC Call FORCE
+    WHEN InCutOff AND listF3COCp AND randomhand < 0.50 Call FORCE
+    WHEN InButton AND f$Gen_EffStack <= 30 AND listF3EPSV RaiseMax FORCE
+    WHEN InButton AND listF3EPV RaiseTo (BetSize * 2.2) FORCE
+    WHEN InButton AND listSq1EPB RaiseTo (BetSize * 2.2) FORCE
+    WHEN InButton AND listSq1EPBp AND randomhand < 0.50 RaiseTo (BetSize * 2.2) FORCE
+    WHEN InButton AND listF3BTNC Call FORCE
+    WHEN InButton AND listF3BTNCp AND randomhand < 0.50 Call FORCE
+    WHEN InSmallBlind AND f$Gen_EffStack <= 30 AND listF3EPSV RaiseMax FORCE
+    WHEN InSmallBlind AND listF3EPV RaiseTo (BetSize * 2.5) FORCE
+    WHEN InSmallBlind AND listSq1EPB RaiseTo (BetSize * 2.5) FORCE
+    WHEN InSmallBlind AND listSq1EPBp AND randomhand < 0.50 RaiseTo (BetSize * 2.5) FORCE
+    WHEN InSmallBlind AND listF3SBC Call FORCE
+    WHEN InSmallBlind AND listF3SBCp AND randomhand < 0.50 Call FORCE
+    WHEN Others Fold FORCE
+WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 1 AND RaisesSinceLastPlay = 1 AND Calls >= 1
+    WHEN InEarlyPosition AND f$Gen_EffStack <= 30 AND listF3SqEPSV RaiseMax FORCE
+    WHEN InEarlyPosition AND listF3SqEPV RaiseTo (BetSize * 2.5) FORCE
+    WHEN InEarlyPosition AND listSq2EPB RaiseTo (BetSize * 2.5) FORCE
+    WHEN InEarlyPosition AND listF3SqEPC Call FORCE
+    WHEN InEarlyPosition AND listF3SqEPCp AND randomhand < 0.50 Call FORCE
+    WHEN InMiddlePosition AND f$Gen_EffStack <= 30 AND listF3SqEPSV RaiseMax FORCE
+    WHEN InMiddlePosition AND listF3SqEPV RaiseTo (BetSize * 2.5) FORCE
+    WHEN InMiddlePosition AND listSq2EPB RaiseTo (BetSize * 2.5) FORCE
+    WHEN InMiddlePosition AND listF3SqMPC Call FORCE
+    WHEN InMiddlePosition AND listF3SqMPCp AND randomhand < 0.50 Call FORCE
+    WHEN InCutOff AND f$Gen_EffStack <= 30 AND listF3SqEPSV RaiseMax FORCE
+    WHEN InCutOff AND listF3SqEPV RaiseTo (BetSize * 2.2) FORCE
+    WHEN InCutOff AND listSq2EPB RaiseTo (BetSize * 2.2) FORCE
+    WHEN InCutOff AND listF3SqCOC Call FORCE
+    WHEN InCutOff AND listF3SqCOCp AND randomhand < 0.50 Call FORCE
+    WHEN InButton AND f$Gen_EffStack <= 30 AND listF3SqEPSV RaiseMax FORCE
+    WHEN InButton AND listF3SqEPV RaiseTo (BetSize * 2.2) FORCE
+    WHEN InButton AND listSq2EPB RaiseTo (BetSize * 2.2) FORCE
+    WHEN InButton AND listF3SqBTNC Call FORCE
+    WHEN InButton AND listF3SqBTNCp AND randomhand < 0.50 Call FORCE
+    WHEN InSmallBlind AND f$Gen_EffStack <= 30 AND listF3SqEPSV RaiseMax FORCE
+    WHEN InSmallBlind AND listF3SqEPV RaiseTo (BetSize * 2.5) FORCE
+    WHEN InSmallBlind AND listSq2EPB RaiseTo (BetSize * 2.5) FORCE
+    WHEN InSmallBlind AND listF3SqCOC Call FORCE
+    WHEN InSmallBlind AND listF3SqSBCp AND randomhand < 0.50 Call FORCE
+    WHEN Others Fold FORCE
+// === OUVERTURE + 3BET DEVANT NOUS (cold) : 4bet très serré ou call ===
+WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 2
+    WHEN listColdF3V RaiseTo (BetSize * 2.5) FORCE
+    WHEN listColdF3C Call FORCE
+    WHEN Others Fold FORCE
+// === NOUS AVONS 3BETÉ ET FACE À UN 4BET : jam value/bluff, call, fold ===
+WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 2 AND RaisesSinceLastPlay = 1
+    WHEN f$Gen_EffStack > 0 AND f$Gen_EffStack <= 8 AND listSq2EPSV RaiseMax FORCE
+    WHEN f$Gen_EffStack > 0 AND f$Gen_EffStack <= 8 AND listSq2EPB RaiseMax FORCE
+    WHEN f$Gen_EffStack > 0 AND f$Gen_EffStack <= 8 AND listF4S8C Call FORCE
+    WHEN f$Gen_EffStack > 0 AND f$Gen_EffStack <= 8 AND listF3SqCOCp AND randomhand < 0.50 Call FORCE
+    WHEN f$Gen_EffStack > 8 AND f$Gen_EffStack <= 12 AND listF3EPV RaiseMax FORCE
+    WHEN f$Gen_EffStack > 8 AND f$Gen_EffStack <= 12 AND listSq2EPB RaiseMax FORCE
+    WHEN f$Gen_EffStack > 8 AND f$Gen_EffStack <= 12 AND listF3MPC Call FORCE
+    WHEN f$Gen_EffStack > 8 AND f$Gen_EffStack <= 12 AND listF3MPCp AND randomhand < 0.50 Call FORCE
+    WHEN f$Gen_EffStack > 12 AND f$Gen_EffStack <= 18 AND listF3EPV RaiseMax FORCE
+    WHEN f$Gen_EffStack > 12 AND f$Gen_EffStack <= 18 AND listSq2EPB RaiseMax FORCE
+    WHEN f$Gen_EffStack > 12 AND f$Gen_EffStack <= 18 AND listF3EPC Call FORCE
+    WHEN f$Gen_EffStack > 12 AND f$Gen_EffStack <= 18 AND listF3EPCp AND randomhand < 0.50 Call FORCE
+    WHEN f$Gen_EffStack > 18 AND f$Gen_EffStack <= 25 AND listF4S25V RaiseMax FORCE
+    WHEN f$Gen_EffStack > 18 AND f$Gen_EffStack <= 25 AND listSq1EPB RaiseMax FORCE
+    WHEN f$Gen_EffStack > 18 AND f$Gen_EffStack <= 25 AND listF4S25C Call FORCE
+    WHEN f$Gen_EffStack > 18 AND f$Gen_EffStack <= 25 AND listF4S25Cp AND randomhand < 0.50 Call FORCE
+    WHEN f$Gen_EffStack > 25 AND f$Gen_EffStack <= 40 AND listF3SqEPV RaiseMax FORCE
+    WHEN f$Gen_EffStack > 25 AND f$Gen_EffStack <= 40 AND listSq1EPB RaiseMax FORCE
+    WHEN f$Gen_EffStack > 25 AND f$Gen_EffStack <= 40 AND listF4S40C Call FORCE
+    WHEN f$Gen_EffStack > 25 AND f$Gen_EffStack <= 40 AND listF4S40Cp AND randomhand < 0.50 Call FORCE
+    WHEN f$Gen_EffStack > 40 AND listF3SqEPV RaiseMax FORCE
+    WHEN f$Gen_EffStack > 40 AND listSq1EPB RaiseMax FORCE
+    WHEN f$Gen_EffStack > 40 AND listF4S10000C Call FORCE
+    WHEN f$Gen_EffStack > 40 AND listF4S10000Cp AND randomhand < 0.50 Call FORCE
+    WHEN Others Fold FORCE
+// === 4BET DEVANT NOUS (cold) : jam premium / call ===
+WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 3
+    WHEN f$Gen_EffStack > 0 AND f$Gen_EffStack <= 8 AND listF3SqEPV RaiseMax FORCE
+    WHEN f$Gen_EffStack > 0 AND f$Gen_EffStack <= 8 AND listColdF4C8 Call FORCE
+    WHEN f$Gen_EffStack > 8 AND f$Gen_EffStack <= 12 AND listF3SqEPV RaiseMax FORCE
+    WHEN f$Gen_EffStack > 8 AND f$Gen_EffStack <= 12 AND listColdF4C12 Call FORCE
+    WHEN f$Gen_EffStack > 12 AND f$Gen_EffStack <= 18 AND listF3SqEPV RaiseMax FORCE
+    WHEN f$Gen_EffStack > 12 AND f$Gen_EffStack <= 18 AND listColdF4C18 Call FORCE
+    WHEN f$Gen_EffStack > 18 AND f$Gen_EffStack <= 25 AND listColdF3V RaiseMax FORCE
+    WHEN f$Gen_EffStack > 18 AND f$Gen_EffStack <= 25 AND listColdF4C25 Call FORCE
+    WHEN f$Gen_EffStack > 25 AND f$Gen_EffStack <= 40 AND listColdF4J40 RaiseMax FORCE
+    WHEN f$Gen_EffStack > 25 AND f$Gen_EffStack <= 40 AND listColdF4C40 Call FORCE
+    WHEN f$Gen_EffStack > 40 AND listColdF4J40 RaiseMax FORCE
+    WHEN f$Gen_EffStack > 40 AND listColdF4C10000 Call FORCE
+    WHEN Others Fold FORCE
+// === FACE À UN 5BET OU UN ALL-IN PRÉFLOP : call selon la profondeur ===
+WHEN Raises >= 2
+    WHEN f$Gen_EffStack > 0 AND f$Gen_EffStack <= 8 AND listAllinCall8 Call FORCE
+    WHEN f$Gen_EffStack > 8 AND f$Gen_EffStack <= 12 AND listAllinCall12 Call FORCE
+    WHEN f$Gen_EffStack > 12 AND f$Gen_EffStack <= 18 AND listVBBSBV Call FORCE
+    WHEN f$Gen_EffStack > 18 AND f$Gen_EffStack <= 25 AND listVBTNCOV Call FORCE
+    WHEN f$Gen_EffStack > 25 AND f$Gen_EffStack <= 40 AND listVMPMPV Call FORCE
+    WHEN f$Gen_EffStack > 40 AND listVMPEPV Call FORCE
+    WHEN Others Fold FORCE
+WHEN Others
+    WHEN AmountToCall > 0 Fold FORCE
+    WHEN Others Check FORCE
+
+##f$Gen_Monster##
+// Mains monstrueuses (value maximale)
+WHEN HaveStraightFlush RETURN true FORCE
+WHEN HaveQuads AND NOT QuadsOnBoard RETURN true FORCE
+WHEN HaveFullHouse AND NOT FullHouseOnBoard RETURN true FORCE
+WHEN HaveFlush AND NOT FlushOnBoard RETURN true FORCE
+WHEN HaveStraight AND NOT StraightOnBoard RETURN true FORCE
+WHEN HaveSet RETURN true FORCE
+WHEN HaveTrips AND NOT TripsOnBoard RETURN true FORCE
+WHEN Others RETURN false FORCE
+
+##f$Gen_Strong##
+// Mains fortes
+WHEN f$Gen_Monster RETURN true FORCE
+WHEN HaveTwoPair RETURN true FORCE
+WHEN HaveOverPair RETURN true FORCE
+WHEN HaveTopPair AND (HaveBestKicker OR HaveSecondBestKicker) RETURN true FORCE
+WHEN Others RETURN false FORCE
+
+##f$Gen_Medium##
+// Paires moyennes / top pair kicker faible
+WHEN HaveTopPair RETURN true FORCE
+WHEN HaveSecondTopPair RETURN true FORCE
+WHEN Others RETURN false FORCE
+
+##f$Gen_WeakSD##
+// Petites paires (valeur de showdown)
+WHEN HavePair RETURN true FORCE
+WHEN Others RETURN false FORCE
+
+##f$Gen_StrongDraw##
+// Tirages forts (flop/turn)
+WHEN (betround < river) AND (HaveFlushDraw OR HaveOpenEndedStraightDraw OR HaveDoubleGutshotDraw) RETURN true FORCE
+WHEN Others RETURN false FORCE
+
+##f$Gen_NutDraw##
+// Tirages nuts / combos : candidats au check-raise et au jam
+WHEN (betround < river) AND (HaveNutFlushDraw OR HaveNutStraightDraw OR (HaveFlushDraw AND HaveStraightDraw)) RETURN true FORCE
+WHEN Others RETURN false FORCE
+
+##f$Gen_WeakDraw##
+// Tirages faibles, backdoors, overcards
+WHEN (betround < river) AND (HaveInsideStraightDraw OR HaveBackdoorFlushDraw OR Overcards = 2) RETURN true FORCE
+WHEN Others RETURN false FORCE
+
+##f$Gen_Air##
+// Rien : ni main faite ni tirage (exclusif avec les autres catégories)
+WHEN f$Gen_Strong OR f$Gen_Medium OR f$Gen_WeakSD OR f$Gen_StrongDraw OR f$Gen_WeakDraw RETURN false FORCE
+WHEN Others RETURN true FORCE
+
+##f$Gen_Blockers##
+// Blockers des nuts (bonus de bluff river)
+WHEN HaveNutFlushCard RETURN true FORCE
+WHEN TopHoleCard = ace RETURN true FORCE
+WHEN Others RETURN false FORCE
+
+##f$Gen_Scare##
+// La carte du turn complète un tirage (dangereuse pour les bluffs)
+WHEN (FlushPossibleOnTurn AND NOT FlushPossibleOnFlop) RETURN true FORCE
+WHEN (StraightPossibleOnTurn AND NOT StraightPossibleOnFlop) RETURN true FORCE
+WHEN Others RETURN false FORCE
+
+##f$Gen_GoodBarrelCard##
+// Overcard au turn : bonne carte pour le preneur d'initiative
+WHEN TurnCardIsOvercardToBoard AND NOT FlushPossibleOnTurn RETURN true FORCE
+WHEN Others RETURN false FORCE
+
+##f$Gen_Tex##
+// Texture du flop : 1 monotone, 2 humide, 3 pairé, 4 haut sec, 5 bas sec, 6 sec
+WHEN nsuitedcommon >= 3 RETURN 1 FORCE
+WHEN (nsuitedcommon = 2 AND (StraightPossible OR OpenEndedStraightDrawPossibleOnFlop)) OR OpenEndedStraightDrawPossibleOnFlop OR ThreeCardStraightOnBoard RETURN 2 FORCE
+WHEN PairOnBoard RETURN 3 FORCE
+WHEN BestBoardCard >= 13 RETURN 4 FORCE
+WHEN BestBoardCard <= 9 RETURN 5 FORCE
+WHEN Others RETURN 6 FORCE
+
+##f$flop##
+// OHPG : flop. Blocs : c-bet (agresseur préflop), mise du non-agresseur, relance subie, mise subie.
+// --- C-BET : nous avons relancé préflop et personne n'a misé ---
+WHEN AmountToCall = 0 AND BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 0
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Monster RaiseBy 40% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Strong RaiseBy 40% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Medium AND randomround < 0.45 RaiseBy 40% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_StrongDraw AND randomround < 0.91 RaiseBy 40% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_WeakDraw AND randomround < 0.56 RaiseBy 40% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_WeakSD AND randomround < 0.23 RaiseBy 40% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Air AND randomround < 0.51 RaiseBy 40% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 Check FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Medium AND randomround < 0.48 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_StrongDraw AND randomround < 0.98 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_WeakDraw AND randomround < 0.71 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_WeakSD AND randomround < 0.24 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Air AND randomround < 0.65 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 Check FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Monster RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Strong RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Medium AND randomround < 0.58 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_StrongDraw RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_WeakDraw RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_WeakSD AND randomround < 0.29 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Air RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 Check FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Monster RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Strong RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Medium AND randomround < 0.58 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_StrongDraw RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_WeakDraw RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_WeakSD AND randomround < 0.29 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Air RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 Check FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Monster RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Strong RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Medium AND randomround < 0.52 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_StrongDraw RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_WeakDraw AND randomround < 0.86 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_WeakSD AND randomround < 0.26 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Air AND randomround < 0.78 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 Check FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Monster RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Strong RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Medium AND randomround < 0.60 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_StrongDraw RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_WeakDraw RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_WeakSD AND randomround < 0.30 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Air RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 Check FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Monster RaiseBy 40% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Strong RaiseBy 40% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Medium AND randomround < 0.25 RaiseBy 40% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_StrongDraw AND randomround < 0.91 RaiseBy 40% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_WeakDraw AND randomround < 0.27 RaiseBy 40% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_WeakSD AND randomround < 0.12 RaiseBy 40% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Air AND randomround < 0.24 RaiseBy 40% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 Check FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Medium AND randomround < 0.28 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_StrongDraw AND randomround < 0.98 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_WeakDraw AND randomround < 0.42 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_WeakSD AND randomround < 0.14 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Air AND randomround < 0.38 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 Check FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Monster RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Strong RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Medium AND randomround < 0.38 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_StrongDraw RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_WeakDraw AND randomround < 0.86 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_WeakSD AND randomround < 0.19 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Air AND randomround < 0.78 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 Check FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Monster RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Strong RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Medium AND randomround < 0.38 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_StrongDraw RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_WeakDraw AND randomround < 0.86 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_WeakSD AND randomround < 0.19 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Air AND randomround < 0.78 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 Check FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Monster RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Strong RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Medium AND randomround < 0.32 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_StrongDraw RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_WeakDraw AND randomround < 0.56 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_WeakSD AND randomround < 0.16 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Air AND randomround < 0.51 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 Check FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Monster RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Strong RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Medium AND randomround < 0.40 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_StrongDraw RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_WeakDraw AND randomround < 0.94 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_WeakSD AND randomround < 0.20 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Air AND randomround < 0.85 RaiseBy 33% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 Check FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Medium AND randomround < 0.29 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_StrongDraw AND randomround < 0.68 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_WeakDraw AND randomround < 0.13 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_WeakSD AND randomround < 0.11 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Air AND randomround < 0.13 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 1 Check FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Medium AND randomround < 0.31 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_StrongDraw AND randomround < 0.73 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_WeakDraw AND randomround < 0.16 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_WeakSD AND randomround < 0.12 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Air AND randomround < 0.16 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 2 Check FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Medium AND randomround < 0.38 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_StrongDraw AND randomround < 0.88 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_WeakDraw AND randomround < 0.26 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_WeakSD AND randomround < 0.15 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Air AND randomround < 0.26 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 3 Check FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Medium AND randomround < 0.38 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_StrongDraw AND randomround < 0.88 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_WeakDraw AND randomround < 0.26 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_WeakSD AND randomround < 0.15 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Air AND randomround < 0.26 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 4 Check FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Medium AND randomround < 0.34 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_StrongDraw AND randomround < 0.78 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_WeakDraw AND randomround < 0.20 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_WeakSD AND randomround < 0.13 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Air AND randomround < 0.20 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 5 Check FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Medium AND randomround < 0.39 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_StrongDraw AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_WeakDraw AND randomround < 0.28 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_WeakSD AND randomround < 0.15 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Air AND randomround < 0.28 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Tex = 6 Check FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Medium AND randomround < 0.16 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_StrongDraw AND randomround < 0.68 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_WeakDraw AND randomround < 0.06 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_WeakSD AND randomround < 0.06 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 AND f$Gen_Air AND randomround < 0.06 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 1 Check FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Medium AND randomround < 0.18 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_StrongDraw AND randomround < 0.73 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_WeakDraw AND randomround < 0.09 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_WeakSD AND randomround < 0.07 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 AND f$Gen_Air AND randomround < 0.09 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 2 Check FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Medium AND randomround < 0.25 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_StrongDraw AND randomround < 0.88 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_WeakDraw AND randomround < 0.20 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_WeakSD AND randomround < 0.10 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 AND f$Gen_Air AND randomround < 0.20 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 3 Check FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Medium AND randomround < 0.25 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_StrongDraw AND randomround < 0.88 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_WeakDraw AND randomround < 0.20 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_WeakSD AND randomround < 0.10 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 AND f$Gen_Air AND randomround < 0.20 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 4 Check FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Medium AND randomround < 0.21 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_StrongDraw AND randomround < 0.78 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_WeakDraw AND randomround < 0.13 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_WeakSD AND randomround < 0.08 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 AND f$Gen_Air AND randomround < 0.13 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 5 Check FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Medium AND randomround < 0.26 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_StrongDraw AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_WeakDraw AND randomround < 0.21 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_WeakSD AND randomround < 0.10 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 AND f$Gen_Air AND randomround < 0.21 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Tex = 6 Check FORCE
+    WHEN Others Check FORCE
+// --- Nous n'avons pas relancé préflop et personne n'a misé ---
+WHEN AmountToCall = 0
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Monster RaiseBy 43% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Strong RaiseBy 43% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Medium AND randomround < 0.44 RaiseBy 43% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_StrongDraw AND randomround < 0.55 RaiseBy 43% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_WeakDraw AND randomround < 0.28 RaiseBy 43% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_WeakSD AND randomround < 0.17 RaiseBy 43% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Air AND randomround < 0.33 RaiseBy 43% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway Check FORCE
+    WHEN Others Check FORCE
+// --- On nous relance après notre mise / check-raise subi ---
+WHEN AmountToCall > 0 AND RaisesSinceLastPlay >= 1 AND BotsActionsOnThisRoundIncludingChecks >= 1
+    WHEN HaveNuts AND f$Gen_PotOdds < 2 RaiseBy 100% FORCE
+    WHEN f$Gen_Monster AND randomround < 0.55 RaiseBy 100% FORCE
+    WHEN f$Gen_Monster Call FORCE
+    WHEN f$Gen_Strong AND randomround < 0.19 RaiseBy 100% FORCE
+    WHEN f$Gen_Strong AND f$Gen_PotOdds <= 0.528 Call FORCE
+    WHEN f$Gen_Strong AND f$Gen_PotOdds <= 0.686 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_NutDraw AND randomround < 0.30 RaiseBy 100% FORCE
+    WHEN f$Gen_StrongDraw AND f$Gen_PotOdds <= 0.376 Call FORCE
+    WHEN f$Gen_StrongDraw AND f$Gen_PotOdds <= 0.489 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Medium AND f$Gen_PotOdds <= 0.360 Call FORCE
+    WHEN f$Gen_Medium AND f$Gen_PotOdds <= 0.468 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_WeakSD AND f$Gen_PotOdds <= 0.224 Call FORCE
+    WHEN f$Gen_WeakSD AND f$Gen_PotOdds <= 0.291 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_WeakDraw AND f$Gen_IP AND f$Gen_PotOdds <= 0.28 AND randomround < 0.40 Call FORCE
+    WHEN f$Gen_WeakDraw AND f$Gen_PotOdds <= 0.160 Call FORCE
+    WHEN f$Gen_WeakDraw AND f$Gen_PotOdds <= 0.208 AND randomround < 0.50 Call FORCE
+    WHEN Others Fold FORCE
+// --- On fait face à une mise (c-bet adverse, donk, etc.) ---
+WHEN AmountToCall > 0
+    WHEN NOT f$Gen_Multiway AND HaveNuts AND f$Gen_PotOdds < 2 RaiseBy 100% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Monster AND randomround < 0.55 RaiseBy 100% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Monster Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Strong AND randomround < 0.19 RaiseBy 100% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Strong AND f$Gen_PotOdds <= 0.660 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Strong AND f$Gen_PotOdds <= 0.858 AND randomround < 0.50 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_NutDraw AND randomround < 0.30 RaiseBy 100% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_StrongDraw AND f$Gen_PotOdds <= 0.470 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_StrongDraw AND f$Gen_PotOdds <= 0.611 AND randomround < 0.50 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Medium AND f$Gen_PotOdds <= 0.450 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Medium AND f$Gen_PotOdds <= 0.585 AND randomround < 0.50 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_WeakSD AND f$Gen_PotOdds <= 0.280 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_WeakSD AND f$Gen_PotOdds <= 0.364 AND randomround < 0.50 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_WeakDraw AND f$Gen_IP AND f$Gen_PotOdds <= 0.28 AND randomround < 0.40 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_WeakDraw AND f$Gen_PotOdds <= 0.200 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_WeakDraw AND f$Gen_PotOdds <= 0.260 AND randomround < 0.50 Call FORCE
+    WHEN NOT f$Gen_Multiway Fold FORCE
+    WHEN f$Gen_Multiway AND HaveNuts AND f$Gen_PotOdds < 2 RaiseBy 100% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Monster AND randomround < 0.55 RaiseBy 100% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Monster Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Strong AND randomround < 0.19 RaiseBy 100% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Strong AND f$Gen_PotOdds <= 0.561 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Strong AND f$Gen_PotOdds <= 0.729 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_NutDraw AND randomround < 0.30 RaiseBy 100% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_StrongDraw AND f$Gen_PotOdds <= 0.399 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_StrongDraw AND f$Gen_PotOdds <= 0.519 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Medium AND f$Gen_PotOdds <= 0.383 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Medium AND f$Gen_PotOdds <= 0.497 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_WeakSD AND f$Gen_PotOdds <= 0.238 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_WeakSD AND f$Gen_PotOdds <= 0.309 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_WeakDraw AND f$Gen_IP AND f$Gen_PotOdds <= 0.28 AND randomround < 0.40 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_WeakDraw AND f$Gen_PotOdds <= 0.170 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_WeakDraw AND f$Gen_PotOdds <= 0.221 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Multiway Fold FORCE
+
+##f$turn##
+// OHPG : turn. Blocs : 2e barrel, c-bet retardé / probe, mise, relance subie, mise subie.
+// --- 2e BARREL : nous avons misé au flop ---
+WHEN AmountToCall = 0 AND BotRaisedOnFlop
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Scare AND f$Gen_Monster AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Scare AND f$Gen_Strong AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Scare AND f$Gen_Medium AND randomround < 0.40 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Scare AND f$Gen_StrongDraw AND randomround < 0.81 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Scare AND f$Gen_WeakDraw AND randomround < 0.29 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Scare AND f$Gen_WeakSD AND randomround < 0.12 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Scare AND f$Gen_Air AND randomround < 0.36 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND f$Gen_Scare Check FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Monster AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Strong AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Medium AND randomround < 0.40 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_StrongDraw AND randomround < 0.98 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_WeakDraw AND randomround < 0.56 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_WeakSD AND randomround < 0.12 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Air AND randomround < 0.70 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard Check FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Monster AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Strong AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Medium AND randomround < 0.40 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_StrongDraw AND randomround < 0.91 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_WeakDraw AND randomround < 0.45 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_WeakSD AND randomround < 0.12 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Air AND randomround < 0.57 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard Check FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Scare AND f$Gen_Monster AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Scare AND f$Gen_Strong AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Scare AND f$Gen_Medium AND randomround < 0.24 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Scare AND f$Gen_StrongDraw AND randomround < 0.81 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Scare AND f$Gen_WeakDraw AND randomround < 0.29 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Scare AND f$Gen_WeakSD AND randomround < 0.07 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Scare AND f$Gen_Air AND randomround < 0.36 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Scare Check FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Monster AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Strong AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Medium AND randomround < 0.24 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_StrongDraw AND randomround < 0.98 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_WeakDraw AND randomround < 0.56 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_WeakSD AND randomround < 0.07 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Air AND randomround < 0.70 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard Check FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Monster AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Strong AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Medium AND randomround < 0.24 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_StrongDraw AND randomround < 0.91 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_WeakDraw AND randomround < 0.45 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_WeakSD AND randomround < 0.07 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Air AND randomround < 0.57 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard Check FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Scare AND f$Gen_Monster AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Scare AND f$Gen_Strong AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Scare AND f$Gen_Medium AND randomround < 0.20 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Scare AND f$Gen_StrongDraw AND randomround < 0.49 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Scare AND f$Gen_WeakDraw AND randomround < 0.11 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Scare AND f$Gen_Air AND randomround < 0.09 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND f$Gen_Scare Check FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Monster AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Strong AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Medium AND randomround < 0.20 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_StrongDraw AND randomround < 0.59 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_WeakDraw AND randomround < 0.21 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Air AND randomround < 0.18 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard Check FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Monster AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Strong AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Medium AND randomround < 0.20 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_StrongDraw AND randomround < 0.55 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_WeakDraw AND randomround < 0.17 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Air AND randomround < 0.14 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard Check FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Scare AND f$Gen_Monster AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Scare AND f$Gen_Strong AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Scare AND f$Gen_Medium AND randomround < 0.12 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Scare AND f$Gen_StrongDraw AND randomround < 0.49 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Scare AND f$Gen_WeakDraw AND randomround < 0.11 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Scare AND f$Gen_Air AND randomround < 0.09 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND f$Gen_Scare Check FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Monster AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Strong AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Medium AND randomround < 0.12 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_StrongDraw AND randomround < 0.59 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_WeakDraw AND randomround < 0.21 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard AND f$Gen_Air AND randomround < 0.18 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND f$Gen_GoodBarrelCard Check FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Monster AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Strong AND randomround < 0.90 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Medium AND randomround < 0.12 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_StrongDraw AND randomround < 0.55 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_WeakDraw AND randomround < 0.17 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard AND f$Gen_Air AND randomround < 0.14 RaiseBy 66% FORCE
+    WHEN f$Gen_Multiway AND NOT f$Gen_IP AND NOT f$Gen_Scare AND NOT f$Gen_GoodBarrelCard Check FORCE
+    WHEN Others Check FORCE
+// --- Flop checké : c-bet retardé (agresseur) ou probe ---
+WHEN AmountToCall = 0 AND NoBettingOnFlop
+    WHEN BotRaisedBeforeFlop AND NOT f$Gen_Multiway AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN BotRaisedBeforeFlop AND NOT f$Gen_Multiway AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN BotRaisedBeforeFlop AND NOT f$Gen_Multiway AND f$Gen_Medium AND randomround < 0.60 RaiseBy 66% FORCE
+    WHEN BotRaisedBeforeFlop AND NOT f$Gen_Multiway AND f$Gen_StrongDraw AND randomround < 0.60 RaiseBy 66% FORCE
+    WHEN BotRaisedBeforeFlop AND NOT f$Gen_Multiway AND f$Gen_WeakDraw AND randomround < 0.36 RaiseBy 66% FORCE
+    WHEN BotRaisedBeforeFlop AND NOT f$Gen_Multiway AND f$Gen_WeakSD AND randomround < 0.18 RaiseBy 66% FORCE
+    WHEN BotRaisedBeforeFlop AND NOT f$Gen_Multiway AND f$Gen_Air AND randomround < 0.41 RaiseBy 66% FORCE
+    WHEN BotRaisedBeforeFlop AND NOT f$Gen_Multiway Check FORCE
+    WHEN NOT BotRaisedBeforeFlop AND NOT f$Gen_Multiway AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN NOT BotRaisedBeforeFlop AND NOT f$Gen_Multiway AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN NOT BotRaisedBeforeFlop AND NOT f$Gen_Multiway AND f$Gen_Medium AND randomround < 0.45 RaiseBy 66% FORCE
+    WHEN NOT BotRaisedBeforeFlop AND NOT f$Gen_Multiway AND f$Gen_StrongDraw AND randomround < 0.45 RaiseBy 66% FORCE
+    WHEN NOT BotRaisedBeforeFlop AND NOT f$Gen_Multiway AND f$Gen_WeakDraw AND randomround < 0.27 RaiseBy 66% FORCE
+    WHEN NOT BotRaisedBeforeFlop AND NOT f$Gen_Multiway AND f$Gen_WeakSD AND randomround < 0.14 RaiseBy 66% FORCE
+    WHEN NOT BotRaisedBeforeFlop AND NOT f$Gen_Multiway AND f$Gen_Air AND randomround < 0.30 RaiseBy 66% FORCE
+    WHEN NOT BotRaisedBeforeFlop AND NOT f$Gen_Multiway Check FORCE
+    WHEN Others Check FORCE
+// --- Autres situations sans mise devant nous ---
+WHEN AmountToCall = 0
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Monster RaiseBy 66% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Strong RaiseBy 66% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Medium AND randomround < 0.32 RaiseBy 66% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_StrongDraw AND randomround < 0.36 RaiseBy 66% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_WeakDraw AND randomround < 0.14 RaiseBy 66% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Air AND randomround < 0.18 RaiseBy 66% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway Check FORCE
+    WHEN NOT f$Gen_IP AND f$Gen_Monster AND randomround < 0.80 RaiseBy 66% FORCE
+    WHEN NOT f$Gen_IP AND f$Gen_Strong AND randomround < 0.80 RaiseBy 66% FORCE
+    WHEN Others Check FORCE
+// --- On nous relance après notre mise ---
+WHEN AmountToCall > 0 AND RaisesSinceLastPlay >= 1 AND BotsActionsOnThisRoundIncludingChecks >= 1
+    WHEN HaveNuts AND f$Gen_PotOdds < 2 RaiseBy 100% FORCE
+    WHEN f$Gen_Monster AND randomround < 0.55 RaiseBy 100% FORCE
+    WHEN f$Gen_Monster Call FORCE
+    WHEN f$Gen_Strong AND randomround < 0.19 RaiseBy 100% FORCE
+    WHEN f$Gen_Strong AND f$Gen_PotOdds <= 0.495 Call FORCE
+    WHEN f$Gen_Strong AND f$Gen_PotOdds <= 0.643 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_NutDraw AND randomround < 0.30 RaiseBy 100% FORCE
+    WHEN f$Gen_StrongDraw AND f$Gen_PotOdds <= 0.285 Call FORCE
+    WHEN f$Gen_StrongDraw AND f$Gen_PotOdds <= 0.371 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Medium AND f$Gen_PotOdds <= 0.307 Call FORCE
+    WHEN f$Gen_Medium AND f$Gen_PotOdds <= 0.400 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_WeakSD AND f$Gen_PotOdds <= 0.173 Call FORCE
+    WHEN f$Gen_WeakSD AND f$Gen_PotOdds <= 0.224 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_WeakDraw AND f$Gen_PotOdds <= 0.090 Call FORCE
+    WHEN f$Gen_WeakDraw AND f$Gen_PotOdds <= 0.117 AND randomround < 0.50 Call FORCE
+    WHEN Others Fold FORCE
+// --- On fait face à une mise ---
+WHEN AmountToCall > 0
+    WHEN NOT f$Gen_Multiway AND HaveNuts AND f$Gen_PotOdds < 2 RaiseBy 100% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Monster AND randomround < 0.55 RaiseBy 100% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Monster Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Strong AND randomround < 0.19 RaiseBy 100% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Strong AND f$Gen_PotOdds <= 0.660 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Strong AND f$Gen_PotOdds <= 0.858 AND randomround < 0.50 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_NutDraw AND randomround < 0.30 RaiseBy 100% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_StrongDraw AND f$Gen_PotOdds <= 0.380 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_StrongDraw AND f$Gen_PotOdds <= 0.494 AND randomround < 0.50 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Medium AND f$Gen_PotOdds <= 0.410 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Medium AND f$Gen_PotOdds <= 0.533 AND randomround < 0.50 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_WeakSD AND f$Gen_PotOdds <= 0.230 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_WeakSD AND f$Gen_PotOdds <= 0.299 AND randomround < 0.50 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_WeakDraw AND f$Gen_PotOdds <= 0.120 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_WeakDraw AND f$Gen_PotOdds <= 0.156 AND randomround < 0.50 Call FORCE
+    WHEN NOT f$Gen_Multiway Fold FORCE
+    WHEN f$Gen_Multiway AND HaveNuts AND f$Gen_PotOdds < 2 RaiseBy 100% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Monster AND randomround < 0.55 RaiseBy 100% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Monster Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Strong AND randomround < 0.19 RaiseBy 100% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Strong AND f$Gen_PotOdds <= 0.561 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Strong AND f$Gen_PotOdds <= 0.729 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_NutDraw AND randomround < 0.30 RaiseBy 100% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_StrongDraw AND f$Gen_PotOdds <= 0.323 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_StrongDraw AND f$Gen_PotOdds <= 0.420 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Medium AND f$Gen_PotOdds <= 0.348 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Medium AND f$Gen_PotOdds <= 0.453 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_WeakSD AND f$Gen_PotOdds <= 0.196 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_WeakSD AND f$Gen_PotOdds <= 0.254 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_WeakDraw AND f$Gen_PotOdds <= 0.102 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_WeakDraw AND f$Gen_PotOdds <= 0.133 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Multiway Fold FORCE
+
+##f$river##
+// OHPG : river. Value fine, bluffs avec blockers, probe, défense par cotes (MDF).
+// --- 3e BARREL : nous avons misé au turn ---
+WHEN AmountToCall = 0 AND BotRaisedOnTurn
+    WHEN NOT f$Gen_Multiway AND HaveNuts AND f$Gen_IP RaiseBy 110% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Monster RaiseBy 70% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Strong RaiseBy 70% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Medium AND randomround < 0.60 RaiseBy 45% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Blockers AND f$Gen_Air AND randomround < 0.82 RaiseBy 70% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Air AND randomround < 0.49 RaiseBy 70% FORCE
+    WHEN NOT f$Gen_Multiway Check FORCE
+    WHEN f$Gen_Multiway AND HaveNuts AND f$Gen_IP RaiseBy 110% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Monster RaiseBy 70% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Strong RaiseBy 70% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Medium AND randomround < 0.24 RaiseBy 45% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Blockers AND f$Gen_Air AND randomround < 0.33 RaiseBy 70% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Air AND randomround < 0.19 RaiseBy 70% FORCE
+    WHEN f$Gen_Multiway Check FORCE
+    WHEN Others Check FORCE
+// --- Sans mise devant nous : value / probe / bluff ---
+WHEN AmountToCall = 0
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND HaveNuts RaiseBy 110% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Monster RaiseBy 70% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Strong RaiseBy 70% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Medium AND randomround < 0.22 RaiseBy 45% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Blockers AND f$Gen_Air AND randomround < 0.35 RaiseBy 70% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Air AND randomround < 0.14 RaiseBy 70% FORCE
+    WHEN f$Gen_IP AND NOT f$Gen_Multiway Check FORCE
+    WHEN NOT f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Monster RaiseBy 70% FORCE
+    WHEN NOT f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Strong RaiseBy 70% FORCE
+    WHEN NOT f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Medium AND randomround < 0.08 RaiseBy 45% FORCE
+    WHEN NOT f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Blockers AND f$Gen_Air AND randomround < 0.35 RaiseBy 70% FORCE
+    WHEN NOT f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_Air AND randomround < 0.14 RaiseBy 70% FORCE
+    WHEN NOT f$Gen_IP AND NOT f$Gen_Multiway Check FORCE
+    WHEN Others Check FORCE
+// --- On nous relance ---
+WHEN AmountToCall > 0 AND RaisesSinceLastPlay >= 1 AND BotsActionsOnThisRoundIncludingChecks >= 1
+    WHEN HaveNuts AND f$Gen_PotOdds < 2 RaiseBy 100% FORCE
+    WHEN f$Gen_Monster AND randomround < 0.55 RaiseBy 100% FORCE
+    WHEN f$Gen_Monster Call FORCE
+    WHEN f$Gen_Strong AND f$Gen_PotOdds <= 0.528 Call FORCE
+    WHEN f$Gen_Strong AND f$Gen_PotOdds <= 0.686 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Medium AND f$Gen_PotOdds <= 0.296 Call FORCE
+    WHEN f$Gen_Medium AND f$Gen_PotOdds <= 0.385 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_WeakSD AND f$Gen_PotOdds <= 0.152 Call FORCE
+    WHEN f$Gen_WeakSD AND f$Gen_PotOdds <= 0.198 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Air AND f$Gen_Blockers AND randomround < 0.04 RaiseBy 100% FORCE
+    WHEN Others Fold FORCE
+// --- On fait face à une mise ---
+WHEN AmountToCall > 0
+    WHEN NOT f$Gen_Multiway AND HaveNuts AND f$Gen_PotOdds < 2 RaiseBy 100% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Monster AND randomround < 0.55 RaiseBy 100% FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Monster Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Strong AND f$Gen_PotOdds <= 0.660 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Strong AND f$Gen_PotOdds <= 0.858 AND randomround < 0.50 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Medium AND f$Gen_PotOdds <= 0.370 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Medium AND f$Gen_PotOdds <= 0.481 AND randomround < 0.50 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_WeakSD AND f$Gen_PotOdds <= 0.190 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_WeakSD AND f$Gen_PotOdds <= 0.247 AND randomround < 0.50 Call FORCE
+    WHEN NOT f$Gen_Multiway AND f$Gen_Air AND f$Gen_Blockers AND randomround < 0.04 RaiseBy 100% FORCE
+    WHEN NOT f$Gen_Multiway Fold FORCE
+    WHEN f$Gen_Multiway AND HaveNuts AND f$Gen_PotOdds < 2 RaiseBy 100% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Monster AND randomround < 0.55 RaiseBy 100% FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Monster Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Strong AND f$Gen_PotOdds <= 0.561 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Strong AND f$Gen_PotOdds <= 0.729 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Medium AND f$Gen_PotOdds <= 0.315 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Medium AND f$Gen_PotOdds <= 0.409 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_WeakSD AND f$Gen_PotOdds <= 0.162 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_WeakSD AND f$Gen_PotOdds <= 0.210 AND randomround < 0.50 Call FORCE
+    WHEN f$Gen_Multiway AND f$Gen_Air AND f$Gen_Blockers AND randomround < 0.04 RaiseBy 100% FORCE
+    WHEN f$Gen_Multiway Fold FORCE
