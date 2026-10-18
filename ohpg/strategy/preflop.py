@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from .. import ranges as R
 from ..ppl import Profile, fmt
-from .common import (HERO, OPENER, ORDER, OPEN_WIDTH, emit_common_helpers, is_ip_vs_opener, join, mix,
+from .common import (actives, configure, HERO, OPENER, ORDER, OPEN_WIDTH, emit_common_helpers, is_ip_vs_opener, join, mix,
                      openers_before, stack_buckets, tiers)
 
 FIRST = "BotsActionsOnThisRoundIncludingChecks = 0"
@@ -54,6 +54,7 @@ def _rules(prof, f, cfg, cond, value, bluff, call, *, v_action, b_action=None, c
 
 
 def generate(prof: Profile, cfg: dict):
+    configure(cfg)
     emit_common_helpers(prof, cfg)
     f = prof.func("f$preflop")
     f.comment("OHPG : fonction préflop. Chaque bloc WHEN sans action est un scénario ; il se termine par un fold/check.")
@@ -81,7 +82,7 @@ def generate(prof: Profile, cfg: dict):
 def _open(prof, f, cfg):
     f.comment("=== OUVERTURE (personne n'est entré dans le pot) ===")
     f.group(join(FIRST, "Raises = 0", "Calls = 0"))
-    for pos in ("EP", "MP", "CO", "BTN", "SB"):
+    for pos in actives():
         hands = open_set(cfg, pos)
         size = cfg["open_size_ep"] if pos in ("EP", "MP") else cfg["open_size_late"] if pos in ("CO", "BTN") else cfg["open_size_sb"]
         if cfg["table_size"] == 2 and pos == "SB":
@@ -112,7 +113,7 @@ def _limpers(prof, f, cfg):
     base = cfg["iso_raise_pct"] * cfg["aggression_scale"] / 100.0
     for n, scale in ((1, 1.0), (2, 0.8), (3, 0.6)):
         cond_n = f"Calls = {n}" if n < 3 else "Calls >= 3"
-        for pos, pf in (("EP", 0.7), ("MP", 0.8), ("CO", 1.0), ("BTN", 1.3), ("SB", 0.9), ("BB", 1.0)):
+        for pos, pf in [x for x in (("EP", 0.7), ("MP", 0.8), ("CO", 1.0), ("BTN", 1.3), ("SB", 0.9), ("BB", 1.0)) if x[0] in ORDER]:
             pct = min(60.0, base * scale * pf)
             iso = R.open_range(round(pct, 1))
             full, part = tiers(iso, 0.8)
@@ -141,7 +142,7 @@ def _vs_open(prof, f, cfg, agg):
     hero_val = {"EP": 0.8, "MP": 0.9, "CO": 1.0, "BTN": 1.1, "SB": 1.2, "BB": 1.0}
     hero_bluff = {"EP": 0.7, "MP": 0.8, "CO": 1.0, "BTN": 1.2, "SB": 1.3, "BB": 1.1}
     for hero in ORDER:
-        for opener in (openers_before(hero) if hero != "BB" else ["EP", "MP", "CO", "BTN", "SB"]):
+        for opener in (openers_before(hero)):
             w = OPEN_WIDTH[opener]
             value_pct = cfg["threebet_value"] * w * hero_val[hero]
             ratio = cfg["threebet_bluff_ratio"] * agg * hero_bluff[hero]
@@ -217,7 +218,7 @@ def _facing_3bet(prof, f, cfg, agg):
     base = "BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 1 AND RaisesSinceLastPlay = 1"
     for suffix, extra, tighten in (("", "Calls = 0", 1.0), ("Sq", "Calls >= 1", 0.7)):
         f.group(join(base, extra))
-        for hero in ("EP", "MP", "CO", "BTN", "SB"):
+        for hero in actives():
             value, bluff, call, ip = _cont_sets(cfg, hero, agg, tighten)
             mult = cfg["fourbet_size_ip"] if ip else cfg["fourbet_size_oop"]
             act = f"RaiseTo (BetSize * {fmt(mult)})"

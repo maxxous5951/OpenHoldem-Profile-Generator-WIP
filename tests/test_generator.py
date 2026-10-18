@@ -63,7 +63,8 @@ def test_profile_json_roundtrip():
 
 # ---------------------------------------------------------------- décisions simulées
 BASE = dict(BotsActionsOnThisRoundIncludingChecks=0, Raises=0, Calls=0, CallsSinceLastRaise=0, InEarlyPosition=False,
-            InMiddlePosition=False, InCutOff=False, InButton=False, InSmallBlind=False, InBigBlind=False,
+            InEarlyPosition1=False, InEarlyPosition2=False, InEarlyPosition3=False, InMiddlePosition1=False,
+            InMiddlePosition2=False, InMiddlePosition3=False, InMiddlePosition=False, InCutOff=False, InButton=False, InSmallBlind=False, InBigBlind=False,
             EarlyPosition1Raising=False, EarlyPosition2Raising=False, EarlyPosition3Raising=False,
             MiddlePosition1Raising=False, MiddlePosition2Raising=False, MiddlePosition3Raising=False,
             CutOffRaising=False, ButtonRaising=False, SmallBlindRaising=False, BetSize=2.5, AmountToCall=1.5,
@@ -82,8 +83,8 @@ def decide(sim, hand, **kw):
 
 
 def test_open_ranges(sim):
-    assert decide(sim, "AA", InEarlyPosition=True).startswith("RaiseTo")
-    assert decide(sim, "72o", InEarlyPosition=True) == "Fold"
+    assert decide(sim, "AA", InMiddlePosition2=True).startswith("RaiseTo")
+    assert decide(sim, "72o", InMiddlePosition2=True) == "Fold"
     assert decide(sim, "T8s", InButton=True).startswith("RaiseTo")
     assert decide(sim, "72o", InButton=True) == "Fold"
 
@@ -111,3 +112,15 @@ def test_output_is_ascii_for_every_preset():
         for fm in presets.FORMATS:
             text = generator.generate(presets.build(st, fm, {"name": "Prôfil é à"}))
             assert all(ord(c) < 128 for c in text), (st, fm)
+
+
+def test_positions_follow_table_size():
+    """Spin 3-max : ni CutOff, ni MiddlePosition, ni EarlyPosition. 6-max : UTG = MiddlePosition2, pas d'EarlyPosition."""
+    for st in presets.STYLES:
+        t3 = generator.generate(presets.build(st, "Spin & Go 3-max"))
+        assert not any(w in t3 for w in ("InCutOff", "CutOffRaising", "MiddlePosition", "EarlyPosition")), st
+        assert not [e for e in validator.validate(t3) if e.level == "error"]
+    t6 = generator.generate(presets.build("Balanced 6-max", "Cash 6-max"))
+    assert "InMiddlePosition2" in t6 and "EarlyPosition" not in t6
+    t4 = generator.generate(presets.build("Balanced 6-max", "Cash 6-max", {"table_size": 4}))
+    assert "InCutOff" in t4 and "MiddlePosition" not in t4

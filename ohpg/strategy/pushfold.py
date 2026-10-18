@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from .. import ranges as R
 from ..ppl import Profile, fmt
-from .common import HERO, OPENER, OPEN_WIDTH, join, mix, tiers
+from .common import ORDER, actives, HERO, OPENER, OPEN_WIDTH, join, mix, tiers
 
 BUCKETS = [3, 4, 5, 6, 7, 8, 10, 12, 15, 20, 25, 30]
 BTN_PUSH = {3: 80, 4: 68, 5: 58, 6: 50, 7: 44, 8: 40, 10: 34, 12: 28, 15: 22, 20: 15, 25: 11, 30: 8}
@@ -51,7 +51,7 @@ def emit(prof: Profile, f, cfg: dict):
     f.comment("=== PUSH/FOLD : première action, stack effectif <= %d BB ===" % pf)
     f.group(join(first, "Raises = 0", "Calls = 0", f"f$Gen_EffStackFirstIn <= {pf}"))
     for lo, hi, ref in bands:
-        for pos in ("EP", "MP", "CO", "BTN", "SB"):
+        for pos in actives():
             hands = R.top_equity(round(push_pct(cfg, pos, ref), 1))
             full, part = tiers(hands, 0.9)
             lf = prof.add_list(f"Push{pos}{hi}", full)
@@ -66,7 +66,7 @@ def emit(prof: Profile, f, cfg: dict):
     f.comment("=== PUSH/FOLD : face à des limpers ===")
     f.group(join(first, "Raises = 0", "Calls >= 1", f"f$Gen_EffStackFirstIn <= {pf}"))
     for lo, hi, ref in bands:
-        for pos in ("EP", "MP", "CO", "BTN", "SB", "BB"):
+        for pos in ORDER:
             base_pos = "CO" if pos == "BB" else pos
             hands = R.top_equity(round(push_pct(cfg, base_pos, ref) * 0.8, 1))
             lh = prof.add_list(f"PushLimp{pos}{hi}", hands)
@@ -80,9 +80,9 @@ def emit(prof: Profile, f, cfg: dict):
     jam_like = "AmountToCall >= StackSize * 0.6"
     for lo, hi, ref in bands:
         band = _cond(lo, hi)
-        for hero in ("BB", "SB", "BTN", "CO", "MP", "EP"):
+        for hero in reversed(ORDER):
             from .common import openers_before
-            for opener in (openers_before(hero) if hero != "BB" else ["EP", "MP", "CO", "BTN", "SB"]):
+            for opener in (openers_before(hero)):
                 cond = join(band, HERO[hero], OPENER[opener])
                 if cfg["icm_pressure"] > 0:
                     lb = prof.add_list(f"CallJamB{hero}{opener}{hi}", R.top_equity(round(call_pct(cfg, hero, opener, ref, True), 1)))

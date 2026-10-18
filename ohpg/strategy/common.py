@@ -4,31 +4,59 @@ from __future__ import annotations
 from ..ppl import Profile, fmt
 from .. import ranges as R
 
-HERO = {
-    "EP": "InEarlyPosition", "MP": "InMiddlePosition", "CO": "InCutOff",
-    "BTN": "InButton", "SB": "InSmallBlind", "BB": "InBigBlind",
-}
-OPENER = {
-    "EP": "(EarlyPosition1Raising OR EarlyPosition2Raising OR EarlyPosition3Raising)",
-    "MP": "(MiddlePosition1Raising OR MiddlePosition2Raising OR MiddlePosition3Raising)",
-    "CO": "CutOffRaising",
-    "BTN": "ButtonRaising",
-    "SB": "SmallBlindRaising",
-}
-ORDER = ["EP", "MP", "CO", "BTN", "SB", "BB"]  # ordre d'action préflop
+HERO: dict[str, str] = {}
+OPENER: dict[str, str] = {}
+ORDER: list[str] = []  # positions actives, dans l'ordre d'action préflop
+SEATS: dict[str, int] = {}  # nombre de sièges regroupés sous EP / MP
+_SEAT_NAMES = ["EarlyPosition1", "EarlyPosition2", "EarlyPosition3",
+               "MiddlePosition1", "MiddlePosition2", "MiddlePosition3"]
+
+
+def configure(cfg: dict) -> None:
+    """Fixe les positions réellement jouées selon la taille de table.
+
+    OpenHoldem attribue les rôles en partant du bouton : BTN, CO, puis MP3, MP2, MP1, EP3, EP2, EP1.
+    Ex. à 6 joueurs UTG = MiddlePosition2 (il n'y a pas d'EarlyPosition) ; à 3 joueurs il n'y a ni CO ni MP/EP.
+    """
+    n = int(cfg["table_size"])
+    k = max(0, min(6, n - 4))  # sièges devant le CO
+    seats = _SEAT_NAMES[len(_SEAT_NAMES) - k:] if k else []
+    mp = k // 2
+    groups = {"EP": seats[: k - mp], "MP": seats[k - mp:]}
+    HERO.clear()
+    OPENER.clear()
+    ORDER.clear()
+    SEATS.clear()
+    for g, names in groups.items():
+        if names:
+            ORDER.append(g)
+            SEATS[g] = len(names)
+            HERO[g] = "(" + " OR ".join("In" + x for x in names) + ")" if len(names) > 1 else "In" + names[0]
+            OPENER[g] = "(" + " OR ".join(x + "Raising" for x in names) + ")" if len(names) > 1 else names[0] + "Raising"
+    if n >= 4:
+        ORDER.append("CO")
+        HERO["CO"], OPENER["CO"] = "InCutOff", "CutOffRaising"
+    ORDER.extend(["BTN", "SB", "BB"])
+    HERO.update({"BTN": "InButton", "SB": "InSmallBlind", "BB": "InBigBlind"})
+    OPENER.update({"BTN": "ButtonRaising", "SB": "SmallBlindRaising"})
+
+
+def actives(with_bb: bool = False) -> list[str]:
+    return [p for p in ORDER if with_bb or p != "BB"]
+
+
 OPEN_WIDTH = {"EP": 0.75, "MP": 0.9, "CO": 1.0, "BTN": 1.25, "SB": 1.35}
 
 
 def openers_before(hero: str) -> list[str]:
     """Positions qui peuvent avoir ouvert avant `hero`."""
+    if hero == "BB":
+        return actives()
     i = ORDER.index(hero)
-    out = ORDER[: i + 1] if hero in ("EP", "MP") else ORDER[:i]
-    out = [o for o in out if o != "BB"]
-    if hero == "EP":
-        return ["EP"]
-    if hero == "MP":
-        return ["EP", "MP"]
-    return out
+    out = ORDER[:i]
+    if hero in ("EP", "MP") and SEATS.get(hero, 0) > 1:
+        out = ORDER[: i + 1]  # un autre siège du même groupe a pu ouvrir
+    return [o for o in out if o != "BB"]
 
 
 def is_ip_vs_opener(hero: str, opener: str) -> bool:
