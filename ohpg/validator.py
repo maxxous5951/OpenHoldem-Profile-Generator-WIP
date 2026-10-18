@@ -73,6 +73,9 @@ def _strip_comments(text: str) -> list[str]:
 
 def validate(text: str, require_main: bool = True) -> list[Issue]:
     issues: list[Issue] = []
+    for i, raw in enumerate(text.splitlines(), 1):
+        if any(ord(c) > 127 for c in raw):
+            issues.append(Issue("error", i, "caractère non-ASCII (accent...) : OpenHoldem ne le supporte pas"))
     lines = _strip_comments(text)
 
     sections: list[tuple[str, int, list[tuple[int, str]]]] = []

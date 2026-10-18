@@ -1,6 +1,7 @@
 """Assemblage du profil complet."""
 from __future__ import annotations
 
+import unicodedata
 from datetime import date
 
 from . import __version__
@@ -21,6 +22,13 @@ HEADER = """//******************************************************************
 """
 
 
+def to_ascii(text: str) -> str:
+    """OpenHoldem ne gère pas l'UTF-8 : supprime accents et caractères spéciaux."""
+    text = text.replace("\u2019", "'").replace("\u2013", "-").replace("\u2014", "-").replace("\u2026", "...")
+    text = unicodedata.normalize("NFKD", text)
+    return "".join(c for c in text if ord(c) < 128)
+
+
 def generate(overrides: dict | None = None) -> str:
     cfg = normalize(overrides)
     prof = Profile()
@@ -28,7 +36,7 @@ def generate(overrides: dict | None = None) -> str:
     preflop.generate(prof, cfg)
     postflop.generate(prof, cfg)
     hopper.generate(prof, cfg)
-    return prof.render()
+    return to_ascii(prof.render())
 
 
 def generate_checked(overrides: dict | None = None) -> tuple[str, list[Issue]]:

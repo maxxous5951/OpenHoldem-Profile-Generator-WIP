@@ -21,9 +21,9 @@ class P:
 
 G_GEN = "Général"
 G_OPEN = "Preflop · Ouverture"
-G_DEF = "Preflop · Défense & 3bet"
+G_DEF = "Preflop · Défense / 3bet"
 G_BIG = "Preflop · 4bet / 5bet / squeeze"
-G_SHORT = "Tournoi · Push/Fold"
+G_SHORT = "Push/Fold"
 G_FLOP = "Flop"
 G_TURN = "Turn"
 G_RIVER = "River"

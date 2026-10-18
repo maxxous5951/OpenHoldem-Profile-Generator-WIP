@@ -103,3 +103,11 @@ def test_facing_3bet_and_4bet(sim):
               NumberOfRaisesBeforeFlop=2, RaisesSinceLastPlay=1, BetSize=20)
     assert decide(sim, "KK", **f4) == "RaiseMax"
     assert decide(sim, "J7o", **f4) == "Fold"
+
+
+def test_output_is_ascii_for_every_preset():
+    from ohpg import presets
+    for st in presets.STYLES:
+        for fm in presets.FORMATS:
+            text = generator.generate(presets.build(st, fm, {"name": "Prôfil é à"}))
+            assert all(ord(c) < 128 for c in text), (st, fm)

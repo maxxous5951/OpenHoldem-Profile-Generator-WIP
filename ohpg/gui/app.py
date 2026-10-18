@@ -4,10 +4,11 @@ from __future__ import annotations
 import json
 import sys
 
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QTimer
+from PyQt6.QtGui import QFontDatabase
 from PyQt6.QtWidgets import (QApplication, QCheckBox, QComboBox, QDoubleSpinBox, QFileDialog, QFormLayout, QHBoxLayout,
                              QLabel, QLineEdit, QMainWindow, QMessageBox, QPlainTextEdit, QPushButton, QScrollArea,
-                             QSpinBox, QSplitter, QTabWidget, QVBoxLayout, QWidget)
+                             QSizePolicy, QSpinBox, QSplitter, QTabWidget, QVBoxLayout, QWidget)
 
 from .. import generator, presets, validator
 from ..params import GROUPS, SCHEMA, coerce
@@ -19,6 +20,10 @@ QPushButton { background:#0a522c; border:none; border-radius:4px; padding:7px 14
 QPushButton:hover { background:#13804a; }
 QTabBar::tab { background:#1E1D2A; padding:7px 12px; margin-right:2px; }
 QTabBar::tab:selected { background:#0a522c; }
+QTabWidget::pane { border:1px solid #3F3D56; border-radius:4px; top:-1px; }
+QScrollArea { border:none; }
+QTabBar::tab:hover { background:#2a2940; }
+QPlainTextEdit { selection-background-color:#0a522c; }
 QToolTip { background:#1E1D2A; color:#EDEBF5; border:1px solid #3F3D56; }
 """
 
@@ -46,28 +51,34 @@ class MainWindow(QMainWindow):
         tl.addWidget(apply_btn)
         tl.addStretch(1)
         for text, fn in (("Charger config…", self.load_config), ("Sauver config…", self.save_config),
-                         ("Générer", self.generate), ("Enregistrer .ohf…", self.save_ohf)):
+                         ("Enregistrer .ohf…", self.save_ohf)):
             b = QPushButton(text)
             b.clicked.connect(fn)
             tl.addWidget(b)
 
+        # onglets : un par rue ; le préflop regroupe ses sous-onglets
         tabs = QTabWidget()
+        nested: dict[str, QTabWidget] = {}
         for group in GROUPS:
-            page = QWidget()
-            form = QFormLayout(page)
-            for p in [x for x in SCHEMA if x.group == group]:
-                w = self._make_widget(p)
-                w.setToolTip(p.help or p.label)
-                self.widgets[p.key] = w
-                form.addRow(p.label, w)
-            scroll = QScrollArea()
-            scroll.setWidgetResizable(True)
-            scroll.setWidget(page)
-            tabs.addTab(scroll, group)
+            top_name, _, sub_name = group.partition(" · ")
+            page = self._build_page(group)
+            if sub_name:
+                if top_name not in nested:
+                    nested[top_name] = QTabWidget()
+                    tabs.addTab(nested[top_name], top_name)
+                nested[top_name].addTab(page, sub_name)
+            else:
+                tabs.addTab(page, top_name)
+
+        self._timer = QTimer(self)
+        self._timer.setSingleShot(True)
+        self._timer.setInterval(350)
+        self._timer.timeout.connect(self.generate)
 
         self.preview = QPlainTextEdit()
         self.preview.setReadOnly(True)
         self.preview.setLineWrapMode(QPlainTextEdit.LineWrapMode.NoWrap)
+        self.preview.setFont(QFontDatabase.systemFont(QFontDatabase.SystemFont.FixedFont))
         self.status = QLabel("Prêt.")
         right = QWidget()
         rl = QVBoxLayout(right)
@@ -82,12 +93,40 @@ class MainWindow(QMainWindow):
 
         central = QWidget()
         cl = QVBoxLayout(central)
-        cl.addWidget(top)
-        cl.addWidget(split)
+        cl.setContentsMargins(8, 8, 8, 8)
+        top.setSizePolicy(top.sizePolicy().horizontalPolicy(), QSizePolicy.Policy.Fixed)
+        cl.addWidget(top, 0)
+        cl.addWidget(split, 1)
         self.setCentralWidget(central)
         self.apply_preset()
+        self.generate()
 
     # ------------------------------------------------------------------ widgets
+    def _build_page(self, group: str) -> QScrollArea:
+        page = QWidget()
+        form = QFormLayout(page)
+        form.setLabelAlignment(Qt.AlignmentFlag.AlignLeft)
+        form.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.AllNonFixedFieldsGrow)
+        form.setVerticalSpacing(8)
+        for p in [x for x in SCHEMA if x.group == group]:
+            w = self._make_widget(p)
+            w.setToolTip(p.help or p.label)
+            self.widgets[p.key] = w
+            form.addRow(p.label, w)
+            if p.help:
+                hint = QLabel(p.help)
+                hint.setStyleSheet("color:#8D8AA8; font-size:11px;")
+                hint.setWordWrap(True)
+                form.addRow("", hint)
+        holder = QWidget()
+        hl = QVBoxLayout(holder)
+        hl.addWidget(page)
+        hl.addStretch(1)
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setWidget(holder)
+        return scroll
+
     def _make_widget(self, p):
         if p.kind == "bool":
             w = QCheckBox()
@@ -105,6 +144,9 @@ class MainWindow(QMainWindow):
             w.setRange(p.lo, p.hi)
             w.setSingleStep(p.step)
             w.setDecimals(2)
+        sig = (w.stateChanged if p.kind == "bool" else w.currentTextChanged if p.kind == "choice"
+               else w.textChanged if p.kind == "str" else w.valueChanged)
+        sig.connect(lambda *_: self._timer.start())
         return w
 
     def set_value(self, key, value):
@@ -162,7 +204,7 @@ class MainWindow(QMainWindow):
             return
         path, _ = QFileDialog.getSaveFileName(self, "Enregistrer le profil", "profile.ohf", "OpenHoldem (*.ohf);;Tous (*)")
         if path:
-            with open(path, "w", encoding="utf-8", newline="\n") as fh:
+            with open(path, "w", encoding="ascii", errors="ignore", newline="\r\n") as fh:
                 fh.write(text)
             self.status.setText(f"Enregistré : {path}")
 
