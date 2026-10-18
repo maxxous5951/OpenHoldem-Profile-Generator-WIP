@@ -25,7 +25,7 @@ python -m ohpg generate --style TAG --format "MTT 9-max (push/fold 15BB)" --set 
 python -m ohpg validate mon_profil.ohf --partial     # valide n'importe quel .ohf
 python -m ohpg list                                   # presets et paramètres
 python -m ohpg dump-config --style Nit > config.json  # puis --config config.json
-python -m ohpg gui                                    # interface graphique
+python -m ohpg gui   # ou double-clic sur lancer.bat                                    # interface graphique
 ```
 Presets de style : Balanced 6-max, TAG, LAG, Nit, Maniac, Calling Station, Exploit vs Passive.
 Formats : Cash 6-max, Full Ring, Heads-Up, MTT 9-max, SNG bubble, Spin & Go 3-max.
