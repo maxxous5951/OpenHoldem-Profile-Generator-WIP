@@ -53,7 +53,7 @@ examples/             profils générés prêts à charger
 - Les ranges de push/fold sont des **approximations** de Nash sans ICM complet, pas des solutions solveur. Règle-les avec `pf_scale`, `pf_call_scale`, `icm_pressure`.
 - Le classement des mains est basé sur l'équité contre une main aléatoire + jouabilité, pas sur des ranges solveur.
 - L'exploitation `use_stats` exige PokerTracker configuré dans OpenHoldem (HEM non géré) ; les noms `pt_*` viennent de la documentation officielle mais n'ont pas pu être exécutés ici. Sans base ou avec trop peu de mains, le profil reste neutre.
-- Les tailles de mise ne varient pas selon l'adversaire (OpenPPL n'accepte que des pourcentages fixes pour `RaiseBy`).
+- Les tailles de mise ne varient pas selon l'adversaire (non implémenté : les tailles sont des pourcentages fixes).
 - Les sites de poker en ligne interdisent généralement les bots : utilise ce projet uniquement là où c'est légal et autorisé (jeu hors-ligne, tests, recherche).
 
 ## Développement
