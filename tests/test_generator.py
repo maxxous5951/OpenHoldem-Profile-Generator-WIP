@@ -124,3 +124,19 @@ def test_positions_follow_table_size():
     assert "InMiddlePosition2" in t6 and "EarlyPosition" not in t6
     t4 = generator.generate(presets.build("Balanced 6-max", "Cash 6-max", {"table_size": 4}))
     assert "InCutOff" in t4 and "MiddlePosition" not in t4
+
+
+def test_limp_then_raise_and_cold_call_then_squeeze(sim):
+    lr = dict(BotsActionsOnThisRoundIncludingChecks=1, Raises=1, AmountToCall=3, PotSize=7.5)
+    assert decide(sim, "AA", InSmallBlind=True, **lr).startswith("RaiseTo")
+    assert decide(sim, "72o", InSmallBlind=True, **lr) == "Fold"
+    sq = dict(BotsActionsOnThisRoundIncludingChecks=1, Raises=2, AmountToCall=12, PotSize=20)
+    assert decide(sim, "AA", InButton=True, **sq).startswith("RaiseTo")
+    assert decide(sim, "72o", InButton=True, **sq) == "Fold"
+
+
+def test_spr_commitment_present_and_optional():
+    t = generator.generate(presets.build("Balanced 6-max", "Cash 6-max"))
+    assert t.count("f$Gen_SPR <=") >= 6
+    off = generator.generate(presets.build("Balanced 6-max", "Cash 6-max", {"commit_spr": 0}))
+    assert "f$Gen_SPR <=" not in off

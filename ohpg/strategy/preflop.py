@@ -72,6 +72,7 @@ def generate(prof: Profile, cfg: dict):
     _cold_facing_3bet(prof, f, cfg)
     _facing_4bet(prof, f, cfg, agg)
     _cold_facing_4bet(prof, f, cfg)
+    _acted_then_raised(prof, f, cfg, agg)
     _facing_5bet(prof, f, cfg)
     f.group("Others")
     f.act("AmountToCall > 0", "Fold")
@@ -277,6 +278,37 @@ def _cold_facing_4bet(prof, f, cfg):
         lc = prof.add_list(f"ColdF4C{hi}", call_h)
         if lc != "false":
             f.act(join(cond, lc), "Call")
+    f.others("Fold")
+
+
+def _acted_then_raised(prof, f, cfg, agg):
+    """Nous avons limpé / payé (sans relancer) puis quelqu'un relance derrière nous."""
+    f.comment("=== NOUS AVONS LIMPE / PAYE PUIS FACE A UNE RELANCE : relance, call (cotes), fold ===")
+    base = join("NOT BotRaisedBeforeFlop", "BotsActionsOnThisRoundIncludingChecks >= 1", "AmountToCall > 0")
+    # une seule relance devant nous (isolation / 3bet sur notre limp)
+    f.group(join(base, "Raises = 1"))
+    value = R.top_equity(round(cfg["threebet_value"] * 1.2 * agg, 2))
+    lv = prof.add_list("LimpRaiseV", value)
+    if lv != "false":
+        f.act(lv, f"RaiseTo (BetSize * {fmt(cfg['threebet_size_oop'])})")
+    for odds, pct in ((0.20, 30.0), (0.30, 20.0), (1.00, 11.0)):
+        hands = [h for h in R.top_play(round(pct * cfg["range_scale"] / 100.0, 2)) if h not in value]
+        lc = prof.add_list(f"LimpRaiseC{int(odds * 100)}", hands)
+        if lc != "false":
+            f.act(join(f"f$Gen_PotOdds <= {fmt(odds)}", lc), "Call")
+    f.others("Fold")
+    # deux relances ou plus devant nous (squeeze / 3bet après notre call)
+    f.group(join(base, "Raises = 2"))
+    jam = R.top_equity(round(cfg["fivebet_value"] * 0.9, 2))
+    call_h = [h for h in R.top_equity(round(cfg["call_4bet_pct"] + cfg["fivebet_value"], 2)) if h not in jam]
+    lj = prof.add_list("ColdF3V", jam)
+    if lj != "false":
+        if cfg["fourbet_shove_stack"] > 0:
+            f.act(join(lj, f"f$Gen_EffStack <= {cfg['fourbet_shove_stack']}"), "RaiseMax")
+        f.act(lj, f"RaiseTo (BetSize * {fmt(cfg['fourbet_size_oop'])})")
+    lc = prof.add_list("ColdF3C", call_h)
+    if lc != "false":
+        f.act(lc, "Call")
     f.others("Fold")
 
 

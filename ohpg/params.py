@@ -92,6 +92,8 @@ SCHEMA: list[P] = [
     # ------------------------------------------------------------------ flop
     P("cbet_bluff_ip", "C-bet bluff IP (% des mains vides)", G_FLOP, "pct", 55, 0, 100),
     P("cbet_bluff_oop", "C-bet bluff OOP (%)", G_FLOP, "pct", 35, 0, 100),
+    P("commit_spr", "SPR d'engagement du tapis (0 = off)", G_FLOP, "float", 2.5, 0, 10, 0.5,
+      help="SPR = tapis / pot. En dessous, Monster/Strong mettent le tapis (valable flop, turn, river)"),
     P("cbet_semibluff", "Semi-bluff des tirages (%)", G_FLOP, "pct", 85, 0, 100),
     P("cbet_medium_ip", "C-bet des mains moyennes IP (%)", G_FLOP, "pct", 55, 0, 100),
     P("cbet_medium_oop", "C-bet des mains moyennes OOP (%)", G_FLOP, "pct", 35, 0, 100),

@@ -22,6 +22,10 @@ def clamp01(x):
 
 # ------------------------------------------------------------------------------ helpers de catégories
 def emit_helpers(prof: Profile):
+    f0 = prof.func("f$Gen_SPR")
+    f0.comment("SPR : tapis restant / pot (plus bas = plus engage)")
+    f0.ret("PotSize <= 0", 99)
+    f0.others_ret("StackSize / PotSize")
     def boolfunc(name, rules, comment=None):
         f = prof.func(name)
         if comment:
@@ -79,6 +83,22 @@ def _act(f, cfg, cond, cat, freq, action):
     if m is None:
         return
     f.act(join(cond, _cat_cond(cat), m), action)
+
+
+# ------------------------------------------------------------------------------ engagement du tapis (SPR bas)
+def commit_rules(f, cfg, street: str):
+    """Quand le SPR est bas, les mains fortes engagent le tapis ; les mains moyennes paient plus large."""
+    spr = cfg["commit_spr"]
+    if spr <= 0:
+        return
+    f.comment(f"Engagement : SPR (tapis / pot) <= {fmt(spr)} -> on met le tapis avec les mains fortes")
+    cats = ("Monster",) if street == "river" else ("Monster", "Strong")
+    for cat in cats:
+        f.act(join(f"f$Gen_SPR <= {fmt(spr)}", _cat_cond(cat)), "RaiseMax")
+    if street != "river":
+        low = fmt(spr / 2)
+        f.act(join(f"f$Gen_SPR <= {low}", "AmountToCall > 0", "f$Gen_StrongDraw", "f$Gen_PotOdds <= 0.45"), "Call")
+    f.act(join(f"f$Gen_SPR <= {fmt(spr / 2)}", "AmountToCall > 0", "f$Gen_Medium", "f$Gen_PotOdds <= 0.40"), "Call")
 
 
 # ------------------------------------------------------------------------------ règles de mise
@@ -167,6 +187,7 @@ def generate(prof: Profile, cfg: dict):
 def _flop(prof, cfg):
     f = prof.func("f$flop")
     f.comment("OHPG : flop. Blocs : c-bet (agresseur préflop), mise du non-agresseur, relance subie, mise subie.")
+    commit_rules(f, cfg, "flop")
     adjs = {"mono": cfg["cbet_mono_adj"], "wet": cfg["cbet_wet_adj"], "paired": cfg["cbet_paired_adj"],
             "high": cfg["cbet_high_adj"], "low": cfg["cbet_low_adj"], "dry": cfg["cbet_dry_adj"]}
     sizes = {"mono": cfg["size_cbet_mono"], "wet": cfg["size_cbet_wet"], "paired": cfg["size_cbet_paired"],
@@ -206,6 +227,7 @@ def _flop(prof, cfg):
 def _turn(prof, cfg):
     f = prof.func("f$turn")
     f.comment("OHPG : turn. Blocs : 2e barrel, c-bet retardé / probe, mise, relance subie, mise subie.")
+    commit_rules(f, cfg, "turn")
     agg = min(1.5, cfg["aggression_scale"] / 100.0)
     adj = cfg["barrel_scare_adj"]
     size = cfg["size_turn"]
@@ -262,6 +284,7 @@ def _turn(prof, cfg):
 def _river(prof, cfg):
     f = prof.func("f$river")
     f.comment("OHPG : river. Value fine, bluffs avec blockers, probe, défense par cotes (MDF).")
+    commit_rules(f, cfg, "river")
     agg = min(1.5, cfg["aggression_scale"] / 100.0)
     size = cfg["size_river"]
     bluff = cfg["river_bluff"] / 100.0
