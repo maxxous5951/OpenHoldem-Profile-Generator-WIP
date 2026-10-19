@@ -203,6 +203,12 @@
 ##listF3SBCp##
     K7s QJo 76s K6s Q8s 22 K5s 65s 97s 54s QTo Q7s K4s K3s
 
+##listF3BBC##
+    AKs TT AQs AKo 99 AJs KQs
+
+##listF3BBCp##
+    88 ATs
+
 ##listF3SqBTNSV##
     AA KK QQ A5s A4s
 
@@ -225,6 +231,12 @@
 
 ##listF3SqSBCp##
     J9s T9s ATo Q9s 44 KJo 98s 87s K8s A9o
+
+##listF3SqBBC##
+    JJ AKs TT AQs
+
+##listF3SqBBCp##
+    AKo 99
 
 ##listColdF3V##
     AA KK AKs
@@ -253,9 +265,6 @@
 ##listF4S25C##
     JJ TT AQs AKo 99 AJs KQs
 
-##listF4S25Cp##
-    88 ATs
-
 ##listF4S40B##
     A5s
 
@@ -264,9 +273,6 @@
 
 ##listF4S40Cp##
     99 AJs
-
-##listF4S10000C##
-    JJ AKs TT AQs
 
 ##listF4S10000Cp##
     AKo
@@ -331,6 +337,10 @@ WHEN Others RETURN EffectiveMaxStacksizeOfActiveOpponents FORCE
 WHEN StillToActPostflop = 0 RETURN true FORCE
 WHEN Others RETURN false FORCE
 
+##f$Gen_Facing##
+// Taille totale (en BB) de la mise adverse : ce qu'il reste a payer + ce que nous avons deja mis (blinde, ouverture). BetSize (= ncallbets) ne donne que le complement, d'ou RaiseTo faux pour les blindes et apres notre relance
+WHEN Others RETURN AmountToCall + ncurrentbets FORCE
+
 ##f$Gen_Multiway##
 WHEN Opponents >= 2 RETURN true FORCE
 WHEN Others RETURN false FORCE
@@ -369,95 +379,105 @@ WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 0 AND Calls >= 1
 // === FACE A UNE OUVERTURE (aucun caller) : 3bet value + bluffs, call, fold ===
 WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 1 AND CallsSinceLastRaise = 0
     WHEN InSmallBlind AND ButtonRaising AND f$Gen_EffStack <= 20 AND listVSBBTNSV RaiseMax FORCE
-    WHEN InSmallBlind AND ButtonRaising AND listVSBBTNV RaiseTo (BetSize * 4) FORCE
-    WHEN InSmallBlind AND ButtonRaising AND listVSBBTNB RaiseTo (BetSize * 4) FORCE
-    WHEN InSmallBlind AND ButtonRaising AND listVSBBTNBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND ButtonRaising AND listVSBBTNV RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InSmallBlind AND ButtonRaising AND listVSBBTNB RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InSmallBlind AND ButtonRaising AND listVSBBTNBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN InSmallBlind AND ButtonRaising AND listVSBBTNC Call FORCE
     WHEN InSmallBlind AND ButtonRaising AND listVSBBTNCp AND randomhand < 0.50 Call FORCE
     WHEN InBigBlind AND ButtonRaising AND f$Gen_EffStack <= 20 AND listVBBBTNSV RaiseMax FORCE
-    WHEN InBigBlind AND ButtonRaising AND listVBBBTNV RaiseTo (BetSize * 4) FORCE
-    WHEN InBigBlind AND ButtonRaising AND listVSBBTNB RaiseTo (BetSize * 4) FORCE
-    WHEN InBigBlind AND ButtonRaising AND listVBBBTNBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND ButtonRaising AND listVBBBTNV RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InBigBlind AND ButtonRaising AND listVSBBTNB RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InBigBlind AND ButtonRaising AND listVBBBTNBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN InBigBlind AND ButtonRaising AND listVBBBTNC Call FORCE
     WHEN InBigBlind AND ButtonRaising AND listVBBBTNCp AND randomhand < 0.50 Call FORCE
     WHEN InBigBlind AND SmallBlindRaising AND f$Gen_EffStack <= 20 AND listVBBSBSV RaiseMax FORCE
-    WHEN InBigBlind AND SmallBlindRaising AND listVBBSBV RaiseTo (BetSize * 4) FORCE
-    WHEN InBigBlind AND SmallBlindRaising AND listVBBSBB RaiseTo (BetSize * 4) FORCE
-    WHEN InBigBlind AND SmallBlindRaising AND listVBBSBBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND SmallBlindRaising AND listVBBSBV RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InBigBlind AND SmallBlindRaising AND listVBBSBB RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InBigBlind AND SmallBlindRaising AND listVBBSBBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN InBigBlind AND SmallBlindRaising AND listVBBSBC Call FORCE
     WHEN InBigBlind AND SmallBlindRaising AND listVBBSBCp AND randomhand < 0.50 Call FORCE
     WHEN Others Fold FORCE
 // === SQUEEZE : une ouverture et un ou plusieurs callers ===
 WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 1 AND CallsSinceLastRaise >= 1
     WHEN CallsSinceLastRaise = 1 AND InButton AND f$Gen_EffStack <= 20 AND listSq1BTNSV RaiseMax FORCE
-    WHEN CallsSinceLastRaise = 1 AND InButton AND listSq1BTNSV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND InButton AND listSq1BTNB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND InButton AND listSq1BTNBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InButton AND listSq1BTNSV RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InButton AND listSq1BTNB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InButton AND listSq1BTNBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise = 1 AND InButton AND listSq1BTNC Call FORCE
     WHEN CallsSinceLastRaise = 1 AND InButton AND listSq1BTNCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND f$Gen_EffStack <= 20 AND listSq1BTNSV RaiseMax FORCE
-    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listSq1BTNSV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listSq1BTNB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listSq1BTNBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listSq1BTNSV RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listSq1BTNB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listSq1BTNBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listSq1SBC Call FORCE
     WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listSq1SBCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise = 1 AND InBigBlind AND f$Gen_EffStack <= 20 AND listSq1BTNSV RaiseMax FORCE
-    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listSq1BTNSV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listSq1BTNB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listSq1BTNBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listSq1BTNSV RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listSq1BTNB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listSq1BTNBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listSq1BBC Call FORCE
     WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listSq1BBCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND InButton AND f$Gen_EffStack <= 20 AND listSq2BTNSV RaiseMax FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InButton AND listSq2BTNSV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InButton AND listSq2BTNB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InButton AND listSq2BTNBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InButton AND listSq2BTNSV RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InButton AND listSq2BTNB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InButton AND listSq2BTNBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise >= 2 AND InButton AND listSq2BTNC Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND InButton AND listSq2BTNCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND f$Gen_EffStack <= 20 AND listSq2BTNSV RaiseMax FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listSq2BTNSV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listSq2BTNB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listSq2BTNBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listSq2BTNSV RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listSq2BTNB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listSq2BTNBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listSq2SBC Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listSq2SBCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND f$Gen_EffStack <= 20 AND listSq2BTNSV RaiseMax FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listSq2BTNSV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listSq2BTNB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listSq2BTNBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listSq2BTNSV RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listSq2BTNB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listSq2BTNBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listSq2BBC Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listSq2BBCp AND randomhand < 0.50 Call FORCE
     WHEN Others Fold FORCE
 // === NOUS AVONS OUVERT ET FACE A UN 3BET : 4bet value/bluff, call, fold ===
-WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 1 AND RaisesSinceLastPlay = 1 AND Calls = 0
+WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND Raises = 1 AND RaisesSinceLastPlay = 1 AND Calls = 0
     WHEN InButton AND f$Gen_EffStack <= 30 AND listF3BTNSV RaiseMax FORCE
-    WHEN InButton AND listF3BTNV RaiseTo (BetSize * 2.2) FORCE
-    WHEN InButton AND listSq2BTNB RaiseTo (BetSize * 2.2) FORCE
+    WHEN InButton AND listF3BTNV RaiseTo (f$Gen_Facing * 2.2) FORCE
+    WHEN InButton AND listSq2BTNB RaiseTo (f$Gen_Facing * 2.2) FORCE
     WHEN InButton AND listF3BTNC Call FORCE
     WHEN InButton AND listF3BTNCp AND randomhand < 0.50 Call FORCE
     WHEN InSmallBlind AND f$Gen_EffStack <= 30 AND listF3BTNSV RaiseMax FORCE
-    WHEN InSmallBlind AND listF3BTNV RaiseTo (BetSize * 2.5) FORCE
-    WHEN InSmallBlind AND listSq2BTNB RaiseTo (BetSize * 2.5) FORCE
+    WHEN InSmallBlind AND listF3BTNV RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN InSmallBlind AND listSq2BTNB RaiseTo (f$Gen_Facing * 2.5) FORCE
     WHEN InSmallBlind AND listF3SBC Call FORCE
     WHEN InSmallBlind AND listF3SBCp AND randomhand < 0.50 Call FORCE
+    WHEN InBigBlind AND f$Gen_EffStack <= 30 AND listF3BTNSV RaiseMax FORCE
+    WHEN InBigBlind AND listF3BTNV RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN InBigBlind AND listSq2BTNB RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN InBigBlind AND listF3BBC Call FORCE
+    WHEN InBigBlind AND listF3BBCp AND randomhand < 0.50 Call FORCE
     WHEN Others Fold FORCE
-WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 1 AND RaisesSinceLastPlay = 1 AND Calls >= 1
+WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND Raises = 1 AND RaisesSinceLastPlay = 1 AND Calls >= 1
     WHEN InButton AND f$Gen_EffStack <= 30 AND listF3SqBTNSV RaiseMax FORCE
-    WHEN InButton AND listF3SqBTNV RaiseTo (BetSize * 2.2) FORCE
-    WHEN InButton AND listF3SqBTNB RaiseTo (BetSize * 2.2) FORCE
+    WHEN InButton AND listF3SqBTNV RaiseTo (f$Gen_Facing * 2.2) FORCE
+    WHEN InButton AND listF3SqBTNB RaiseTo (f$Gen_Facing * 2.2) FORCE
     WHEN InButton AND listF3SqBTNC Call FORCE
     WHEN InButton AND listF3SqBTNCp AND randomhand < 0.50 Call FORCE
     WHEN InSmallBlind AND f$Gen_EffStack <= 30 AND listF3SqBTNSV RaiseMax FORCE
-    WHEN InSmallBlind AND listF3SqBTNV RaiseTo (BetSize * 2.5) FORCE
-    WHEN InSmallBlind AND listF3SqBTNB RaiseTo (BetSize * 2.5) FORCE
+    WHEN InSmallBlind AND listF3SqBTNV RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN InSmallBlind AND listF3SqBTNB RaiseTo (f$Gen_Facing * 2.5) FORCE
     WHEN InSmallBlind AND listF3SqSBC Call FORCE
     WHEN InSmallBlind AND listF3SqSBCp AND randomhand < 0.50 Call FORCE
+    WHEN InBigBlind AND f$Gen_EffStack <= 30 AND listF3SqBTNSV RaiseMax FORCE
+    WHEN InBigBlind AND listF3SqBTNV RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN InBigBlind AND listF3SqBTNB RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN InBigBlind AND listF3SqBBC Call FORCE
+    WHEN InBigBlind AND listF3SqBBCp AND randomhand < 0.50 Call FORCE
     WHEN Others Fold FORCE
 // === OUVERTURE + 3BET DEVANT NOUS (cold) : 4bet tres serre ou call ===
 WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 2
-    WHEN listColdF3V RaiseTo (BetSize * 2.5) FORCE
+    WHEN listColdF3V RaiseTo (f$Gen_Facing * 2.5) FORCE
     WHEN listColdF3C Call FORCE
     WHEN Others Fold FORCE
 // === NOUS AVONS 3BETE ET FACE A UN 4BET : jam value/bluff, call, fold ===
-WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 2 AND RaisesSinceLastPlay = 1
+WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND Raises = 2 AND RaisesSinceLastPlay = 1
     WHEN f$Gen_EffStack >= 0 AND f$Gen_EffStack <= 8 AND listSq2BTNSV RaiseMax FORCE
     WHEN f$Gen_EffStack >= 0 AND f$Gen_EffStack <= 8 AND listF3SqBTNB RaiseMax FORCE
     WHEN f$Gen_EffStack >= 0 AND f$Gen_EffStack <= 8 AND listF4S8C Call FORCE
@@ -473,14 +493,14 @@ WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND Numbe
     WHEN f$Gen_EffStack >= 18 AND f$Gen_EffStack <= 25 AND listF4S25V RaiseMax FORCE
     WHEN f$Gen_EffStack >= 18 AND f$Gen_EffStack <= 25 AND listF3SqBTNB RaiseMax FORCE
     WHEN f$Gen_EffStack >= 18 AND f$Gen_EffStack <= 25 AND listF4S25C Call FORCE
-    WHEN f$Gen_EffStack >= 18 AND f$Gen_EffStack <= 25 AND listF4S25Cp AND randomhand < 0.50 Call FORCE
+    WHEN f$Gen_EffStack >= 18 AND f$Gen_EffStack <= 25 AND listF3BBCp AND randomhand < 0.50 Call FORCE
     WHEN f$Gen_EffStack >= 25 AND f$Gen_EffStack <= 40 AND listF3SqBTNV RaiseMax FORCE
     WHEN f$Gen_EffStack >= 25 AND f$Gen_EffStack <= 40 AND listF4S40B RaiseMax FORCE
     WHEN f$Gen_EffStack >= 25 AND f$Gen_EffStack <= 40 AND listF4S40C Call FORCE
     WHEN f$Gen_EffStack >= 25 AND f$Gen_EffStack <= 40 AND listF4S40Cp AND randomhand < 0.50 Call FORCE
     WHEN f$Gen_EffStack >= 40 AND listF3SqBTNV RaiseMax FORCE
     WHEN f$Gen_EffStack >= 40 AND listF4S40B RaiseMax FORCE
-    WHEN f$Gen_EffStack >= 40 AND listF4S10000C Call FORCE
+    WHEN f$Gen_EffStack >= 40 AND listF3SqBBC Call FORCE
     WHEN f$Gen_EffStack >= 40 AND listF4S10000Cp AND randomhand < 0.50 Call FORCE
     WHEN Others Fold FORCE
 // === 4BET DEVANT NOUS (cold) : jam premium / call ===
@@ -500,14 +520,14 @@ WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 3
     WHEN Others Fold FORCE
 // === NOUS AVONS LIMPE / PAYE PUIS FACE A UNE RELANCE : relance, call (cotes), fold ===
 WHEN NOT BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks >= 1 AND AmountToCall > 0 AND Raises = 1
-    WHEN listLimpRaiseV RaiseTo (BetSize * 4) FORCE
+    WHEN listLimpRaiseV RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN f$Gen_RawOdds <= 0.2 AND listLimpRaiseC20 Call FORCE
     WHEN f$Gen_RawOdds <= 0.3 AND listLimpRaiseC30 Call FORCE
     WHEN f$Gen_RawOdds <= 1 AND listLimpRaiseC100 Call FORCE
     WHEN Others Fold FORCE
 WHEN NOT BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks >= 1 AND AmountToCall > 0 AND Raises = 2
     WHEN listColdF3V AND f$Gen_EffStack <= 30 RaiseMax FORCE
-    WHEN listColdF3V RaiseTo (BetSize * 2.5) FORCE
+    WHEN listColdF3V RaiseTo (f$Gen_Facing * 2.5) FORCE
     WHEN listColdF3C Call FORCE
     WHEN Others Fold FORCE
 // === FACE A UN 5BET OU UN ALL-IN PREFLOP : call selon la profondeur ===
@@ -530,9 +550,11 @@ WHEN Others
     WHEN Others Check FORCE
 
 ##f$Gen_PotType##
-// Type de pot preflop : 1 = ouvert/limpe, 2 = 3bet, 3 = 4bet ou plus
-WHEN NumberOfRaisesBeforeFlop >= 3 RETURN 3 FORCE
-WHEN NumberOfRaisesBeforeFlop = 2 RETURN 2 FORCE
+// Type de pot preflop : 1 = ouvert/limpe, 2 = 3bet, 3 = 4bet ou plus. NumberOfRaisesBeforeFlop ne compte que les relances adverses : on ajoute la notre.
+WHEN BotRaisedBeforeFlop AND NumberOfRaisesBeforeFlop >= 2 RETURN 3 FORCE
+WHEN BotRaisedBeforeFlop AND NumberOfRaisesBeforeFlop = 1 RETURN 2 FORCE
+WHEN NOT BotRaisedBeforeFlop AND NumberOfRaisesBeforeFlop >= 3 RETURN 3 FORCE
+WHEN NOT BotRaisedBeforeFlop AND NumberOfRaisesBeforeFlop = 2 RETURN 2 FORCE
 WHEN Others RETURN 1 FORCE
 
 ##f$Gen_WeChecked##

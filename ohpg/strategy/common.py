@@ -131,6 +131,10 @@ def emit_common_helpers(prof: Profile, cfg: dict):
     f.comment("Vrai si nous agirons en dernier postflop")
     f.ret("StillToActPostflop = 0", "true")
     f.others_ret("false")
+    f = prof.func("f$Gen_Facing")
+    f.comment("Taille totale (en BB) de la mise adverse : ce qu'il reste à payer + ce que nous avons déjà mis (blinde, ouverture)."
+              " BetSize (= ncallbets) ne donne que le complément, d'où RaiseTo faux pour les blindes et après notre relance")
+    f.ret("", "AmountToCall + ncurrentbets")
     f = prof.func("f$Gen_Multiway")
     f.ret("Opponents >= 2", "true")
     f.others_ret("false")

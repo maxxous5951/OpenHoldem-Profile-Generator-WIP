@@ -64,14 +64,14 @@ def emit(prof: Profile, f, cfg: dict):
     f.others("Fold")
 
     f.comment("=== PUSH/FOLD : face à des limpers ===")
-    f.group(join(first, "Raises = 0", "Calls >= 1", f"f$Gen_EffStackFirstIn <= {pf}"))
+    f.group(join(first, "Raises = 0", "Calls >= 1", f"f$Gen_EffStack <= {pf}"))
     for lo, hi, ref in bands:
         for pos in ORDER:
             base_pos = "CO" if pos == "BB" else pos
             hands = R.top_equity(round(push_pct(cfg, base_pos, ref) * 0.8, 1))
             lh = prof.add_list(f"PushLimp{pos}{hi}", hands)
             if lh != "false":
-                f.act(join(_cond(lo, hi, "f$Gen_EffStackFirstIn"), HERO[pos], lh), "RaiseMax")
+                f.act(join(_cond(lo, hi), HERO[pos], lh), "RaiseMax")
     f.act("InBigBlind", "Check")
     f.others("Fold")
 

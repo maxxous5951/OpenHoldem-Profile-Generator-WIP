@@ -28,7 +28,7 @@ def _preflop_states():
                         continue
                     atc = (0 if pos == "BB" else 1) if r == 0 else 2.5 * 2.5 ** (r - 1)
                     yield dict(kind="first", pos=pos, stack=stack, r=r, c=c, op=op, acted=0, br=False, atc=atc)
-            for r, c, op in itertools.product((2, 3, 4), (0, 1), OPEN):
+            for r, c, op in itertools.product((1, 2, 3), (0, 1), OPEN):
                 if ORDER.index(op) < i:
                     yield dict(kind="raised_then_faced", pos=pos, stack=stack, r=r, c=c, op=op, acted=1, br=True, atc=2.5 * 2.5 ** (r - 1))
             for r, c, op in itertools.product((1, 2, 3), (0, 1), OPEN):
@@ -43,9 +43,10 @@ def test_preflop_has_no_holes(style, fmt):
     for s in _preflop_states():
         for hand in ("AA", "KK", "AKs", "99", "72o"):
             st = dict(**POS[s["pos"]], BotsActionsOnThisRoundIncludingChecks=s["acted"], Raises=s["r"], Calls=s["c"],
-                      CallsSinceLastRaise=s["c"] if s["r"] else 0, BotRaisedBeforeFlop=s["br"], NumberOfRaisesBeforeFlop=s["r"],
-                      RaisesSinceLastPlay=(s["r"] - 1 if s["br"] else s["r"]) if s["acted"] else s["r"], AmountToCall=s["atc"],
+                      CallsSinceLastRaise=s["c"] if s["r"] else 0, BotRaisedBeforeFlop=s["br"], NumberOfRaisesBeforeFlop=0,
+                      RaisesSinceLastPlay=1 if s["acted"] else s["r"], AmountToCall=s["atc"],
                       PotSize=1.5 + s["atc"] * (1 + s["c"]), BetSize=max(s["atc"], 2.5),
+                      ncurrentbets=2.5 if s["acted"] else {"BB": 1, "SB": 0.5}.get(s["pos"], 0),
                       EffectiveMaxStacksizeOfActiveOpponents=s["stack"], StackSize=s["stack"],
                       **({OPEN[s["op"]]: True} if s["op"] else {}))
             a = T.decide(sim, hand, **st)
@@ -55,7 +56,7 @@ def test_preflop_has_no_holes(style, fmt):
                 bad[("check-facing-bet", s["kind"])] += 1
             elif hand in ("AA", "KK") and a == "Fold":
                 bad[("premium-fold", hand, s["kind"], s["r"])] += 1
-            elif hand == "AA" and a == "Call" and s["r"] >= 3 and s["stack"] >= 30:
+            elif hand == "AA" and a == "Call" and s["r"] >= 2 and s["stack"] >= 30 and s["kind"] != "first":
                 bad[("aa-only-calls", s["kind"], s["r"])] += 1
     assert not bad, dict(bad)
 
@@ -133,7 +134,7 @@ def test_stats_make_us_exploit_nits_and_maniacs_preflop():
     def cont(vpip, pfr, af, hands=300):
         n = 0
         for h in R.EQUITY_ORDER:
-            st = dict(T.BASE, hand=h, InButton=True, Raises=1, CutOffRaising=True, NumberOfRaisesBeforeFlop=1,
+            st = dict(T.BASE, hand=h, InButton=True, Raises=1, CutOffRaising=True, NumberOfRaisesBeforeFlop=0,
                       RaisesSinceLastPlay=1, AmountToCall=2.5, PotSize=4, BetSize=2.5, EffectiveMaxStacksizeOfActiveOpponents=100,
                       pt_hands_lastraiserchair=hands, pt_vpip_lastraiserchair=vpip, pt_pfr_lastraiserchair=pfr,
                       pt_aggr_factor_lastraiserchair=af, pt_hands_firstcallerchair=0, pt_vpip_firstcallerchair=0,
@@ -176,3 +177,11 @@ def test_texture_drives_bluffs_defense_and_stack_bounds_use_ge():
     tourney = generator.generate(presets.build("Balanced 6-max", "MTT 9-max (push/fold 15BB)"))
     assert not re.search(r"f\$Gen_EffStack(FirstIn)? > ", t + tourney)
     assert "f$Gen_EffStackFirstIn >= 0" in tourney
+
+
+def test_pot_type_counts_our_own_raise():
+    sim = Sim(generator.generate(presets.build("Balanced 6-max", "Cash 6-max")))
+    cases = [(True, 0, 1), (True, 1, 2), (True, 2, 3), (False, 1, 1), (False, 2, 2), (False, 3, 3), (False, 0, 1)]
+    for bot_raised, n, typ in cases:
+        st = {"botraisedbeforeflop": bot_raised, "numberofraisesbeforeflop": n}
+        assert sim.call_func("f$Gen_PotType", st) == typ, (bot_raised, n, typ)

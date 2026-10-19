@@ -67,7 +67,7 @@ BASE = dict(BotsActionsOnThisRoundIncludingChecks=0, Raises=0, Calls=0, CallsSin
             InMiddlePosition2=False, InMiddlePosition3=False, InMiddlePosition=False, InCutOff=False, InButton=False, InSmallBlind=False, InBigBlind=False,
             EarlyPosition1Raising=False, EarlyPosition2Raising=False, EarlyPosition3Raising=False,
             MiddlePosition1Raising=False, MiddlePosition2Raising=False, MiddlePosition3Raising=False,
-            CutOffRaising=False, ButtonRaising=False, SmallBlindRaising=False, BetSize=2.5, AmountToCall=1.5,
+            CutOffRaising=False, ButtonRaising=False, SmallBlindRaising=False, BetSize=2.5, AmountToCall=1.5, ncurrentbets=0,
             StackSize=100, EffectiveMaxStacksizeOfActiveOpponents=100, BotRaisedBeforeFlop=False,
             NumberOfRaisesBeforeFlop=0, RaisesSinceLastPlay=0)
 
@@ -97,11 +97,11 @@ def test_premium_3bets_and_trash_folds(sim):
 
 def test_facing_3bet_and_4bet(sim):
     f3 = dict(InCutOff=True, BotRaisedBeforeFlop=True, BotsActionsOnThisRoundIncludingChecks=1,
-              NumberOfRaisesBeforeFlop=1, RaisesSinceLastPlay=1, BetSize=8)
+              Raises=1, RaisesSinceLastPlay=1, AmountToCall=5.5, ncurrentbets=2.5)
     assert decide(sim, "AA", **f3).startswith("RaiseTo")
     assert decide(sim, "K9s", **f3) == "Fold"
     f4 = dict(InButton=True, BotRaisedBeforeFlop=True, BotsActionsOnThisRoundIncludingChecks=1,
-              NumberOfRaisesBeforeFlop=2, RaisesSinceLastPlay=1, BetSize=20)
+              Raises=2, RaisesSinceLastPlay=1, AmountToCall=20, ncurrentbets=8)
     assert decide(sim, "KK", **f4) == "RaiseMax"
     assert decide(sim, "J7o", **f4) == "Fold"
 
@@ -140,3 +140,15 @@ def test_spr_commitment_present_and_optional():
     assert t.count("f$Gen_SPR <=") >= 6
     off = generator.generate(presets.build("Balanced 6-max", "Cash 6-max", {"commit_spr": 0}))
     assert "f$Gen_SPR <=" not in off
+
+
+def test_raise_sizes_use_total_bet_not_call_amount(sim):
+    """BB (1 BB déjà posée) face à une ouverture à 2.5 BB : 3bet ~ 4x2.5 = 10, pas 4x1.5 = 6."""
+    st = dict(InBigBlind=True, Raises=1, CutOffRaising=True, AmountToCall=1.5, ncurrentbets=1, PotSize=4)
+    a = decide(sim, "AA", **st)
+    assert a.startswith("RaiseTo") and 8.5 <= float(a.split()[1]) <= 14, a
+    # nous avons ouvert à 2.5 et subissons un 3bet à 8 : 4bet vers ~17-20, pas 2.2x5.5
+    f3 = dict(InCutOff=True, BotRaisedBeforeFlop=True, BotsActionsOnThisRoundIncludingChecks=1, Raises=1,
+              RaisesSinceLastPlay=1, AmountToCall=5.5, ncurrentbets=2.5, PotSize=12, EffectiveMaxStacksizeOfActiveOpponents=100)
+    a = decide(sim, "AA", **f3)
+    assert a.startswith("RaiseTo") and 16 <= float(a.split()[1]) <= 24, a

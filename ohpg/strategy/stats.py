@@ -78,9 +78,12 @@ def emit_postflop(prof: Profile, cfg: dict):
         f.others_ret("1")
     # type de pot
     f = prof.func("f$Gen_PotType")
-    f.comment("Type de pot préflop : 1 = ouvert/limpé, 2 = 3bet, 3 = 4bet ou plus")
-    f.ret("NumberOfRaisesBeforeFlop >= 3", 3)
-    f.ret("NumberOfRaisesBeforeFlop = 2", 2)
+    f.comment("Type de pot préflop : 1 = ouvert/limpé, 2 = 3bet, 3 = 4bet ou plus. "
+              "NumberOfRaisesBeforeFlop ne compte que les relances adverses : on ajoute la nôtre.")
+    f.ret("BotRaisedBeforeFlop AND NumberOfRaisesBeforeFlop >= 2", 3)
+    f.ret("BotRaisedBeforeFlop AND NumberOfRaisesBeforeFlop = 1", 2)
+    f.ret("NOT BotRaisedBeforeFlop AND NumberOfRaisesBeforeFlop >= 3", 3)
+    f.ret("NOT BotRaisedBeforeFlop AND NumberOfRaisesBeforeFlop = 2", 2)
     f.others_ret("1")
     f = prof.func("f$Gen_WeChecked")
     f.comment("Vrai si nous avons checké dans ce tour d'enchères (donc faisons face à une mise après check)")

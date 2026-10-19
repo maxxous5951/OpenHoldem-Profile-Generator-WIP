@@ -1090,6 +1090,9 @@
 ##listF3SBCp##
     A8s A7s 55 K9s A2s A6s J9s
 
+##listF3BBC##
+    AKs TT AQs AKo 99 AJs KQs 88
+
 ##listF3SqEPSV##
     AA KK QQ A5s A4s
 
@@ -1123,6 +1126,12 @@
 ##listF3SqSBCp##
     QJs A9s AJo JTs
 
+##listF3SqBBC##
+    JJ AKs TT AQs AKo
+
+##listF3SqBBCp##
+    99 AJs
+
 ##listColdF3V##
     AA KK AKs
 
@@ -1138,9 +1147,6 @@
 ##listF4S12C##
     AKs TT AQs AKo 99 AJs KQs 88 ATs AQo KJs 77
 
-##listF4S18C##
-    AKs TT AQs AKo 99 AJs KQs 88
-
 ##listF4S25V##
     AA KK QQ AKs
 
@@ -1152,12 +1158,6 @@
 
 ##listF4S40B##
     A5s
-
-##listF4S40C##
-    JJ AKs TT AQs AKo
-
-##listF4S40Cp##
-    99 AJs
 
 ##listColdF4C8##
     JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs
@@ -1219,6 +1219,10 @@ WHEN Others RETURN (MaxStillToActStackSize < StackSize ? MaxStillToActStackSize 
 // Vrai si nous agirons en dernier postflop
 WHEN StillToActPostflop = 0 RETURN true FORCE
 WHEN Others RETURN false FORCE
+
+##f$Gen_Facing##
+// Taille totale (en BB) de la mise adverse : ce qu'il reste a payer + ce que nous avons deja mis (blinde, ouverture). BetSize (= ncallbets) ne donne que le complement, d'ou RaiseTo faux pour les blindes et apres notre relance
+WHEN Others RETURN AmountToCall + ncurrentbets FORCE
 
 ##f$Gen_Multiway##
 WHEN Opponents >= 2 RETURN true FORCE
@@ -1320,61 +1324,61 @@ WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 0 AND Calls = 0 AND 
     WHEN f$Gen_EffStackFirstIn >= 12 AND f$Gen_EffStackFirstIn <= 15 AND InSmallBlind AND listPushSB15Edge AND randomhand < 0.50 RaiseMax FORCE
     WHEN Others Fold FORCE
 // === PUSH/FOLD : face a des limpers ===
-WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 0 AND Calls >= 1 AND f$Gen_EffStackFirstIn <= 15
-    WHEN f$Gen_EffStackFirstIn >= 0 AND f$Gen_EffStackFirstIn <= 3 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP3 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 0 AND f$Gen_EffStackFirstIn <= 3 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpMP3 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 0 AND f$Gen_EffStackFirstIn <= 3 AND InCutOff AND listPushLimpCO3 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 0 AND f$Gen_EffStackFirstIn <= 3 AND InButton AND listPushLimpBTN3 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 0 AND f$Gen_EffStackFirstIn <= 3 AND InSmallBlind AND listPushLimpSB3 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 0 AND f$Gen_EffStackFirstIn <= 3 AND InBigBlind AND listPushLimpCO3 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 3 AND f$Gen_EffStackFirstIn <= 4 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP4 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 3 AND f$Gen_EffStackFirstIn <= 4 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpMP4 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 3 AND f$Gen_EffStackFirstIn <= 4 AND InCutOff AND listPushLimpCO4 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 3 AND f$Gen_EffStackFirstIn <= 4 AND InButton AND listPushLimpBTN4 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 3 AND f$Gen_EffStackFirstIn <= 4 AND InSmallBlind AND listPushLimpSB3 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 3 AND f$Gen_EffStackFirstIn <= 4 AND InBigBlind AND listPushLimpCO4 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 4 AND f$Gen_EffStackFirstIn <= 5 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP5 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 4 AND f$Gen_EffStackFirstIn <= 5 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpMP5 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 4 AND f$Gen_EffStackFirstIn <= 5 AND InCutOff AND listPushLimpCO5 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 4 AND f$Gen_EffStackFirstIn <= 5 AND InButton AND listPushLimpBTN5 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 4 AND f$Gen_EffStackFirstIn <= 5 AND InSmallBlind AND listPushLimpSB3 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 4 AND f$Gen_EffStackFirstIn <= 5 AND InBigBlind AND listPushLimpCO5 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 5 AND f$Gen_EffStackFirstIn <= 6 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP6 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 5 AND f$Gen_EffStackFirstIn <= 6 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushEP4 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 5 AND f$Gen_EffStackFirstIn <= 6 AND InCutOff AND listPushLimpMP4 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 5 AND f$Gen_EffStackFirstIn <= 6 AND InButton AND listPushLimpBTN6 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 5 AND f$Gen_EffStackFirstIn <= 6 AND InSmallBlind AND listPushLimpSB3 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 5 AND f$Gen_EffStackFirstIn <= 6 AND InBigBlind AND listPushLimpMP4 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 6 AND f$Gen_EffStackFirstIn <= 7 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP7 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 6 AND f$Gen_EffStackFirstIn <= 7 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpMP7 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 6 AND f$Gen_EffStackFirstIn <= 7 AND InCutOff AND listPushLimpCO7 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 6 AND f$Gen_EffStackFirstIn <= 7 AND InButton AND listPushLimpMP3 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 6 AND f$Gen_EffStackFirstIn <= 7 AND InSmallBlind AND listPushLimpSB7 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 6 AND f$Gen_EffStackFirstIn <= 7 AND InBigBlind AND listPushLimpCO7 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 7 AND f$Gen_EffStackFirstIn <= 8 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushEP10 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 7 AND f$Gen_EffStackFirstIn <= 8 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpMP8 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 7 AND f$Gen_EffStackFirstIn <= 8 AND InCutOff AND listPushMP6 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 7 AND f$Gen_EffStackFirstIn <= 8 AND InButton AND listPushLimpBTN8 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 7 AND f$Gen_EffStackFirstIn <= 8 AND InSmallBlind AND listPushLimpBTN4 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 7 AND f$Gen_EffStackFirstIn <= 8 AND InBigBlind AND listPushMP6 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 8 AND f$Gen_EffStackFirstIn <= 10 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP10 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 8 AND f$Gen_EffStackFirstIn <= 10 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpEP6 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 8 AND f$Gen_EffStackFirstIn <= 10 AND InCutOff AND listPushEP5 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 8 AND f$Gen_EffStackFirstIn <= 10 AND InButton AND listPushLimpBTN10 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 8 AND f$Gen_EffStackFirstIn <= 10 AND InSmallBlind AND listPushLimpBTN5 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 8 AND f$Gen_EffStackFirstIn <= 10 AND InBigBlind AND listPushEP5 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 10 AND f$Gen_EffStackFirstIn <= 12 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP12 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 10 AND f$Gen_EffStackFirstIn <= 12 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpMP12 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 10 AND f$Gen_EffStackFirstIn <= 12 AND InCutOff AND listPushEP6 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 10 AND f$Gen_EffStackFirstIn <= 12 AND InButton AND listPushLimpBTN12 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 10 AND f$Gen_EffStackFirstIn <= 12 AND InSmallBlind AND listPushLimpBTN6 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 10 AND f$Gen_EffStackFirstIn <= 12 AND InBigBlind AND listPushEP6 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 12 AND f$Gen_EffStackFirstIn <= 15 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP15 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 12 AND f$Gen_EffStackFirstIn <= 15 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpMP15 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 12 AND f$Gen_EffStackFirstIn <= 15 AND InCutOff AND listPushLimpEP7 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 12 AND f$Gen_EffStackFirstIn <= 15 AND InButton AND listPushLimpMP8 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 12 AND f$Gen_EffStackFirstIn <= 15 AND InSmallBlind AND listPushMP4 RaiseMax FORCE
-    WHEN f$Gen_EffStackFirstIn >= 12 AND f$Gen_EffStackFirstIn <= 15 AND InBigBlind AND listPushLimpEP7 RaiseMax FORCE
+WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 0 AND Calls >= 1 AND f$Gen_EffStack <= 15
+    WHEN f$Gen_EffStack >= 0 AND f$Gen_EffStack <= 3 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP3 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 0 AND f$Gen_EffStack <= 3 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpMP3 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 0 AND f$Gen_EffStack <= 3 AND InCutOff AND listPushLimpCO3 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 0 AND f$Gen_EffStack <= 3 AND InButton AND listPushLimpBTN3 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 0 AND f$Gen_EffStack <= 3 AND InSmallBlind AND listPushLimpSB3 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 0 AND f$Gen_EffStack <= 3 AND InBigBlind AND listPushLimpCO3 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 3 AND f$Gen_EffStack <= 4 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP4 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 3 AND f$Gen_EffStack <= 4 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpMP4 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 3 AND f$Gen_EffStack <= 4 AND InCutOff AND listPushLimpCO4 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 3 AND f$Gen_EffStack <= 4 AND InButton AND listPushLimpBTN4 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 3 AND f$Gen_EffStack <= 4 AND InSmallBlind AND listPushLimpSB3 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 3 AND f$Gen_EffStack <= 4 AND InBigBlind AND listPushLimpCO4 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 4 AND f$Gen_EffStack <= 5 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP5 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 4 AND f$Gen_EffStack <= 5 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpMP5 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 4 AND f$Gen_EffStack <= 5 AND InCutOff AND listPushLimpCO5 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 4 AND f$Gen_EffStack <= 5 AND InButton AND listPushLimpBTN5 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 4 AND f$Gen_EffStack <= 5 AND InSmallBlind AND listPushLimpSB3 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 4 AND f$Gen_EffStack <= 5 AND InBigBlind AND listPushLimpCO5 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 5 AND f$Gen_EffStack <= 6 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP6 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 5 AND f$Gen_EffStack <= 6 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushEP4 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 5 AND f$Gen_EffStack <= 6 AND InCutOff AND listPushLimpMP4 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 5 AND f$Gen_EffStack <= 6 AND InButton AND listPushLimpBTN6 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 5 AND f$Gen_EffStack <= 6 AND InSmallBlind AND listPushLimpSB3 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 5 AND f$Gen_EffStack <= 6 AND InBigBlind AND listPushLimpMP4 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 6 AND f$Gen_EffStack <= 7 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP7 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 6 AND f$Gen_EffStack <= 7 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpMP7 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 6 AND f$Gen_EffStack <= 7 AND InCutOff AND listPushLimpCO7 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 6 AND f$Gen_EffStack <= 7 AND InButton AND listPushLimpMP3 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 6 AND f$Gen_EffStack <= 7 AND InSmallBlind AND listPushLimpSB7 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 6 AND f$Gen_EffStack <= 7 AND InBigBlind AND listPushLimpCO7 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 7 AND f$Gen_EffStack <= 8 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushEP10 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 7 AND f$Gen_EffStack <= 8 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpMP8 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 7 AND f$Gen_EffStack <= 8 AND InCutOff AND listPushMP6 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 7 AND f$Gen_EffStack <= 8 AND InButton AND listPushLimpBTN8 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 7 AND f$Gen_EffStack <= 8 AND InSmallBlind AND listPushLimpBTN4 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 7 AND f$Gen_EffStack <= 8 AND InBigBlind AND listPushMP6 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 8 AND f$Gen_EffStack <= 10 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP10 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 8 AND f$Gen_EffStack <= 10 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpEP6 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 8 AND f$Gen_EffStack <= 10 AND InCutOff AND listPushEP5 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 8 AND f$Gen_EffStack <= 10 AND InButton AND listPushLimpBTN10 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 8 AND f$Gen_EffStack <= 10 AND InSmallBlind AND listPushLimpBTN5 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 8 AND f$Gen_EffStack <= 10 AND InBigBlind AND listPushEP5 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 10 AND f$Gen_EffStack <= 12 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP12 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 10 AND f$Gen_EffStack <= 12 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpMP12 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 10 AND f$Gen_EffStack <= 12 AND InCutOff AND listPushEP6 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 10 AND f$Gen_EffStack <= 12 AND InButton AND listPushLimpBTN12 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 10 AND f$Gen_EffStack <= 12 AND InSmallBlind AND listPushLimpBTN6 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 10 AND f$Gen_EffStack <= 12 AND InBigBlind AND listPushEP6 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 12 AND f$Gen_EffStack <= 15 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listPushLimpEP15 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 12 AND f$Gen_EffStack <= 15 AND (InMiddlePosition2 OR InMiddlePosition3) AND listPushLimpMP15 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 12 AND f$Gen_EffStack <= 15 AND InCutOff AND listPushLimpEP7 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 12 AND f$Gen_EffStack <= 15 AND InButton AND listPushLimpMP8 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 12 AND f$Gen_EffStack <= 15 AND InSmallBlind AND listPushMP4 RaiseMax FORCE
+    WHEN f$Gen_EffStack >= 12 AND f$Gen_EffStack <= 15 AND InBigBlind AND listPushLimpEP7 RaiseMax FORCE
     WHEN InBigBlind Check FORCE
     WHEN Others Fold FORCE
 // === PUSH/FOLD : face a une relance (call d'un jam, reshove sinon) ===
@@ -1895,239 +1899,249 @@ WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 0 AND Calls >= 1
 // === FACE A UNE OUVERTURE (aucun caller) : 3bet value + bluffs, call, fold ===
 WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 1 AND CallsSinceLastRaise = 0
     WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND f$Gen_EffStack <= 24 AND listVEPEPSV RaiseMax FORCE
-    WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVEPEPV RaiseTo (BetSize * 4) FORCE
-    WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVEPEPB RaiseTo (BetSize * 4) FORCE
+    WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVEPEPV RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVEPEPB RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVEPEPC Call FORCE
     WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVEPEPCp AND randomhand < 0.50 Call FORCE
     WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND f$Gen_EffStack <= 24 AND listVEPEPSV RaiseMax FORCE
-    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVEPEPV RaiseTo (BetSize * 4) FORCE
-    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVMPEPB RaiseTo (BetSize * 4) FORCE
+    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVEPEPV RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVMPEPB RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVEPEPC Call FORCE
     WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVEPEPCp AND randomhand < 0.50 Call FORCE
     WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND f$Gen_EffStack <= 24 AND listVMPMPSV RaiseMax FORCE
-    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVMPMPV RaiseTo (BetSize * 4) FORCE
-    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVEPEPB RaiseTo (BetSize * 4) FORCE
-    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVMPMPBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVMPMPV RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVEPEPB RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVMPMPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVMPMPC Call FORCE
     WHEN (InMiddlePosition2 OR InMiddlePosition3) AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVMPMPCp AND randomhand < 0.50 Call FORCE
     WHEN InCutOff AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND f$Gen_EffStack <= 24 AND listVMPMPSV RaiseMax FORCE
-    WHEN InCutOff AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVMPMPV RaiseTo (BetSize * 3) FORCE
-    WHEN InCutOff AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVEPEPB RaiseTo (BetSize * 3) FORCE
-    WHEN InCutOff AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVMPMPBp AND randomhand < 0.50 RaiseTo (BetSize * 3) FORCE
+    WHEN InCutOff AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVMPMPV RaiseTo (f$Gen_Facing * 3) FORCE
+    WHEN InCutOff AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVEPEPB RaiseTo (f$Gen_Facing * 3) FORCE
+    WHEN InCutOff AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVMPMPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3) FORCE
     WHEN InCutOff AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVCOEPC Call FORCE
     WHEN InCutOff AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listIso3SBEdge AND randomhand < 0.50 Call FORCE
     WHEN InCutOff AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND f$Gen_EffStack <= 24 AND listVCOMPSV RaiseMax FORCE
-    WHEN InCutOff AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listCallJamBMPEP15 RaiseTo (BetSize * 3) FORCE
-    WHEN InCutOff AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVMPEPB RaiseTo (BetSize * 3) FORCE
-    WHEN InCutOff AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVCOMPBp AND randomhand < 0.50 RaiseTo (BetSize * 3) FORCE
+    WHEN InCutOff AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listCallJamBMPEP15 RaiseTo (f$Gen_Facing * 3) FORCE
+    WHEN InCutOff AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVMPEPB RaiseTo (f$Gen_Facing * 3) FORCE
+    WHEN InCutOff AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVCOMPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3) FORCE
     WHEN InCutOff AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVCOMPC Call FORCE
     WHEN InCutOff AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVCOMPCp AND randomhand < 0.50 Call FORCE
     WHEN InButton AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND f$Gen_EffStack <= 24 AND listVBTNEPSV RaiseMax FORCE
-    WHEN InButton AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listCallJamBEPEP15 RaiseTo (BetSize * 3) FORCE
-    WHEN InButton AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVBTNEPB RaiseTo (BetSize * 3) FORCE
-    WHEN InButton AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (BetSize * 3) FORCE
+    WHEN InButton AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listCallJamBEPEP15 RaiseTo (f$Gen_Facing * 3) FORCE
+    WHEN InButton AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVBTNEPB RaiseTo (f$Gen_Facing * 3) FORCE
+    WHEN InButton AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3) FORCE
     WHEN InButton AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVBTNEPC Call FORCE
     WHEN InButton AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVCOMPCp AND randomhand < 0.50 Call FORCE
     WHEN InButton AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND f$Gen_EffStack <= 24 AND listVBTNMPSV RaiseMax FORCE
-    WHEN InButton AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNMPV RaiseTo (BetSize * 3) FORCE
-    WHEN InButton AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNEPB RaiseTo (BetSize * 3) FORCE
-    WHEN InButton AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNMPBp AND randomhand < 0.50 RaiseTo (BetSize * 3) FORCE
+    WHEN InButton AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNMPV RaiseTo (f$Gen_Facing * 3) FORCE
+    WHEN InButton AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNEPB RaiseTo (f$Gen_Facing * 3) FORCE
+    WHEN InButton AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNMPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3) FORCE
     WHEN InButton AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNMPC Call FORCE
     WHEN InButton AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNMPCp AND randomhand < 0.50 Call FORCE
     WHEN InButton AND CutOffRaising AND f$Gen_EffStack <= 24 AND listVBTNCOSV RaiseMax FORCE
-    WHEN InButton AND CutOffRaising AND listCallJamBEPEP12 RaiseTo (BetSize * 3) FORCE
-    WHEN InButton AND CutOffRaising AND listVBTNCOB RaiseTo (BetSize * 3) FORCE
-    WHEN InButton AND CutOffRaising AND listVBTNCOBp AND randomhand < 0.50 RaiseTo (BetSize * 3) FORCE
+    WHEN InButton AND CutOffRaising AND listCallJamBEPEP12 RaiseTo (f$Gen_Facing * 3) FORCE
+    WHEN InButton AND CutOffRaising AND listVBTNCOB RaiseTo (f$Gen_Facing * 3) FORCE
+    WHEN InButton AND CutOffRaising AND listVBTNCOBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3) FORCE
     WHEN InButton AND CutOffRaising AND listVBTNCOC Call FORCE
     WHEN InButton AND CutOffRaising AND listVBTNCOCp AND randomhand < 0.50 Call FORCE
     WHEN InSmallBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND f$Gen_EffStack <= 24 AND listVSBEPSV RaiseMax FORCE
-    WHEN InSmallBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listCallJamBMPEP15 RaiseTo (BetSize * 4) FORCE
-    WHEN InSmallBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVBTNEPB RaiseTo (BetSize * 4) FORCE
-    WHEN InSmallBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVBTNMPBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listCallJamBMPEP15 RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InSmallBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVBTNEPB RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InSmallBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVBTNMPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN InSmallBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVSBEPC Call FORCE
     WHEN InSmallBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVSBEPCp AND randomhand < 0.50 Call FORCE
     WHEN InSmallBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND f$Gen_EffStack <= 24 AND listVBTNCOSV RaiseMax FORCE
-    WHEN InSmallBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listCallJamBEPEP12 RaiseTo (BetSize * 4) FORCE
-    WHEN InSmallBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNCOB RaiseTo (BetSize * 4) FORCE
-    WHEN InSmallBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNCOBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listCallJamBEPEP12 RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InSmallBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNCOB RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InSmallBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNCOBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN InSmallBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVSBMPC Call FORCE
     WHEN InSmallBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVSBMPCp AND randomhand < 0.50 Call FORCE
     WHEN InSmallBlind AND CutOffRaising AND f$Gen_EffStack <= 24 AND listVSBCOSV RaiseMax FORCE
-    WHEN InSmallBlind AND CutOffRaising AND listCallJamBMPEP12 RaiseTo (BetSize * 4) FORCE
-    WHEN InSmallBlind AND CutOffRaising AND listVBTNCOB RaiseTo (BetSize * 4) FORCE
-    WHEN InSmallBlind AND CutOffRaising AND listVSBCOBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND CutOffRaising AND listCallJamBMPEP12 RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InSmallBlind AND CutOffRaising AND listVBTNCOB RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InSmallBlind AND CutOffRaising AND listVSBCOBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN InSmallBlind AND CutOffRaising AND listVSBMPC Call FORCE
     WHEN InSmallBlind AND CutOffRaising AND listVSBCOCp AND randomhand < 0.50 Call FORCE
     WHEN InSmallBlind AND ButtonRaising AND f$Gen_EffStack <= 24 AND listVSBBTNSV RaiseMax FORCE
-    WHEN InSmallBlind AND ButtonRaising AND listCallJamBEPEP8 RaiseTo (BetSize * 4) FORCE
-    WHEN InSmallBlind AND ButtonRaising AND listVSBBTNB RaiseTo (BetSize * 4) FORCE
-    WHEN InSmallBlind AND ButtonRaising AND listVSBBTNBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InSmallBlind AND ButtonRaising AND listCallJamBEPEP8 RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InSmallBlind AND ButtonRaising AND listVSBBTNB RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InSmallBlind AND ButtonRaising AND listVSBBTNBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN InSmallBlind AND ButtonRaising AND listVSBBTNC Call FORCE
     WHEN InSmallBlind AND ButtonRaising AND listVSBBTNCp AND randomhand < 0.50 Call FORCE
     WHEN InBigBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND f$Gen_EffStack <= 24 AND listVMPMPSV RaiseMax FORCE
-    WHEN InBigBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVMPMPV RaiseTo (BetSize * 4) FORCE
-    WHEN InBigBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVMPEPB RaiseTo (BetSize * 4) FORCE
-    WHEN InBigBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVCOMPBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVMPMPV RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InBigBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVMPEPB RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InBigBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVCOMPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN InBigBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVBBEPC Call FORCE
     WHEN InBigBlind AND (EarlyPosition2Raising OR EarlyPosition3Raising OR MiddlePosition1Raising) AND listVBBEPCp AND randomhand < 0.50 Call FORCE
     WHEN InBigBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND f$Gen_EffStack <= 24 AND listVSBEPSV RaiseMax FORCE
-    WHEN InBigBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listCallJamBMPEP15 RaiseTo (BetSize * 4) FORCE
-    WHEN InBigBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNEPB RaiseTo (BetSize * 4) FORCE
-    WHEN InBigBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listCallJamBMPEP15 RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InBigBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNEPB RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InBigBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN InBigBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBBMPC Call FORCE
     WHEN InBigBlind AND (MiddlePosition2Raising OR MiddlePosition3Raising) AND listVBBMPCp AND randomhand < 0.50 Call FORCE
     WHEN InBigBlind AND CutOffRaising AND f$Gen_EffStack <= 24 AND listVBTNMPSV RaiseMax FORCE
-    WHEN InBigBlind AND CutOffRaising AND listVBTNMPV RaiseTo (BetSize * 4) FORCE
-    WHEN InBigBlind AND CutOffRaising AND listVBTNEPB RaiseTo (BetSize * 4) FORCE
-    WHEN InBigBlind AND CutOffRaising AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND CutOffRaising AND listVBTNMPV RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InBigBlind AND CutOffRaising AND listVBTNEPB RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InBigBlind AND CutOffRaising AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN InBigBlind AND CutOffRaising AND listVBBCOC Call FORCE
     WHEN InBigBlind AND CutOffRaising AND listVBBCOCp AND randomhand < 0.50 Call FORCE
     WHEN InBigBlind AND ButtonRaising AND f$Gen_EffStack <= 24 AND listVBBBTNSV RaiseMax FORCE
-    WHEN InBigBlind AND ButtonRaising AND listCallJamBEPEP10 RaiseTo (BetSize * 4) FORCE
-    WHEN InBigBlind AND ButtonRaising AND listVBTNCOB RaiseTo (BetSize * 4) FORCE
-    WHEN InBigBlind AND ButtonRaising AND listVBTNCOBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND ButtonRaising AND listCallJamBEPEP10 RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InBigBlind AND ButtonRaising AND listVBTNCOB RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InBigBlind AND ButtonRaising AND listVBTNCOBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN InBigBlind AND ButtonRaising AND listVBBBTNC Call FORCE
     WHEN InBigBlind AND ButtonRaising AND listVBBBTNCp AND randomhand < 0.50 Call FORCE
     WHEN InBigBlind AND SmallBlindRaising AND f$Gen_EffStack <= 24 AND listVBBSBSV RaiseMax FORCE
-    WHEN InBigBlind AND SmallBlindRaising AND listCallJamBCOEP12 RaiseTo (BetSize * 4) FORCE
-    WHEN InBigBlind AND SmallBlindRaising AND listVBTNCOB RaiseTo (BetSize * 4) FORCE
-    WHEN InBigBlind AND SmallBlindRaising AND listVSBCOBp AND randomhand < 0.50 RaiseTo (BetSize * 4) FORCE
+    WHEN InBigBlind AND SmallBlindRaising AND listCallJamBCOEP12 RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InBigBlind AND SmallBlindRaising AND listVBTNCOB RaiseTo (f$Gen_Facing * 4) FORCE
+    WHEN InBigBlind AND SmallBlindRaising AND listVSBCOBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN InBigBlind AND SmallBlindRaising AND listVBBSBC Call FORCE
     WHEN InBigBlind AND SmallBlindRaising AND listVBBSBCp AND randomhand < 0.50 Call FORCE
     WHEN Others Fold FORCE
 // === SQUEEZE : une ouverture et un ou plusieurs callers ===
 WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 1 AND CallsSinceLastRaise >= 1
     WHEN CallsSinceLastRaise = 1 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND f$Gen_EffStack <= 24 AND listVMPMPV RaiseMax FORCE
-    WHEN CallsSinceLastRaise = 1 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVMPMPV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVMPEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVMPMPV RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVMPEPB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise = 1 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listSq1EPC Call FORCE
     WHEN CallsSinceLastRaise = 1 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVSBCOCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise = 1 AND (InMiddlePosition2 OR InMiddlePosition3) AND f$Gen_EffStack <= 24 AND listVMPMPV RaiseMax FORCE
-    WHEN CallsSinceLastRaise = 1 AND (InMiddlePosition2 OR InMiddlePosition3) AND listVMPMPV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND (InMiddlePosition2 OR InMiddlePosition3) AND listVMPEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND (InMiddlePosition2 OR InMiddlePosition3) AND listVMPMPV RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND (InMiddlePosition2 OR InMiddlePosition3) AND listVMPEPB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise = 1 AND (InMiddlePosition2 OR InMiddlePosition3) AND listSq1EPC Call FORCE
     WHEN CallsSinceLastRaise = 1 AND (InMiddlePosition2 OR InMiddlePosition3) AND listVSBCOCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise = 1 AND InCutOff AND f$Gen_EffStack <= 24 AND listCallJamBMPEP15 RaiseMax FORCE
-    WHEN CallsSinceLastRaise = 1 AND InCutOff AND listCallJamBMPEP15 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND InCutOff AND listVBTNEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND InCutOff AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InCutOff AND listCallJamBMPEP15 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InCutOff AND listVBTNEPB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InCutOff AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise = 1 AND InCutOff AND listSq1COC Call FORCE
     WHEN CallsSinceLastRaise = 1 AND InCutOff AND listSq1COCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise = 1 AND InButton AND f$Gen_EffStack <= 24 AND listCallJamBMPEP15 RaiseMax FORCE
-    WHEN CallsSinceLastRaise = 1 AND InButton AND listCallJamBMPEP15 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND InButton AND listVBTNEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND InButton AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InButton AND listCallJamBMPEP15 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InButton AND listVBTNEPB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InButton AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise = 1 AND InButton AND listSq1COC Call FORCE
     WHEN CallsSinceLastRaise = 1 AND InButton AND listSq1COCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND f$Gen_EffStack <= 24 AND listCallJamBMPEP15 RaiseMax FORCE
-    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listCallJamBMPEP15 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listVBTNEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listCallJamBMPEP15 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listVBTNEPB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listVCOMPC Call FORCE
     WHEN CallsSinceLastRaise = 1 AND InSmallBlind AND listVCOMPCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise = 1 AND InBigBlind AND f$Gen_EffStack <= 24 AND listCallJamBMPEP15 RaiseMax FORCE
-    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listCallJamBMPEP15 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listVBTNEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listCallJamBMPEP15 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listVBTNEPB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listVBTNEPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listSq1BBC Call FORCE
     WHEN CallsSinceLastRaise = 1 AND InBigBlind AND listSq1BBCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND f$Gen_EffStack <= 24 AND listVEPEPV RaiseMax FORCE
-    WHEN CallsSinceLastRaise >= 2 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVEPEPV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVEPEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVEPEPV RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVEPEPB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise >= 2 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVEPEPC Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVEPEPCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND (InMiddlePosition2 OR InMiddlePosition3) AND f$Gen_EffStack <= 24 AND listVEPEPV RaiseMax FORCE
-    WHEN CallsSinceLastRaise >= 2 AND (InMiddlePosition2 OR InMiddlePosition3) AND listVEPEPV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND (InMiddlePosition2 OR InMiddlePosition3) AND listVEPEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND (InMiddlePosition2 OR InMiddlePosition3) AND listVEPEPV RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND (InMiddlePosition2 OR InMiddlePosition3) AND listVEPEPB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise >= 2 AND (InMiddlePosition2 OR InMiddlePosition3) AND listVEPEPC Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND (InMiddlePosition2 OR InMiddlePosition3) AND listVEPEPCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND InCutOff AND f$Gen_EffStack <= 24 AND listVEPEPV RaiseMax FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InCutOff AND listVEPEPV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InCutOff AND listVMPEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InCutOff AND listVCOMPBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InCutOff AND listVEPEPV RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InCutOff AND listVMPEPB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InCutOff AND listVCOMPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise >= 2 AND InCutOff AND listSq2COC Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND InCutOff AND listSq2COCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND InButton AND f$Gen_EffStack <= 24 AND listVEPEPV RaiseMax FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InButton AND listVEPEPV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InButton AND listVMPEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InButton AND listVCOMPBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InButton AND listVEPEPV RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InButton AND listVMPEPB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InButton AND listVCOMPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise >= 2 AND InButton AND listSq2COC Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND InButton AND listSq2COCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND f$Gen_EffStack <= 24 AND listVEPEPV RaiseMax FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listVEPEPV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listVMPEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listVCOMPBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listVEPEPV RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listVMPEPB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listVCOMPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listSq2SBC Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND InSmallBlind AND listVSBCOCp AND randomhand < 0.50 Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND f$Gen_EffStack <= 24 AND listVEPEPV RaiseMax FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listVEPEPV RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listVMPEPB RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
-    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listVCOMPBp AND randomhand < 0.50 RaiseTo (BetSize * 3.8 + BetSize * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listVEPEPV RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listVMPEPB RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
+    WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listVCOMPBp AND randomhand < 0.50 RaiseTo (f$Gen_Facing * 3.8 + f$Gen_Facing * (CallsSinceLastRaise - 1)) FORCE
     WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listSq2BBC Call FORCE
     WHEN CallsSinceLastRaise >= 2 AND InBigBlind AND listIso2MPEdge AND randomhand < 0.50 Call FORCE
     WHEN Others Fold FORCE
 // === NOUS AVONS OUVERT ET FACE A UN 3BET : 4bet value/bluff, call, fold ===
-WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 1 AND RaisesSinceLastPlay = 1 AND Calls = 0
+WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND Raises = 1 AND RaisesSinceLastPlay = 1 AND Calls = 0
     WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND f$Gen_EffStack <= 34 AND listF3EPSV RaiseMax FORCE
-    WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listF3EPV RaiseTo (BetSize * 2.5) FORCE
-    WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVMPEPB RaiseTo (BetSize * 2.5) FORCE
+    WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listF3EPV RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVMPEPB RaiseTo (f$Gen_Facing * 2.5) FORCE
     WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listF3EPC Call FORCE
     WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVEPEPCp AND randomhand < 0.50 Call FORCE
     WHEN (InMiddlePosition2 OR InMiddlePosition3) AND f$Gen_EffStack <= 34 AND listF3EPSV RaiseMax FORCE
-    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND listF3EPV RaiseTo (BetSize * 2.5) FORCE
-    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND listVMPEPB RaiseTo (BetSize * 2.5) FORCE
+    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND listF3EPV RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND listVMPEPB RaiseTo (f$Gen_Facing * 2.5) FORCE
     WHEN (InMiddlePosition2 OR InMiddlePosition3) AND listF3MPC Call FORCE
     WHEN (InMiddlePosition2 OR InMiddlePosition3) AND listF3MPCp AND randomhand < 0.50 Call FORCE
     WHEN InCutOff AND f$Gen_EffStack <= 34 AND listF3EPSV RaiseMax FORCE
-    WHEN InCutOff AND listF3EPV RaiseTo (BetSize * 2.2) FORCE
-    WHEN InCutOff AND listVMPEPB RaiseTo (BetSize * 2.2) FORCE
+    WHEN InCutOff AND listF3EPV RaiseTo (f$Gen_Facing * 2.2) FORCE
+    WHEN InCutOff AND listVMPEPB RaiseTo (f$Gen_Facing * 2.2) FORCE
     WHEN InCutOff AND listF3COC Call FORCE
     WHEN InCutOff AND listF3COCp AND randomhand < 0.50 Call FORCE
     WHEN InButton AND f$Gen_EffStack <= 34 AND listF3EPSV RaiseMax FORCE
-    WHEN InButton AND listF3EPV RaiseTo (BetSize * 2.2) FORCE
-    WHEN InButton AND listVMPEPB RaiseTo (BetSize * 2.2) FORCE
+    WHEN InButton AND listF3EPV RaiseTo (f$Gen_Facing * 2.2) FORCE
+    WHEN InButton AND listVMPEPB RaiseTo (f$Gen_Facing * 2.2) FORCE
     WHEN InButton AND listF3BTNC Call FORCE
     WHEN InButton AND listF3BTNCp AND randomhand < 0.50 Call FORCE
     WHEN InSmallBlind AND f$Gen_EffStack <= 34 AND listF3EPSV RaiseMax FORCE
-    WHEN InSmallBlind AND listF3EPV RaiseTo (BetSize * 2.5) FORCE
-    WHEN InSmallBlind AND listVMPEPB RaiseTo (BetSize * 2.5) FORCE
+    WHEN InSmallBlind AND listF3EPV RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN InSmallBlind AND listVMPEPB RaiseTo (f$Gen_Facing * 2.5) FORCE
     WHEN InSmallBlind AND listF3SBC Call FORCE
     WHEN InSmallBlind AND listF3SBCp AND randomhand < 0.50 Call FORCE
+    WHEN InBigBlind AND f$Gen_EffStack <= 34 AND listF3EPSV RaiseMax FORCE
+    WHEN InBigBlind AND listF3EPV RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN InBigBlind AND listVMPEPB RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN InBigBlind AND listF3BBC Call FORCE
+    WHEN InBigBlind AND listVMPMPCp AND randomhand < 0.50 Call FORCE
     WHEN Others Fold FORCE
-WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 1 AND RaisesSinceLastPlay = 1 AND Calls >= 1
+WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND Raises = 1 AND RaisesSinceLastPlay = 1 AND Calls >= 1
     WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND f$Gen_EffStack <= 34 AND listF3SqEPSV RaiseMax FORCE
-    WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listF3SqEPV RaiseTo (BetSize * 2.5) FORCE
-    WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVEPEPB RaiseTo (BetSize * 2.5) FORCE
+    WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listF3SqEPV RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listVEPEPB RaiseTo (f$Gen_Facing * 2.5) FORCE
     WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listF3SqEPC Call FORCE
     WHEN (InEarlyPosition2 OR InEarlyPosition3 OR InMiddlePosition1) AND listF3SqEPCp AND randomhand < 0.50 Call FORCE
     WHEN (InMiddlePosition2 OR InMiddlePosition3) AND f$Gen_EffStack <= 34 AND listF3SqEPSV RaiseMax FORCE
-    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND listF3SqEPV RaiseTo (BetSize * 2.5) FORCE
-    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND listVEPEPB RaiseTo (BetSize * 2.5) FORCE
+    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND listF3SqEPV RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN (InMiddlePosition2 OR InMiddlePosition3) AND listVEPEPB RaiseTo (f$Gen_Facing * 2.5) FORCE
     WHEN (InMiddlePosition2 OR InMiddlePosition3) AND listF3SqMPC Call FORCE
     WHEN (InMiddlePosition2 OR InMiddlePosition3) AND listF3SqMPCp AND randomhand < 0.50 Call FORCE
     WHEN InCutOff AND f$Gen_EffStack <= 34 AND listF3SqEPSV RaiseMax FORCE
-    WHEN InCutOff AND listF3SqEPV RaiseTo (BetSize * 2.2) FORCE
-    WHEN InCutOff AND listVEPEPB RaiseTo (BetSize * 2.2) FORCE
+    WHEN InCutOff AND listF3SqEPV RaiseTo (f$Gen_Facing * 2.2) FORCE
+    WHEN InCutOff AND listVEPEPB RaiseTo (f$Gen_Facing * 2.2) FORCE
     WHEN InCutOff AND listF3SqCOC Call FORCE
     WHEN InCutOff AND listIso2MPEdge AND randomhand < 0.50 Call FORCE
     WHEN InButton AND f$Gen_EffStack <= 34 AND listF3SqEPSV RaiseMax FORCE
-    WHEN InButton AND listF3SqEPV RaiseTo (BetSize * 2.2) FORCE
-    WHEN InButton AND listVEPEPB RaiseTo (BetSize * 2.2) FORCE
+    WHEN InButton AND listF3SqEPV RaiseTo (f$Gen_Facing * 2.2) FORCE
+    WHEN InButton AND listVEPEPB RaiseTo (f$Gen_Facing * 2.2) FORCE
     WHEN InButton AND listF3SqBTNC Call FORCE
     WHEN InButton AND listF3SqBTNCp AND randomhand < 0.50 Call FORCE
     WHEN InSmallBlind AND f$Gen_EffStack <= 34 AND listF3SqEPSV RaiseMax FORCE
-    WHEN InSmallBlind AND listF3SqEPV RaiseTo (BetSize * 2.5) FORCE
-    WHEN InSmallBlind AND listVEPEPB RaiseTo (BetSize * 2.5) FORCE
+    WHEN InSmallBlind AND listF3SqEPV RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN InSmallBlind AND listVEPEPB RaiseTo (f$Gen_Facing * 2.5) FORCE
     WHEN InSmallBlind AND listF3SqSBC Call FORCE
     WHEN InSmallBlind AND listF3SqSBCp AND randomhand < 0.50 Call FORCE
+    WHEN InBigBlind AND f$Gen_EffStack <= 34 AND listF3SqEPSV RaiseMax FORCE
+    WHEN InBigBlind AND listF3SqEPV RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN InBigBlind AND listVEPEPB RaiseTo (f$Gen_Facing * 2.5) FORCE
+    WHEN InBigBlind AND listF3SqBBC Call FORCE
+    WHEN InBigBlind AND listF3SqBBCp AND randomhand < 0.50 Call FORCE
     WHEN Others Fold FORCE
 // === OUVERTURE + 3BET DEVANT NOUS (cold) : 4bet tres serre ou call ===
 WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 2
-    WHEN listColdF3V RaiseTo (BetSize * 2.5) FORCE
+    WHEN listColdF3V RaiseTo (f$Gen_Facing * 2.5) FORCE
     WHEN listColdF3C Call FORCE
     WHEN Others Fold FORCE
 // === NOUS AVONS 3BETE ET FACE A UN 4BET : jam value/bluff, call, fold ===
-WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 2 AND RaisesSinceLastPlay = 1
+WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND Raises = 2 AND RaisesSinceLastPlay = 1
     WHEN f$Gen_EffStack >= 0 AND f$Gen_EffStack <= 8 AND listVEPEPV RaiseMax FORCE
     WHEN f$Gen_EffStack >= 0 AND f$Gen_EffStack <= 8 AND listVEPEPB RaiseMax FORCE
     WHEN f$Gen_EffStack >= 0 AND f$Gen_EffStack <= 8 AND listF4S8C Call FORCE
@@ -2138,7 +2152,7 @@ WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND Numbe
     WHEN f$Gen_EffStack >= 8 AND f$Gen_EffStack <= 12 AND listIso3COEdge AND randomhand < 0.50 Call FORCE
     WHEN f$Gen_EffStack >= 12 AND f$Gen_EffStack <= 18 AND listF3EPV RaiseMax FORCE
     WHEN f$Gen_EffStack >= 12 AND f$Gen_EffStack <= 18 AND listVEPEPB RaiseMax FORCE
-    WHEN f$Gen_EffStack >= 12 AND f$Gen_EffStack <= 18 AND listF4S18C Call FORCE
+    WHEN f$Gen_EffStack >= 12 AND f$Gen_EffStack <= 18 AND listF3BBC Call FORCE
     WHEN f$Gen_EffStack >= 12 AND f$Gen_EffStack <= 18 AND listIso3MPEdge AND randomhand < 0.50 Call FORCE
     WHEN f$Gen_EffStack >= 18 AND f$Gen_EffStack <= 25 AND listF4S25V RaiseMax FORCE
     WHEN f$Gen_EffStack >= 18 AND f$Gen_EffStack <= 25 AND listVEPEPB RaiseMax FORCE
@@ -2146,8 +2160,8 @@ WHEN BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND Numbe
     WHEN f$Gen_EffStack >= 18 AND f$Gen_EffStack <= 25 AND listF4S25Cp AND randomhand < 0.50 Call FORCE
     WHEN f$Gen_EffStack >= 25 AND f$Gen_EffStack <= 40 AND listF3SqEPV RaiseMax FORCE
     WHEN f$Gen_EffStack >= 25 AND f$Gen_EffStack <= 40 AND listF4S40B RaiseMax FORCE
-    WHEN f$Gen_EffStack >= 25 AND f$Gen_EffStack <= 40 AND listF4S40C Call FORCE
-    WHEN f$Gen_EffStack >= 25 AND f$Gen_EffStack <= 40 AND listF4S40Cp AND randomhand < 0.50 Call FORCE
+    WHEN f$Gen_EffStack >= 25 AND f$Gen_EffStack <= 40 AND listF3SqBBC Call FORCE
+    WHEN f$Gen_EffStack >= 25 AND f$Gen_EffStack <= 40 AND listF3SqBBCp AND randomhand < 0.50 Call FORCE
     WHEN f$Gen_EffStack >= 40 AND listF3SqEPV RaiseMax FORCE
     WHEN f$Gen_EffStack >= 40 AND listF4S40B RaiseMax FORCE
     WHEN f$Gen_EffStack >= 40 AND listF3SqEPC Call FORCE
@@ -2170,14 +2184,14 @@ WHEN BotsActionsOnThisRoundIncludingChecks = 0 AND Raises = 3
     WHEN Others Fold FORCE
 // === NOUS AVONS LIMPE / PAYE PUIS FACE A UNE RELANCE : relance, call (cotes), fold ===
 WHEN NOT BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks >= 1 AND AmountToCall > 0 AND Raises = 1
-    WHEN listCallJamBMPEP12 RaiseTo (BetSize * 4) FORCE
+    WHEN listCallJamBMPEP12 RaiseTo (f$Gen_Facing * 4) FORCE
     WHEN f$Gen_RawOdds <= 0.2 AND listLimpRaiseC20 Call FORCE
     WHEN f$Gen_RawOdds <= 0.3 AND listLimpRaiseC30 Call FORCE
     WHEN f$Gen_RawOdds <= 1 AND listLimpRaiseC100 Call FORCE
     WHEN Others Fold FORCE
 WHEN NOT BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks >= 1 AND AmountToCall > 0 AND Raises = 2
     WHEN listColdF3V AND f$Gen_EffStack <= 34 RaiseMax FORCE
-    WHEN listColdF3V RaiseTo (BetSize * 2.5) FORCE
+    WHEN listColdF3V RaiseTo (f$Gen_Facing * 2.5) FORCE
     WHEN listColdF3C Call FORCE
     WHEN Others Fold FORCE
 // === FACE A UN 5BET OU UN ALL-IN PREFLOP : call selon la profondeur ===
@@ -2200,9 +2214,11 @@ WHEN Others
     WHEN Others Check FORCE
 
 ##f$Gen_PotType##
-// Type de pot preflop : 1 = ouvert/limpe, 2 = 3bet, 3 = 4bet ou plus
-WHEN NumberOfRaisesBeforeFlop >= 3 RETURN 3 FORCE
-WHEN NumberOfRaisesBeforeFlop = 2 RETURN 2 FORCE
+// Type de pot preflop : 1 = ouvert/limpe, 2 = 3bet, 3 = 4bet ou plus. NumberOfRaisesBeforeFlop ne compte que les relances adverses : on ajoute la notre.
+WHEN BotRaisedBeforeFlop AND NumberOfRaisesBeforeFlop >= 2 RETURN 3 FORCE
+WHEN BotRaisedBeforeFlop AND NumberOfRaisesBeforeFlop = 1 RETURN 2 FORCE
+WHEN NOT BotRaisedBeforeFlop AND NumberOfRaisesBeforeFlop >= 3 RETURN 3 FORCE
+WHEN NOT BotRaisedBeforeFlop AND NumberOfRaisesBeforeFlop = 2 RETURN 2 FORCE
 WHEN Others RETURN 1 FORCE
 
 ##f$Gen_WeChecked##

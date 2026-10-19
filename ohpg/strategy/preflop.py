@@ -12,7 +12,7 @@ FIRST = "BotsActionsOnThisRoundIncludingChecks = 0"
 
 
 def open_pct(cfg: dict, pos: str) -> float:
-    base = cfg["open_" + {"EP": "ep", "MP": "mp", "CO": "co", "BTN": "btn", "SB": "sb"}[pos]]
+    base = cfg["iso_raise_pct"] if pos == "BB" else cfg["open_" + {"EP": "ep", "MP": "mp", "CO": "co", "BTN": "btn", "SB": "sb"}[pos]]
     pct = base * cfg["range_scale"] / 100.0
     pct *= 1.0 + cfg["ante_bb"] * 1.2
     return min(100.0, pct)
@@ -190,7 +190,7 @@ def _vs_open(prof, f, cfg, agg):
             mult = cfg["threebet_size_ip"] if ip else cfg["threebet_size_oop"]
             cond = join(HERO[hero], OPENER[opener])
             tag = f"V{hero}{opener}{sfx}"
-            act = f"RaiseTo (BetSize * {fmt(mult)})"
+            act = f"RaiseTo (f$Gen_Facing * {fmt(mult)})"
             shove = cfg["threebet_shove_stack"]
             if shove > 0:
                 sh = prof.add_list(_lnm(tag, "SV"), value + bluff[: max(1, len(bluff) // 2)] if bluff else value)
@@ -214,7 +214,7 @@ def _squeeze(prof, f, cfg, agg):
             bl = val * cfg["squeeze_bluff_ratio"] * agg * (0.5 if hero in ("EP", "MP") else 1.0)
             call = cfg["coldcall_squeeze_pct"] * scale * (1.7 if hero == "BB" else 1.2 if hero == "SB" else 0.8 if hero in ("EP", "MP") else 1.0)
             value, bluff, callh = R.split_range(val, bl, call)
-            size = f"RaiseTo (BetSize * {fmt(cfg['squeeze_size'])} + BetSize * (CallsSinceLastRaise - 1))"
+            size = f"RaiseTo (f$Gen_Facing * {fmt(cfg['squeeze_size'])} + f$Gen_Facing * (CallsSinceLastRaise - 1))"
             cond = join(cond_c, HERO[hero])
             tag = f"Sq{callers}{hero}"
             if cfg["threebet_shove_stack"] > 0:
@@ -240,15 +240,15 @@ def _cont_sets(cfg, hero, agg, tighten=1.0, kv=1.0, kb=1.0, kc=1.0):
 
 def _facing_3bet(prof, f, cfg, agg):
     f.comment("=== NOUS AVONS OUVERT ET FACE À UN 3BET : 4bet value/bluff, call, fold ===")
-    base = "BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 1 AND RaisesSinceLastPlay = 1"
+    base = "BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND Raises = 1 AND RaisesSinceLastPlay = 1"
     for suffix, extra, tighten in (("", "Calls = 0", 1.0), ("Sq", "Calls >= 1", 0.7)):
       for opp in opp_variants(cfg, "Rs"):
         sfx, ocond, kv, kb, kc = opp or ("", "", 1.0, 1.0, 1.0)
         f.group(join(base, extra, ocond))
-        for hero in actives():
+        for hero in ORDER:
             value, bluff, call, ip = _cont_sets(cfg, hero, agg, tighten, kv, kb, kc)
             mult = cfg["fourbet_size_ip"] if ip else cfg["fourbet_size_oop"]
-            act = f"RaiseTo (BetSize * {fmt(mult)})"
+            act = f"RaiseTo (f$Gen_Facing * {fmt(mult)})"
             cond = HERO[hero]
             tag = f"F3{suffix}{hero}{sfx}"
             if cfg["fourbet_shove_stack"] > 0:
@@ -266,7 +266,7 @@ def _cold_facing_3bet(prof, f, cfg):
     call_h = [h for h in R.top_equity(round(cfg["call_4bet_pct"] + cfg["fivebet_value"], 2)) if h not in value]
     lv = prof.add_list("ColdF3V", value)
     if lv != "false":
-        f.act(lv, f"RaiseTo (BetSize * {fmt(cfg['fourbet_size_oop'])})")
+        f.act(lv, f"RaiseTo (f$Gen_Facing * {fmt(cfg['fourbet_size_oop'])})")
     lc = prof.add_list("ColdF3C", call_h)
     if lc != "false":
         f.act(lc, "Call")
@@ -284,7 +284,7 @@ def _stack_lists(prof, cfg, tag, value_pct, bluff_pct, call_pct, agg):
 
 def _facing_4bet(prof, f, cfg, agg):
     f.comment("=== NOUS AVONS 3BETÉ ET FACE À UN 4BET : jam value/bluff, call, fold ===")
-    f.group("BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 2 AND RaisesSinceLastPlay = 1")
+    f.group("BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND Raises = 2 AND RaisesSinceLastPlay = 1")
     for lo, hi, v, b, c in _stack_lists(prof, cfg, "F4", cfg["fivebet_value"], cfg["fivebet_bluff"] * agg, cfg["call_4bet_pct"], agg):
         cond = join(f"f$Gen_EffStack >= {lo}", f"f$Gen_EffStack <= {hi}") if hi < 10000 else f"f$Gen_EffStack >= {lo}"
         _rules(prof, f, cfg, cond, v, b, c, v_action="RaiseMax", tag=f"F4S{hi}")
@@ -316,7 +316,7 @@ def _acted_then_raised(prof, f, cfg, agg):
     value = R.top_equity(round(cfg["threebet_value"] * 1.2 * agg, 2))
     lv = prof.add_list("LimpRaiseV", value)
     if lv != "false":
-        f.act(lv, f"RaiseTo (BetSize * {fmt(cfg['threebet_size_oop'])})")
+        f.act(lv, f"RaiseTo (f$Gen_Facing * {fmt(cfg['threebet_size_oop'])})")
     for odds, pct in ((0.20, 30.0), (0.30, 20.0), (1.00, 11.0)):
         hands = [h for h in R.top_play(round(pct * cfg["range_scale"] / 100.0, 2)) if h not in value]
         lc = prof.add_list(f"LimpRaiseC{int(odds * 100)}", hands)
@@ -331,7 +331,7 @@ def _acted_then_raised(prof, f, cfg, agg):
     if lj != "false":
         if cfg["fourbet_shove_stack"] > 0:
             f.act(join(lj, f"f$Gen_EffStack <= {cfg['fourbet_shove_stack']}"), "RaiseMax")
-        f.act(lj, f"RaiseTo (BetSize * {fmt(cfg['fourbet_size_oop'])})")
+        f.act(lj, f"RaiseTo (f$Gen_Facing * {fmt(cfg['fourbet_size_oop'])})")
     lc = prof.add_list("ColdF3C", call_h)
     if lc != "false":
         f.act(lc, "Call")
