@@ -29,6 +29,7 @@ G_TURN = "Turn"
 G_RIVER = "River"
 G_SIZE = "Tailles de mise"
 G_HOP = "Gestion de table"
+G_STATS = "Stats adversaires"
 
 SCHEMA: list[P] = [
     # ------------------------------------------------------------------ général
@@ -94,6 +95,12 @@ SCHEMA: list[P] = [
     P("cbet_bluff_oop", "C-bet bluff OOP (%)", G_FLOP, "pct", 35, 0, 100),
     P("commit_spr", "SPR d'engagement du tapis (0 = off)", G_FLOP, "float", 2.5, 0, 10, 0.5,
       help="SPR = tapis / pot. En dessous, Monster/Strong mettent le tapis (valable flop, turn, river)"),
+    P("slowplay_pct", "Slowplay des monstres, board sec heads-up (%)", G_FLOP, "pct", 10, 0, 60,
+      help="% de fois où un monstre check au lieu de miser (piège)"),
+    P("cbet_3bet_pot_scale", "Pots 3bet+ : facteur sur les bluffs (%)", G_FLOP, "pct", 80, 20, 150,
+      help="agit sur tous les bluffs/semi-bluffs postflop quand le pot préflop est 3bet ou plus"),
+    P("call_3bet_pot_scale", "Pots 3bet+ : tolérance de call (%)", G_FLOP, "int", 110, 60, 160, 1,
+      help="engagement plus large dans les pots 3bet/4bet"),
     P("cbet_semibluff", "Semi-bluff des tirages (%)", G_FLOP, "pct", 85, 0, 100),
     P("cbet_medium_ip", "C-bet des mains moyennes IP (%)", G_FLOP, "pct", 55, 0, 100),
     P("cbet_medium_oop", "C-bet des mains moyennes OOP (%)", G_FLOP, "pct", 35, 0, 100),
@@ -133,11 +140,31 @@ SCHEMA: list[P] = [
     P("size_cbet_paired", "C-bet board pairé (% pot)", G_SIZE, "int", 33, 20, 150, 1),
     P("size_cbet_mono", "C-bet board monotone (% pot)", G_SIZE, "int", 40, 20, 150, 1),
     P("size_cbet_multiway", "C-bet multiway (% pot)", G_SIZE, "int", 66, 20, 150, 1),
+    P("size_cbet_3bet", "C-bet pots 3bet+ (% pot)", G_SIZE, "int", 33, 20, 150, 1),
     P("size_turn", "Mise turn (% pot)", G_SIZE, "int", 66, 20, 200, 1),
     P("size_river", "Mise river value/bluff (% pot)", G_SIZE, "int", 70, 20, 200, 1),
     P("size_river_nuts", "Mise river avec les nuts IP (% pot)", G_SIZE, "int", 110, 20, 300, 1),
     P("size_thin", "Mise value fine (% pot)", G_SIZE, "int", 45, 20, 150, 1),
     P("size_raise_postflop", "Relance postflop (% pot)", G_SIZE, "int", 100, 50, 250, 1),
+    # ------------------------------------------------------------------ stats adversaires
+    P("use_stats", "Exploiter les stats PokerTracker (OpenHoldem pt_*)", G_STATS, "bool", False,
+      help="nécessite PokerTracker configuré dans OpenHoldem ; sans base, le profil reste neutre"),
+    P("stats_min_hands", "Mains minimum avant de se fier aux stats", G_STATS, "int", 60, 10, 500, 5),
+    P("opp_nit_vpip", "Nit : VPIP <= (%)", G_STATS, "pct", 17, 5, 30),
+    P("opp_fish_vpip", "Fish / station : VPIP >= (%)", G_STATS, "pct", 40, 25, 80),
+    P("opp_maniac_pfr", "Maniaque : PFR >= (%)", G_STATS, "pct", 25, 10, 60),
+    P("opp_maniac_af", "Maniaque : agression (AF) >=", G_STATS, "float", 3.5, 1.5, 10, 0.1),
+    P("exploit_vs_nit", "Préflop vs nit : continuer (% de nos ranges)", G_STATS, "int", 70, 30, 150, 1),
+    P("exploit_vs_fish", "Préflop vs fish : continuer (%)", G_STATS, "int", 125, 50, 200, 1),
+    P("exploit_vs_maniac", "Préflop vs maniaque : continuer (%)", G_STATS, "int", 140, 50, 250, 1),
+    P("exploit_iso_fish", "Isoler un limper fish (% de la fréquence normale)", G_STATS, "int", 150, 50, 300, 1),
+    P("exploit_bluff_nit", "Postflop vs nit : fréquence de bluff (%)", G_STATS, "int", 130, 20, 250, 1),
+    P("exploit_bluff_fish", "Postflop vs fish : fréquence de bluff (%)", G_STATS, "int", 30, 0, 200, 1),
+    P("exploit_bluff_maniac", "Postflop vs maniaque : fréquence de bluff (%)", G_STATS, "int", 60, 0, 200, 1),
+    P("exploit_value_fish", "Postflop vs fish : value fine (% de la fréquence)", G_STATS, "int", 130, 50, 250, 1),
+    P("exploit_call_nit", "Postflop vs nit : tolérance de call (%)", G_STATS, "int", 80, 40, 160, 1),
+    P("exploit_call_fish", "Postflop vs fish : tolérance de call (%)", G_STATS, "int", 90, 40, 160, 1),
+    P("exploit_call_maniac", "Postflop vs maniaque : tolérance de call (%)", G_STATS, "int", 130, 40, 220, 1),
     # ------------------------------------------------------------------ gestion de table
     P("sitin", "Se rasseoir automatiquement (f$sitin)", G_HOP, "bool", False),
     P("sitout_below_bb", "Se lever sous (BB, 0 = off)", G_HOP, "int", 0, 0, 100, 1),

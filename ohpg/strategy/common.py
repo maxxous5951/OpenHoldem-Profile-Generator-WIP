@@ -80,7 +80,16 @@ def mix(cfg: dict, freq: float):
     return f"randomhand < {freq:.2f}"
 
 
-def mix_round(cfg: dict, freq: float):
+def rr_symbol(cfg: dict, kind: str | None) -> str:
+    """Symbole d'aléatoire constant pendant la street. 'bluff' / 'value' passent par un facteur d'exploitation."""
+    if kind == "bluff" and (cfg["use_stats"] or cfg["cbet_3bet_pot_scale"] != 100):
+        return "f$Gen_RRBluff"
+    if kind == "value" and cfg["use_stats"]:
+        return "f$Gen_RRValue"
+    return "randomround"
+
+
+def mix_round(cfg: dict, freq: float, kind: str | None = None):
     """Idem mais constant pendant la street (postflop)."""
     freq = max(0.0, min(1.0, freq))
     if freq >= 0.995:
@@ -89,7 +98,7 @@ def mix_round(cfg: dict, freq: float):
         return None
     if not cfg["randomize"]:
         return "" if freq >= 0.5 else None
-    return f"randomround < {freq:.2f}"
+    return f"{rr_symbol(cfg, kind)} < {freq:.2f}"
 
 
 def tiers(hands, full_share=0.75):
@@ -122,10 +131,6 @@ def emit_common_helpers(prof: Profile, cfg: dict):
     f.comment("Vrai si nous agirons en dernier postflop")
     f.ret("StillToActPostflop = 0", "true")
     f.others_ret("false")
-    f = prof.func("f$Gen_PotOdds")
-    f.comment("Équité nécessaire pour payer : AmountToCall / (PotSize + AmountToCall)")
-    f.ret("AmountToCall <= 0", 0)
-    f.others_ret("AmountToCall / (PotSize + AmountToCall)")
     f = prof.func("f$Gen_Multiway")
     f.ret("Opponents >= 2", "true")
     f.others_ret("false")

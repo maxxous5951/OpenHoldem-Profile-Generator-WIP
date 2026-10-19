@@ -3,6 +3,7 @@ c-bet / barrels / value fine / bluffs mixtes, défense basée sur les cotes du p
 from __future__ import annotations
 
 from ..ppl import Profile, fmt
+from . import stats
 from .common import join, mix_round
 
 CATS = ("Monster", "Strong", "Medium", "StrongDraw", "WeakDraw", "WeakSD", "Air")
@@ -13,6 +14,8 @@ EQ = {
     "turn": {"Monster": .86, "Strong": .66, "Medium": .41, "WeakSD": .23, "StrongDraw": .33, "WeakDraw": .12, "Air": .03},
     "river": {"Monster": .88, "Strong": .66, "Medium": .37, "WeakSD": .19, "StrongDraw": .0, "WeakDraw": .0, "Air": .02},
 }
+KIND = {"Air": "bluff", "WeakDraw": "bluff", "StrongDraw": "bluff", "NutDraw": "bluff",
+        "Medium": "value", "WeakSD": "value"}
 TEX = {"mono": 1, "wet": 2, "paired": 3, "high": 4, "low": 5, "dry": 6}
 
 
@@ -79,7 +82,7 @@ def _cat_cond(cat):
 
 def _act(f, cfg, cond, cat, freq, action):
     """Ajoute `WHEN cond AND cat [AND random] action` (ignorée si la fréquence est nulle)."""
-    m = mix_round(cfg, freq)
+    m = mix_round(cfg, freq, KIND.get(cat))
     if m is None:
         return
     f.act(join(cond, _cat_cond(cat), m), action)
@@ -113,12 +116,13 @@ def bet_rules(f, cfg, cond, size_pct, freq: dict, nuts_size=None):
     f.act(cond, "Check")
 
 
-def cbet_freqs(cfg, ip: bool, multiway: bool, adj: int):
+def cbet_freqs(cfg, ip: bool, multiway: bool, adj: int, dry: bool = False):
     agg = cfg["aggression_scale"] / 100.0
     air = clamp01((cfg["cbet_bluff_ip"] if ip else cfg["cbet_bluff_oop"] + 0) / 100.0 + adj / 100.0) * min(1.5, agg)
     med = clamp01((cfg["cbet_medium_ip"] if ip else cfg["cbet_medium_oop"]) / 100.0 + adj / 300.0)
     semi = clamp01(cfg["cbet_semibluff"] / 100.0 + adj / 200.0) * min(1.3, agg)
-    fr = {"Monster": 1.0, "Strong": 1.0, "Medium": med, "StrongDraw": semi, "WeakDraw": clamp01(air * 1.1),
+    slow = cfg["slowplay_pct"] / 100.0 if (dry and not multiway) else 0.0
+    fr = {"Monster": 1.0 - slow, "Strong": 1.0, "Medium": med, "StrongDraw": semi, "WeakDraw": clamp01(air * 1.1),
           "WeakSD": clamp01(med * 0.5), "Air": air}
     if multiway:
         s = cfg["cbet_multiway_scale"] / 100.0
@@ -128,14 +132,21 @@ def cbet_freqs(cfg, ip: bool, multiway: bool, adj: int):
 
 
 # ------------------------------------------------------------------------------ défense face à une mise
-def facing_rules(f, cfg, street: str, base_cond: str, tighten: float = 1.0, raise_size=None):
-    """Défense par catégorie contre une mise, d'après les cotes du pot."""
+def facing_rules(f, cfg, street: str, base_cond: str, tighten: float = 1.0, raise_size=None, xr: bool = False,
+                 allin: bool = False):
+    """Défense par catégorie contre une mise, d'après les cotes du pot.
+
+    xr=True  : nous avons checké et faisons face à une mise -> plan de check-raise (xr_value / xr_bluff).
+    allin=True : la mise nous met all-in -> aucune relance possible, seulement call / fold.
+    """
     eq = EQ[street]
     scale = (cfg["river_call_scale"] if street == "river" else cfg["call_scale"]) / 100.0 * tighten
     rsize = raise_size or cfg["size_raise_postflop"]
-    raise_act = f"RaiseBy {fmt(rsize)}%"
-    rv = clamp01(cfg["raise_vs_bet_value"] / 100.0)
+    raise_act = "Call" if allin else f"RaiseBy {fmt(rsize)}%"
+    rv = clamp01((cfg["xr_value"] if xr else cfg["raise_vs_bet_value"]) / 100.0)
+    rv_strong = rv * (0.25 if xr else 0.35)
     agg = min(1.5, cfg["aggression_scale"] / 100.0)
+    xr_b = clamp01(cfg["xr_bluff"] / 100.0 * agg)
 
     def call_block(cat, thr, extra=""):
         thr = thr * scale
@@ -146,38 +157,79 @@ def facing_rules(f, cfg, street: str, base_cond: str, tighten: float = 1.0, rais
             f.act(join(c1, f"f$Gen_PotOdds <= {thr * 1.3:.3f}", m), "Call")
 
     f.act(join(base_cond, "HaveNuts", "f$Gen_PotOdds < 2"), raise_act)
-    # monstres : relance de value à fréquence rv, sinon call
-    m = mix_round(cfg, rv)
-    if m is not None:
-        f.act(join(base_cond, "f$Gen_Monster", m), raise_act)
+    if not allin:
+        # monstres : relance de value à fréquence rv, sinon call
+        m = mix_round(cfg, rv)
+        if m is not None:
+            f.act(join(base_cond, "f$Gen_Monster", m), raise_act)
     f.act(join(base_cond, "f$Gen_Monster"), "Call")
-    m = mix_round(cfg, rv * 0.35)
-    if m is not None and street != "river":
-        f.act(join(base_cond, "f$Gen_Strong", m), raise_act)
+    if not allin and street != "river":
+        m = mix_round(cfg, rv_strong)
+        if m is not None:
+            f.act(join(base_cond, "f$Gen_Strong", m), raise_act)
     call_block("Strong", eq["Strong"])
     if street != "river":
-        m = mix_round(cfg, clamp01(cfg["xr_bluff"] / 100.0 * agg))
-        if m is not None:
-            f.act(join(base_cond, "f$Gen_NutDraw", m), raise_act)
+        if not allin:
+            m = mix_round(cfg, xr_b, "bluff")
+            if m is not None:
+                f.act(join(base_cond, "f$Gen_NutDraw", m), raise_act)
+            if xr:  # check-raise : aussi une partie des tirages forts (semi-bluff)
+                m = mix_round(cfg, xr_b * 0.5, "bluff")
+                if m is not None:
+                    f.act(join(base_cond, "f$Gen_StrongDraw", m), raise_act)
         call_block("StrongDraw", eq["StrongDraw"] + 0.05)  # cotes implicites
     call_block("Medium", eq["Medium"])
     call_block("WeakSD", eq["WeakSD"])
     if street == "flop":
-        m = mix_round(cfg, clamp01(cfg["float_ip"] / 100.0))
+        m = mix_round(cfg, clamp01(cfg["float_ip"] / 100.0), "bluff")
         if m is not None:
             f.act(join(base_cond, "f$Gen_WeakDraw", "f$Gen_IP", "f$Gen_PotOdds <= 0.28", m), "Call")
         call_block("WeakDraw", eq["WeakDraw"])
     elif street == "turn":
         call_block("WeakDraw", eq["WeakDraw"])
-    if street == "river":
-        m = mix_round(cfg, clamp01(cfg["river_raise_bluff"] / 100.0 * agg))
+    if street == "river" and not allin:
+        m = mix_round(cfg, clamp01(cfg["river_raise_bluff"] / 100.0 * agg), "bluff")
         if m is not None:
             f.act(join(base_cond, "f$Gen_Air", "f$Gen_Blockers", m), raise_act)
     f.act(base_cond, "Fold")
 
 
+def facing_groups(f, cfg, street: str, t_raised: float, t_mw: float = 0.85):
+    """Toutes les situations où nous faisons face à une mise (ordre = priorité)."""
+    f.comment("--- On nous met all-in : call ou fold (pas de relance possible) ---")
+    f.group("AmountToCall > 0 AND AmountToCall >= StackSize * 0.9")
+    facing_rules(f, cfg, street, "NOT f$Gen_Multiway", allin=True)
+    facing_rules(f, cfg, street, "f$Gen_Multiway", tighten=t_mw, allin=True)
+    f.comment("--- Nous avons checké et on mise devant nous : plan de check-raise ---")
+    f.group("AmountToCall > 0 AND f$Gen_WeChecked")
+    facing_rules(f, cfg, street, "NOT f$Gen_Multiway", xr=True)
+    facing_rules(f, cfg, street, "f$Gen_Multiway", tighten=t_mw, xr=True)
+    f.comment("--- On nous relance après notre mise ---")
+    f.group("AmountToCall > 0 AND RaisesSinceLastPlay >= 1 AND BotsActionsOnThisRoundIncludingChecks >= 1")
+    facing_rules(f, cfg, street, "", tighten=t_raised)
+    f.comment("--- On fait face à une mise (c-bet adverse, donk, probe...) ---")
+    f.group("AmountToCall > 0")
+    facing_rules(f, cfg, street, "NOT f$Gen_Multiway")
+    facing_rules(f, cfg, street, "f$Gen_Multiway", tighten=t_mw)
+
+
+def lead_rules(f, cfg, street: str, size: float, probe: float, donk: float):
+    """Personne n'a misé et nous n'avons pas l'initiative : IP (heads-up ou multiway) et OOP (lead/donk)."""
+    agg = min(1.5, cfg["aggression_scale"] / 100.0)
+    probe, donk = clamp01(probe), clamp01(donk)
+    ip_freq = {"Monster": 1, "Strong": 1, "Medium": probe * 0.8, "StrongDraw": probe, "WeakDraw": probe * 0.5,
+               "WeakSD": probe * 0.3, "Air": probe * 0.45 * agg}
+    bet_rules(f, cfg, join("f$Gen_IP", "NOT f$Gen_Multiway"), size, ip_freq)
+    mw_freq = {"Monster": 1, "Strong": 1, "Medium": probe * 0.3, "StrongDraw": probe * 0.5, "WeakDraw": 0.0,
+               "WeakSD": 0.0, "Air": 0.0}
+    bet_rules(f, cfg, join("f$Gen_IP", "f$Gen_Multiway"), size, mw_freq)
+    for cat in ("Monster", "Strong"):
+        _act(f, cfg, "NOT f$Gen_IP", cat, donk, f"RaiseBy {fmt(size)}%")
+
+
 # ------------------------------------------------------------------------------ rues
 def generate(prof: Profile, cfg: dict):
+    stats.emit_postflop(prof, cfg)
     emit_helpers(prof)
     _flop(prof, cfg)
     _turn(prof, cfg)
@@ -195,33 +247,26 @@ def _flop(prof, cfg):
 
     f.comment("--- C-BET : nous avons relancé préflop et personne n'a misé ---")
     f.group("AmountToCall = 0 AND BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 0")
-    for mw in (False, True):
-        for ip in (True, False):
-            for tex, code in TEX.items():
-                cond = join("f$Gen_Multiway" if mw else "NOT f$Gen_Multiway", "f$Gen_IP" if ip else "NOT f$Gen_IP", f"f$Gen_Tex = {code}")
-                size = cfg["size_cbet_multiway"] if mw else sizes[tex]
-                bet_rules(f, cfg, cond, size, cbet_freqs(cfg, ip, mw, adjs[tex]))
+    for big_pot in (False, True):  # pot 3bet+ : mises plus petites, bluffs réduits via f$Gen_RRBluff
+        pcond = "f$Gen_PotType >= 2" if big_pot else "f$Gen_PotType = 1"
+        for mw in (False, True):
+            for ip in (True, False):
+                for tex, code in TEX.items():
+                    cond = join(pcond, "f$Gen_Multiway" if mw else "NOT f$Gen_Multiway", "f$Gen_IP" if ip else "NOT f$Gen_IP",
+                                f"f$Gen_Tex = {code}")
+                    size = cfg["size_cbet_multiway"] if mw else sizes[tex]
+                    if big_pot:
+                        size = min(size, cfg["size_cbet_3bet"])
+                    dry = tex in ("high", "low", "dry")
+                    bet_rules(f, cfg, cond, size, cbet_freqs(cfg, ip, mw, adjs[tex], dry))
     f.others("Check")
 
     f.comment("--- Nous n'avons pas relancé préflop et personne n'a misé ---")
     f.group("AmountToCall = 0")
-    probe = clamp01(cfg["probe_freq"] / 100.0)
-    donk = clamp01(cfg["donk_freq"] / 100.0)
-    ip_freq = {"Monster": 1, "Strong": 1, "Medium": probe * 0.8, "StrongDraw": probe, "WeakDraw": probe * 0.5,
-               "WeakSD": probe * 0.3, "Air": probe * 0.45 * min(1.5, cfg["aggression_scale"] / 100.0)}
-    bet_rules(f, cfg, join("f$Gen_IP", "NOT f$Gen_Multiway"), cfg["size_cbet_dry"] + 10, ip_freq)
-    for cat in ("Monster", "Strong"):
-        _act(f, cfg, "NOT f$Gen_IP", cat, donk, f"RaiseBy {fmt(cfg['size_cbet_wet'])}%")
+    lead_rules(f, cfg, "flop", cfg["size_cbet_dry"] + 10, cfg["probe_freq"] / 100.0, cfg["donk_freq"] / 100.0)
     f.others("Check")
 
-    f.comment("--- On nous relance après notre mise / check-raise subi ---")
-    f.group("AmountToCall > 0 AND RaisesSinceLastPlay >= 1 AND BotsActionsOnThisRoundIncludingChecks >= 1")
-    facing_rules(f, cfg, "flop", "", tighten=0.8)
-
-    f.comment("--- On fait face à une mise (c-bet adverse, donk, etc.) ---")
-    f.group("AmountToCall > 0")
-    facing_rules(f, cfg, "flop", "NOT f$Gen_Multiway")
-    facing_rules(f, cfg, "flop", "f$Gen_Multiway", tighten=0.85)
+    facing_groups(f, cfg, "flop", 0.8)
 
 
 def _turn(prof, cfg):
@@ -264,21 +309,10 @@ def _turn(prof, cfg):
 
     f.comment("--- Autres situations sans mise devant nous ---")
     f.group("AmountToCall = 0")
-    pr2 = clamp01(cfg["turn_probe"] / 100.0)
-    fr = {"Monster": 1, "Strong": 1, "Medium": pr2 * 0.7, "StrongDraw": pr2 * 0.8, "WeakDraw": pr2 * 0.3,
-          "WeakSD": 0.0, "Air": pr2 * 0.3 * agg}
-    bet_rules(f, cfg, join("f$Gen_IP", "NOT f$Gen_Multiway"), cfg["size_turn"], fr)
-    for cat in ("Monster", "Strong"):
-        _act(f, cfg, "NOT f$Gen_IP", cat, 0.8, f"RaiseBy {fmt(cfg['size_turn'])}%")
+    lead_rules(f, cfg, "turn", cfg["size_turn"], cfg["turn_probe"] / 100.0, 0.8)
     f.others("Check")
 
-    f.comment("--- On nous relance après notre mise ---")
-    f.group("AmountToCall > 0 AND RaisesSinceLastPlay >= 1 AND BotsActionsOnThisRoundIncludingChecks >= 1")
-    facing_rules(f, cfg, "turn", "", tighten=0.75)
-    f.comment("--- On fait face à une mise ---")
-    f.group("AmountToCall > 0")
-    facing_rules(f, cfg, "turn", "NOT f$Gen_Multiway")
-    facing_rules(f, cfg, "turn", "f$Gen_Multiway", tighten=0.85)
+    facing_groups(f, cfg, "turn", 0.75)
 
 
 def _river(prof, cfg):
@@ -318,12 +352,11 @@ def _river(prof, cfg):
         _act(f, cfg, join(ipc, "f$Gen_Blockers"), "Air", clamp01((bluff + bonus) * 0.6 * agg * (probe + 0.3)), f"RaiseBy {fmt(size)}%")
         _act(f, cfg, ipc, "Air", clamp01(bluff * 0.4 * agg * (probe + 0.3)), f"RaiseBy {fmt(size)}%")
         f.act(ipc, "Check")
+    mwc = "f$Gen_Multiway"
+    f.act(join(mwc, "f$Gen_Monster"), f"RaiseBy {fmt(size)}%")
+    f.act(join(mwc, "f$Gen_Strong"), f"RaiseBy {fmt(size)}%")
+    _act(f, cfg, join(mwc, "f$Gen_IP"), "Medium", thin * 0.3 * probe, f"RaiseBy {fmt(cfg['size_thin'])}%")
+    f.act(mwc, "Check")
     f.others("Check")
 
-    f.comment("--- On nous relance ---")
-    f.group("AmountToCall > 0 AND RaisesSinceLastPlay >= 1 AND BotsActionsOnThisRoundIncludingChecks >= 1")
-    facing_rules(f, cfg, "river", "", tighten=0.8)
-    f.comment("--- On fait face à une mise ---")
-    f.group("AmountToCall > 0")
-    facing_rules(f, cfg, "river", "NOT f$Gen_Multiway")
-    facing_rules(f, cfg, "river", "f$Gen_Multiway", tighten=0.85)
+    facing_groups(f, cfg, "river", 0.8)

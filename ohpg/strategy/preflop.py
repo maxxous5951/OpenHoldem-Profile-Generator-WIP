@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from .. import ranges as R
 from ..ppl import Profile, fmt
+from . import stats
 from .common import (actives, configure, HERO, OPENER, ORDER, OPEN_WIDTH, emit_common_helpers, is_ip_vs_opener, join, mix,
                      openers_before, stack_buckets, tiers)
 
@@ -19,6 +20,23 @@ def open_pct(cfg: dict, pos: str) -> float:
 
 def open_set(cfg: dict, pos: str) -> list[str]:
     return R.open_range(round(open_pct(cfg, pos), 1))
+
+
+def opp_variants(cfg: dict, tag: str):
+    """Variantes d'exploitation : [(suffixe, condition, k_value, k_bluff, k_call)] puis None (comportement normal)."""
+    if not cfg["use_stats"]:
+        return [None]
+    out = []
+    for kind, key in (("Maniac", "exploit_vs_maniac"), ("Fish", "exploit_vs_fish"), ("Nit", "exploit_vs_nit")):
+        k = cfg[key] / 100.0
+        if kind == "Nit":
+            kv, kb, kc = k ** 0.5, k ** 2, k
+        elif kind == "Fish":
+            kv, kb, kc = k ** 0.5, 1.0 / k, k
+        else:
+            kv, kb, kc = k ** 0.5, k, k
+        out.append((kind, f"f$Gen_{tag}{kind}", kv, kb, kc))
+    return out + [None]
 
 
 def _lname(prefix: str, *parts) -> str:
@@ -56,6 +74,7 @@ def _rules(prof, f, cfg, cond, value, bluff, call, *, v_action, b_action=None, c
 def generate(prof: Profile, cfg: dict):
     configure(cfg)
     emit_common_helpers(prof, cfg)
+    stats.emit_preflop(prof, cfg)
     f = prof.func("f$preflop")
     f.comment("OHPG : fonction préflop. Chaque bloc WHEN sans action est un scénario ; il se termine par un fold/check.")
     agg = cfg["aggression_scale"] / 100.0
@@ -110,39 +129,44 @@ def _open(prof, f, cfg):
 
 def _limpers(prof, f, cfg):
     f.comment("=== LIMPERS DEVANT : isolation / overlimp ===")
-    f.group(join(FIRST, "Raises = 0", "Calls >= 1"))
-    base = cfg["iso_raise_pct"] * cfg["aggression_scale"] / 100.0
-    for n, scale in ((1, 1.0), (2, 0.8), (3, 0.6)):
-        cond_n = f"Calls = {n}" if n < 3 else "Calls >= 3"
-        for pos, pf in [x for x in (("EP", 0.7), ("MP", 0.8), ("CO", 1.0), ("BTN", 1.3), ("SB", 0.9), ("BB", 1.0)) if x[0] in ORDER]:
-            pct = min(60.0, base * scale * pf)
-            iso = R.open_range(round(pct, 1))
-            full, part = tiers(iso, 0.8)
-            size = f"RaiseTo ({fmt(cfg['iso_size'])} + Calls)"
-            li = prof.add_list(f"Iso{n}{pos}", full)
-            if li != "false":
-                f.act(join(cond_n, HERO[pos], li), size)
-            lp = prof.add_list(f"Iso{n}{pos}Edge", part)
-            m = mix(cfg, 0.5)
-            if lp != "false" and m is not None:
-                f.act(join(cond_n, HERO[pos], lp, m), size)
-    if cfg["overlimp_pct"] > 0:
-        over = [h for h in R.open_range(cfg["overlimp_pct"] + base)]
-        lo = prof.add_list("Overlimp", over)
-        if lo != "false":
-            f.act(join(lo, "Calls <= 3", "InBigBlind"), "Check")
-            f.act(join(lo, "Calls <= 3"), "Call")
-    f.act("InBigBlind", "Check")
-    f.others("Fold")
+    variants = [("Fish", "f$Gen_LmFish", cfg["exploit_iso_fish"] / 100.0, 1.0)] if cfg["use_stats"] else []
+    for opp in variants + [None]:
+        sfx, ocond, kiso, extra_size = opp or ("", "", 1.0, 0.0)
+        f.group(join(FIRST, "Raises = 0", "Calls >= 1", ocond))
+        base = cfg["iso_raise_pct"] * cfg["aggression_scale"] / 100.0 * kiso
+        for n, scale in ((1, 1.0), (2, 0.8), (3, 0.6)):
+            cond_n = f"Calls = {n}" if n < 3 else "Calls >= 3"
+            for pos, pf in [x for x in (("EP", 0.7), ("MP", 0.8), ("CO", 1.0), ("BTN", 1.3), ("SB", 0.9), ("BB", 1.0)) if x[0] in ORDER]:
+                pct = min(60.0, base * scale * pf)
+                iso = R.open_range(round(pct, 1))
+                full, part = tiers(iso, 0.8)
+                size = f"RaiseTo ({fmt(cfg['iso_size'] + extra_size)} + Calls)"
+                li = prof.add_list(f"Iso{n}{pos}{sfx}", full)
+                if li != "false":
+                    f.act(join(cond_n, HERO[pos], li), size)
+                lp = prof.add_list(f"Iso{n}{pos}{sfx}Edge", part)
+                m = mix(cfg, 0.5)
+                if lp != "false" and m is not None:
+                    f.act(join(cond_n, HERO[pos], lp, m), size)
+        if cfg["overlimp_pct"] > 0:
+            over = [h for h in R.open_range(cfg["overlimp_pct"] + base)]
+            lo = prof.add_list("Overlimp" + sfx, over)
+            if lo != "false":
+                f.act(join(lo, "Calls <= 3", "InBigBlind"), "Check")
+                f.act(join(lo, "Calls <= 3"), "Call")
+        f.act("InBigBlind", "Check")
+        f.others("Fold")
 
 
 # ---------------------------------------------------------------------------------- vs ouverture
 def _vs_open(prof, f, cfg, agg):
     f.comment("=== FACE À UNE OUVERTURE (aucun caller) : 3bet value + bluffs, call, fold ===")
-    f.group(join(FIRST, "Raises = 1", "CallsSinceLastRaise = 0"))
     hero_val = {"EP": 0.8, "MP": 0.9, "CO": 1.0, "BTN": 1.1, "SB": 1.2, "BB": 1.0}
     hero_bluff = {"EP": 0.7, "MP": 0.8, "CO": 1.0, "BTN": 1.2, "SB": 1.3, "BB": 1.1}
-    for hero in ORDER:
+    for opp in opp_variants(cfg, "Rs"):
+      sfx, ocond, kv, kb, kc = opp or ("", "", 1.0, 1.0, 1.0)
+      f.group(join(FIRST, "Raises = 1", "CallsSinceLastRaise = 0", ocond))
+      for hero in ORDER:
         for opener in (openers_before(hero)):
             w = OPEN_WIDTH[opener]
             value_pct = cfg["threebet_value"] * w * hero_val[hero]
@@ -161,11 +185,11 @@ def _vs_open(prof, f, cfg, agg):
                 call_pct = cfg["call_ip_pct"] * 0.5 * w
             else:
                 call_pct = cfg["call_ip_pct"] * (1.0 if hero == "BTN" else 0.8) * w
-            value, bluff, call = R.split_range(value_pct, bluff_pct, call_pct)
+            value, bluff, call = R.split_range(min(100.0, value_pct * kv), bluff_pct * kb, call_pct * kc)
             ip = is_ip_vs_opener(hero, opener)
             mult = cfg["threebet_size_ip"] if ip else cfg["threebet_size_oop"]
             cond = join(HERO[hero], OPENER[opener])
-            tag = f"V{hero}{opener}"
+            tag = f"V{hero}{opener}{sfx}"
             act = f"RaiseTo (BetSize * {fmt(mult)})"
             shove = cfg["threebet_shove_stack"]
             if shove > 0:
@@ -173,7 +197,7 @@ def _vs_open(prof, f, cfg, agg):
                 if sh != "false":
                     f.act(join(cond, f"f$Gen_EffStack <= {shove}", sh), "RaiseMax")
             _rules(prof, f, cfg, cond, value, bluff, call, v_action=act, tag=tag)
-    f.others("Fold")
+      f.others("Fold")
 
 
 def _lnm(tag, suffix):
@@ -202,14 +226,14 @@ def _squeeze(prof, f, cfg, agg):
 
 
 # ---------------------------------------------------------------------------------- vs 3bet
-def _cont_sets(cfg, hero, agg, tighten=1.0):
+def _cont_sets(cfg, hero, agg, tighten=1.0, kv=1.0, kb=1.0, kc=1.0):
     own = open_set(cfg, hero)
     own_pct = R.pct_of(own)
     ip = hero in ("CO", "BTN")
     share = (cfg["call_3bet_ip"] if ip else cfg["call_3bet_oop"]) / 100.0 * tighten
-    value_pct = min(cfg["fourbet_value"] * tighten, own_pct * 0.5)
-    bluff_pct = value_pct * cfg["fourbet_bluff_ratio"] * agg
-    call_pct = own_pct * share
+    value_pct = min(cfg["fourbet_value"] * tighten * kv, own_pct * 0.5)
+    bluff_pct = value_pct * cfg["fourbet_bluff_ratio"] * agg * kb
+    call_pct = own_pct * share * kc
     value, bluff, call = R.split_range(value_pct, bluff_pct, call_pct, pool=R.BLUFF_POOL_4BET, within=own)
     return value, bluff, call, ip
 
@@ -218,13 +242,15 @@ def _facing_3bet(prof, f, cfg, agg):
     f.comment("=== NOUS AVONS OUVERT ET FACE À UN 3BET : 4bet value/bluff, call, fold ===")
     base = "BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 1 AND RaisesSinceLastPlay = 1"
     for suffix, extra, tighten in (("", "Calls = 0", 1.0), ("Sq", "Calls >= 1", 0.7)):
-        f.group(join(base, extra))
+      for opp in opp_variants(cfg, "Rs"):
+        sfx, ocond, kv, kb, kc = opp or ("", "", 1.0, 1.0, 1.0)
+        f.group(join(base, extra, ocond))
         for hero in actives():
-            value, bluff, call, ip = _cont_sets(cfg, hero, agg, tighten)
+            value, bluff, call, ip = _cont_sets(cfg, hero, agg, tighten, kv, kb, kc)
             mult = cfg["fourbet_size_ip"] if ip else cfg["fourbet_size_oop"]
             act = f"RaiseTo (BetSize * {fmt(mult)})"
             cond = HERO[hero]
-            tag = f"F3{suffix}{hero}"
+            tag = f"F3{suffix}{hero}{sfx}"
             if cfg["fourbet_shove_stack"] > 0:
                 sh = prof.add_list(_lnm(tag, "SV"), value + bluff)
                 if sh != "false":
@@ -295,7 +321,7 @@ def _acted_then_raised(prof, f, cfg, agg):
         hands = [h for h in R.top_play(round(pct * cfg["range_scale"] / 100.0, 2)) if h not in value]
         lc = prof.add_list(f"LimpRaiseC{int(odds * 100)}", hands)
         if lc != "false":
-            f.act(join(f"f$Gen_PotOdds <= {fmt(odds)}", lc), "Call")
+            f.act(join(f"f$Gen_RawOdds <= {fmt(odds)}", lc), "Call")
     f.others("Fold")
     # deux relances ou plus devant nous (squeeze / 3bet après notre call)
     f.group(join(base, "Raises = 2"))
@@ -318,7 +344,11 @@ def _facing_5bet(prof, f, cfg):
     for lo, hi, factor in stack_buckets():
         cond = join(f"f$Gen_EffStack > {lo}", f"f$Gen_EffStack <= {hi}") if hi < 10000 else f"f$Gen_EffStack > {lo}"
         pct = min(35.0, cfg["call_allin_pct"] * factor)
-        lc = prof.add_list(f"AllinCall{hi}", R.top_equity(round(pct, 2)))
+        jam = R.top_equity(round(cfg["fivebet_value"] * 0.6 * factor ** 0.5, 2))
+        lj = prof.add_list(f"AllinJam{hi}", jam)
+        if lj != "false":
+            f.act(join(cond, lj), "RaiseMax")
+        lc = prof.add_list(f"AllinCall{hi}", [h for h in R.top_equity(round(pct, 2)) if h not in jam])
         if lc != "false":
             f.act(join(cond, lc), "Call")
     f.others("Fold")

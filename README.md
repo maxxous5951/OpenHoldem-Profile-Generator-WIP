@@ -10,7 +10,9 @@ Générateur de profils **OpenHoldem / OpenPPL** : tu règles des paramètres de
 - **Postflop par catégories de mains** (monstre, forte, moyenne, tirage fort/faible, paire faible, rien) × texture du board × IP/OOP × multiway, défense basée sur les **cotes du pot** (MDF).
 - **Préflop complet** : ouverture par poste, isolation, défense vs ouverture selon le poste de l'ouvreur, BB defense, squeeze, 4bet/5bet, calls d'all-in selon la profondeur.
 - **Tournoi** : push/fold par profondeur et poste, reshove, ante, pression ICM à la bulle (`IsBubble`).
-- **93 paramètres** décrits dans un schéma unique (`ohpg/params.py`) qui alimente la CLI, les presets et la GUI.
+- **Situations couvertes, vérifiées par balayage exhaustif** (`tests/test_coverage.py`) : ouverture, limpers, vs ouverture, squeeze, vs 3bet/4bet/5bet/all-in, limp/call puis relance, pots ouverts/3bet/4bet (SPR et engagement du tapis), c-bet / 2e et 3e barrel / probe / donk, check-raise planifié, face à un all-in, multiway, heads-up. Positions adaptées à la taille de table (2 à 10 joueurs).
+- **Exploitation des adversaires** (option `use_stats`) : classification nit / fish / maniaque via les stats PokerTracker d'OpenHoldem (`pt_*`) et ajustement des ranges préflop, des bluffs et de la tolérance de call.
+- **115 paramètres** décrits dans un schéma unique (`ohpg/params.py`) qui alimente la CLI, les presets et la GUI.
 
 ## Installation
 ```bash
@@ -50,7 +52,8 @@ examples/             profils générés prêts à charger
 - Non testé **dans OpenHoldem lui-même** (Windows) : la validation garantit que les symboles existent dans la bibliothèque officielle, pas leur comportement exact sur chaque table. Charge le profil et utilise le vérificateur de syntaxe d'OpenHoldem.
 - Les ranges de push/fold sont des **approximations** de Nash sans ICM complet, pas des solutions solveur. Règle-les avec `pf_scale`, `pf_call_scale`, `icm_pressure`.
 - Le classement des mains est basé sur l'équité contre une main aléatoire + jouabilité, pas sur des ranges solveur.
-- Pas de lecture adverse (stats PokerTracker/HEM) pour l'instant.
+- L'exploitation `use_stats` exige PokerTracker configuré dans OpenHoldem (HEM non géré) ; les noms `pt_*` viennent de la documentation officielle mais n'ont pas pu être exécutés ici. Sans base ou avec trop peu de mains, le profil reste neutre.
+- Les tailles de mise ne varient pas selon l'adversaire (OpenPPL n'accepte que des pourcentages fixes pour `RaiseBy`).
 - Les sites de poker en ligne interdisent généralement les bots : utilise ce projet uniquement là où c'est légal et autorisé (jeu hors-ligne, tests, recherche).
 
 ## Développement
