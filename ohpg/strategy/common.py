@@ -82,7 +82,7 @@ def mix(cfg: dict, freq: float):
 
 def rr_symbol(cfg: dict, kind: str | None) -> str:
     """Symbole d'aléatoire constant pendant la street. 'bluff' / 'value' passent par un facteur d'exploitation."""
-    if kind == "bluff" and (cfg["use_stats"] or cfg["cbet_3bet_pot_scale"] != 100):
+    if kind == "bluff" and (cfg["use_stats"] or cfg["cbet_3bet_pot_scale"] != 100 or cfg["tex_dynamic_pct"] > 0):
         return "f$Gen_RRBluff"
     if kind == "value" and cfg["use_stats"]:
         return "f$Gen_RRValue"

@@ -27,7 +27,7 @@ def _bands(pf_max: int):
 
 
 def _cond(lo, hi, var="f$Gen_EffStack"):
-    return join(f"{var} > {lo}", f"{var} <= {hi}")
+    return join(f"{var} >= {lo}", f"{var} <= {hi}")
 
 
 def push_pct(cfg, pos, ref):

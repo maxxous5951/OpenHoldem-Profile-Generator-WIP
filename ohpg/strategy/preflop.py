@@ -286,7 +286,7 @@ def _facing_4bet(prof, f, cfg, agg):
     f.comment("=== NOUS AVONS 3BETÉ ET FACE À UN 4BET : jam value/bluff, call, fold ===")
     f.group("BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 1 AND NumberOfRaisesBeforeFlop = 2 AND RaisesSinceLastPlay = 1")
     for lo, hi, v, b, c in _stack_lists(prof, cfg, "F4", cfg["fivebet_value"], cfg["fivebet_bluff"] * agg, cfg["call_4bet_pct"], agg):
-        cond = join(f"f$Gen_EffStack > {lo}", f"f$Gen_EffStack <= {hi}") if hi < 10000 else f"f$Gen_EffStack > {lo}"
+        cond = join(f"f$Gen_EffStack >= {lo}", f"f$Gen_EffStack <= {hi}") if hi < 10000 else f"f$Gen_EffStack >= {lo}"
         _rules(prof, f, cfg, cond, v, b, c, v_action="RaiseMax", tag=f"F4S{hi}")
     f.others("Fold")
 
@@ -295,7 +295,7 @@ def _cold_facing_4bet(prof, f, cfg):
     f.comment("=== 4BET DEVANT NOUS (cold) : jam premium / call ===")
     f.group(join(FIRST, "Raises = 3"))
     for lo, hi, factor in stack_buckets():
-        cond = join(f"f$Gen_EffStack > {lo}", f"f$Gen_EffStack <= {hi}") if hi < 10000 else f"f$Gen_EffStack > {lo}"
+        cond = join(f"f$Gen_EffStack >= {lo}", f"f$Gen_EffStack <= {hi}") if hi < 10000 else f"f$Gen_EffStack >= {lo}"
         jam = R.top_equity(round(cfg["fivebet_value"] * 0.7 * factor ** 0.5, 2))
         call_h = [h for h in R.top_equity(round((cfg["fivebet_value"] * 0.7 + cfg["call_4bet_pct"] * 0.5) * factor, 2)) if h not in jam]
         lj = prof.add_list(f"ColdF4J{hi}", jam)
@@ -342,7 +342,7 @@ def _facing_5bet(prof, f, cfg):
     f.comment("=== FACE À UN 5BET OU UN ALL-IN PRÉFLOP : call selon la profondeur ===")
     f.group("Raises >= 2")
     for lo, hi, factor in stack_buckets():
-        cond = join(f"f$Gen_EffStack > {lo}", f"f$Gen_EffStack <= {hi}") if hi < 10000 else f"f$Gen_EffStack > {lo}"
+        cond = join(f"f$Gen_EffStack >= {lo}", f"f$Gen_EffStack <= {hi}") if hi < 10000 else f"f$Gen_EffStack >= {lo}"
         pct = min(35.0, cfg["call_allin_pct"] * factor)
         jam = R.top_equity(round(cfg["fivebet_value"] * 0.6 * factor ** 0.5, 2))
         lj = prof.add_list(f"AllinJam{hi}", jam)

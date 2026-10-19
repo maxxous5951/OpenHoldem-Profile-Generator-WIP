@@ -12,7 +12,7 @@ Générateur de profils **OpenHoldem / OpenPPL** : tu règles des paramètres de
 - **Tournoi** : push/fold par profondeur et poste, reshove, ante, pression ICM à la bulle (`IsBubble`).
 - **Situations couvertes, vérifiées par balayage exhaustif** (`tests/test_coverage.py`) : ouverture, limpers, vs ouverture, squeeze, vs 3bet/4bet/5bet/all-in, limp/call puis relance, pots ouverts/3bet/4bet (SPR et engagement du tapis), c-bet / 2e et 3e barrel / probe / donk, check-raise planifié, face à un all-in, multiway, heads-up. Positions adaptées à la taille de table (2 à 10 joueurs).
 - **Exploitation des adversaires** (option `use_stats`) : classification nit / fish / maniaque via les stats PokerTracker d'OpenHoldem (`pt_*`) et ajustement des ranges préflop, des bluffs et de la tolérance de call.
-- **115 paramètres** décrits dans un schéma unique (`ohpg/params.py`) qui alimente la CLI, les presets et la GUI.
+- **120 paramètres** décrits dans un schéma unique (`ohpg/params.py`) qui alimente la CLI, les presets et la GUI.
 
 ## Installation
 ```bash

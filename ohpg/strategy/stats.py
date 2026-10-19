@@ -92,21 +92,47 @@ def emit_postflop(prof: Profile, cfg: dict):
     f.ret("AmountToCall <= 0", 0)
     f.others_ret("AmountToCall / (PotSize + AmountToCall)")
     tol = cfg["call_3bet_pot_scale"] / 100.0
+    k = cfg["tex_dynamic_pct"] / 100.0
+
+    def sc(v):  # intensité de la texture : 1 + (v - 1) * k
+        return f"{1.0 + (v - 1.0) * k:.2f}"
+
+    texf = "1"
+    if k > 0:
+        texf = "f$Gen_TexTol"
+        f = prof.func("f$Gen_TexTol")
+        f.comment("Tolérance de call selon la texture : plus bas sur board humide (les tirages arrivent)")
+        for code, v in ((1, 0.88), (2, 0.90), (4, 0.94), (5, 0.97), (6, 1.03), (7, 1.03)):
+            f.ret(f"f$Gen_Tex = {code}", sc(v))
+        f.others_ret("1")
+        if cfg["randomize"]:
+            f = prof.func("f$Gen_TexBluff")
+            f.comment("Turn/river : crédibilité des bluffs selon le board (flush/quinte/paire complétés = moins de bluffs)")
+            f.ret("betround = flop", "1")
+            f.ret("nsuitedcommon >= 4", sc(0.5))
+            f.ret("nsuitedcommon >= 3", sc(0.7))
+            f.ret("f$Gen_TxConnected", sc(0.8))
+            f.ret("PairOnBoard", sc(0.9))
+            f.ret("f$Gen_Tex >= 6", sc(1.15))
+            f.others_ret("1")
     f = prof.func("f$Gen_CallTol")
-    f.comment("Tolérance de call globale : type de pot x adversaire")
+    f.comment("Tolérance de call globale : type de pot x adversaire x texture")
     opp = "f$Gen_OppTol" if cfg["use_stats"] else "1"
+    base = f"{opp} * {texf}" if texf != "1" else opp
     if tol != 1:
-        f.ret("f$Gen_PotType >= 2", f"{tol:.2f} * {opp}")
-    f.others_ret(opp)
+        f.ret("f$Gen_PotType >= 2", f"{tol:.2f} * {base}")
+    f.others_ret(base)
     f = prof.func("f$Gen_PotOdds")
     f.comment("Cotes du pot ajustées (plus bas = on paye plus large) : sert aux seuils de call postflop")
     f.ret("AmountToCall <= 0", 0)
     f.others_ret("f$Gen_RawOdds / f$Gen_CallTol")
-    if cfg["randomize"] and (cfg["use_stats"] or cfg["cbet_3bet_pot_scale"] != 100):
+    if cfg["randomize"] and (cfg["use_stats"] or cfg["cbet_3bet_pot_scale"] != 100 or k > 0):
         ps = cfg["cbet_3bet_pot_scale"] / 100.0
         f = prof.func("f$Gen_BluffMult")
         f.comment("Facteur sur les bluffs : type de pot x adversaire")
         opp = "f$Gen_OppBluff" if cfg["use_stats"] else "1"
+        if k > 0:
+            opp = f"{opp} * f$Gen_TexBluff" if opp != "1" else "f$Gen_TexBluff"
         if ps != 1:
             f.ret("f$Gen_PotType >= 2", f"{ps:.2f} * {opp}")
         f.others_ret(opp)

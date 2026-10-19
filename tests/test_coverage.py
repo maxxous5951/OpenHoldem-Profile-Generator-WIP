@@ -150,5 +150,29 @@ def test_big_pot_and_stats_helpers_are_emitted():
     t = generator.generate(presets.build("Balanced 6-max", "Cash 6-max", {"use_stats": True}))
     for name in ("f$Gen_PotType", "f$Gen_WeChecked", "f$Gen_RRBluff", "f$Gen_CallTol", "f$Gen_PostNit", "f$Gen_RsFish"):
         assert f"##{name}##" in t, name
-    plain = generator.generate(presets.build("Balanced 6-max", "Cash 6-max", {"cbet_3bet_pot_scale": 100, "call_3bet_pot_scale": 100}))
+    plain = generator.generate(presets.build("Balanced 6-max", "Cash 6-max", {"cbet_3bet_pot_scale": 100, "call_3bet_pot_scale": 100, "tex_dynamic_pct": 0}))
     assert "##f$Gen_RRBluff##" not in plain and "pt_" not in plain
+
+
+def test_board_texture_classes():
+    sim = Sim(generator.generate(presets.build("Balanced 6-max", "Cash 6-max")))
+    base = {"nsuitedcommon": 1, "paironboard": False, "f$gen_txconnected": False, "bestboardcard": 14}
+    cases = [(dict(nsuitedcommon=3), 1), (dict(paironboard=True, bestboardcard=13), 3),
+             (dict(nsuitedcommon=2, **{"f$gen_txconnected": True}, bestboardcard=9), 2),
+             (dict(**{"f$gen_txconnected": True}, bestboardcard=9), 4), (dict(nsuitedcommon=2), 5),
+             (dict(bestboardcard=14), 6), (dict(bestboardcard=13), 7), (dict(bestboardcard=10), 8), (dict(bestboardcard=7), 9)]
+    for over, code in cases:
+        assert sim.call_func("f$Gen_Tex", dict(base, **over)) == code, (over, code)
+
+
+def test_texture_drives_bluffs_defense_and_stack_bounds_use_ge():
+    t = generator.generate(presets.build("Balanced 6-max", "Cash 6-max"))
+    for name in ("f$Gen_TexBluff", "f$Gen_TexTol", "f$Gen_TxConnected"):
+        assert f"##{name}##" in t, name
+    assert "f$Gen_RRBluff < " in t                      # les bluffs river passent par le facteur texture
+    off = generator.generate(presets.build("Balanced 6-max", "Cash 6-max", {"tex_dynamic_pct": 0, "cbet_3bet_pot_scale": 100}))
+    assert "##f$Gen_TexBluff##" not in off
+    import re
+    tourney = generator.generate(presets.build("Balanced 6-max", "MTT 9-max (push/fold 15BB)"))
+    assert not re.search(r"f\$Gen_EffStack(FirstIn)? > ", t + tourney)
+    assert "f$Gen_EffStackFirstIn >= 0" in tourney

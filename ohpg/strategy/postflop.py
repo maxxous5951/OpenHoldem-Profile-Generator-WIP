@@ -16,7 +16,8 @@ EQ = {
 }
 KIND = {"Air": "bluff", "WeakDraw": "bluff", "StrongDraw": "bluff", "NutDraw": "bluff",
         "Medium": "value", "WeakSD": "value"}
-TEX = {"mono": 1, "wet": 2, "paired": 3, "high": 4, "low": 5, "dry": 6}
+TEX = {"mono": 1, "wet": 2, "paired": 3, "connected": 4, "twotone": 5, "ace": 6, "broad": 7, "mid": 8, "low": 9}
+DRY_TEX = ("ace", "broad", "mid", "low")
 
 
 def clamp01(x):
@@ -66,14 +67,25 @@ def emit_helpers(prof: Profile):
     boolfunc("f$Gen_GoodBarrelCard", ["TurnCardIsOvercardToBoard AND NOT FlushPossibleOnTurn"],
              "Overcard au turn : bonne carte pour le preneur d'initiative")
 
+    f = prof.func("f$Gen_TxConnected")
+    f.comment("Board connecté (tirages quinte possibles). Flop : tirages ouverts ; turn/river : quinte possible")
+    f.ret("betround = flop AND (OpenEndedStraightDrawPossibleOnFlop OR ThreeCardStraightOnBoard)", "true")
+    f.ret("betround = turn AND (StraightPossible OR OneCardStraightPossible OR OpenEndedStraightDrawOnBoard)", "true")
+    f.ret("betround = river AND (StraightPossible OR OneCardStraightPossible)", "true")
+    f.others_ret("false")
+
     f = prof.func("f$Gen_Tex")
-    f.comment("Texture du flop : 1 monotone, 2 humide, 3 pairé, 4 haut sec, 5 bas sec, 6 sec")
+    f.comment("Texture du board (toutes streets) : 1 monotone/flush, 2 humide, 3 pairé, 4 connecté, 5 deux couleurs, "
+              "6 As-haut sec, 7 K/Q-haut sec, 8 moyen sec, 9 bas sec")
     f.ret("nsuitedcommon >= 3", TEX["mono"])
-    f.ret("(nsuitedcommon = 2 AND (StraightPossible OR OpenEndedStraightDrawPossibleOnFlop)) OR OpenEndedStraightDrawPossibleOnFlop OR ThreeCardStraightOnBoard", TEX["wet"])
     f.ret("PairOnBoard", TEX["paired"])
-    f.ret("BestBoardCard >= 13", TEX["high"])
-    f.ret("BestBoardCard <= 9", TEX["low"])
-    f.others_ret(TEX["dry"])
+    f.ret("nsuitedcommon = 2 AND f$Gen_TxConnected", TEX["wet"])
+    f.ret("f$Gen_TxConnected", TEX["connected"])
+    f.ret("nsuitedcommon = 2", TEX["twotone"])
+    f.ret("BestBoardCard = 14", TEX["ace"])
+    f.ret("BestBoardCard >= 12", TEX["broad"])
+    f.ret("BestBoardCard >= 8", TEX["mid"])
+    f.others_ret(TEX["low"])
 
 
 def _cat_cond(cat):
@@ -213,13 +225,19 @@ def facing_groups(f, cfg, street: str, t_raised: float, t_mw: float = 0.85):
     facing_rules(f, cfg, street, "f$Gen_Multiway", tighten=t_mw)
 
 
-def lead_rules(f, cfg, street: str, size: float, probe: float, donk: float):
+def lead_rules(f, cfg, street: str, size: float, probe: float, donk: float, tex_adj: dict | None = None):
     """Personne n'a misé et nous n'avons pas l'initiative : IP (heads-up ou multiway) et OOP (lead/donk)."""
     agg = min(1.5, cfg["aggression_scale"] / 100.0)
     probe, donk = clamp01(probe), clamp01(donk)
     ip_freq = {"Monster": 1, "Strong": 1, "Medium": probe * 0.8, "StrongDraw": probe, "WeakDraw": probe * 0.5,
                "WeakSD": probe * 0.3, "Air": probe * 0.45 * agg}
-    bet_rules(f, cfg, join("f$Gen_IP", "NOT f$Gen_Multiway"), size, ip_freq)
+    if tex_adj:  # flop : fréquence et taille de la mise selon la texture
+        for tex, code in TEX.items():
+            k = clamp01(1.0 + tex_adj[tex][0] / 100.0 * 0.6)
+            fr = {c: (v if c in ("Monster", "Strong") else clamp01(v * k)) for c, v in ip_freq.items()}
+            bet_rules(f, cfg, join("f$Gen_IP", "NOT f$Gen_Multiway", f"f$Gen_Tex = {code}"), tex_adj[tex][1], fr)
+    else:
+        bet_rules(f, cfg, join("f$Gen_IP", "NOT f$Gen_Multiway"), size, ip_freq)
     mw_freq = {"Monster": 1, "Strong": 1, "Medium": probe * 0.3, "StrongDraw": probe * 0.5, "WeakDraw": 0.0,
                "WeakSD": 0.0, "Air": 0.0}
     bet_rules(f, cfg, join("f$Gen_IP", "f$Gen_Multiway"), size, mw_freq)
@@ -241,9 +259,12 @@ def _flop(prof, cfg):
     f.comment("OHPG : flop. Blocs : c-bet (agresseur préflop), mise du non-agresseur, relance subie, mise subie.")
     commit_rules(f, cfg, "flop")
     adjs = {"mono": cfg["cbet_mono_adj"], "wet": cfg["cbet_wet_adj"], "paired": cfg["cbet_paired_adj"],
-            "high": cfg["cbet_high_adj"], "low": cfg["cbet_low_adj"], "dry": cfg["cbet_dry_adj"]}
+            "connected": cfg["cbet_connected_adj"], "twotone": cfg["cbet_twotone_adj"], "ace": cfg["cbet_dry_adj"],
+            "broad": cfg["cbet_high_adj"], "mid": cfg["cbet_mid_adj"], "low": cfg["cbet_low_adj"]}
     sizes = {"mono": cfg["size_cbet_mono"], "wet": cfg["size_cbet_wet"], "paired": cfg["size_cbet_paired"],
-             "high": cfg["size_cbet_dry"], "low": cfg["size_cbet_dry"], "dry": cfg["size_cbet_dry"]}
+             "connected": cfg["size_cbet_wet"], "twotone": (cfg["size_cbet_dry"] + cfg["size_cbet_wet"]) // 2,
+             "ace": cfg["size_cbet_dry"], "broad": cfg["size_cbet_dry"], "mid": cfg["size_cbet_dry"],
+             "low": cfg["size_cbet_dry"]}
 
     f.comment("--- C-BET : nous avons relancé préflop et personne n'a misé ---")
     f.group("AmountToCall = 0 AND BotRaisedBeforeFlop AND BotsActionsOnThisRoundIncludingChecks = 0")
@@ -257,13 +278,14 @@ def _flop(prof, cfg):
                     size = cfg["size_cbet_multiway"] if mw else sizes[tex]
                     if big_pot:
                         size = min(size, cfg["size_cbet_3bet"])
-                    dry = tex in ("high", "low", "dry")
+                    dry = tex in DRY_TEX
                     bet_rules(f, cfg, cond, size, cbet_freqs(cfg, ip, mw, adjs[tex], dry))
     f.others("Check")
 
     f.comment("--- Nous n'avons pas relancé préflop et personne n'a misé ---")
     f.group("AmountToCall = 0")
-    lead_rules(f, cfg, "flop", cfg["size_cbet_dry"] + 10, cfg["probe_freq"] / 100.0, cfg["donk_freq"] / 100.0)
+    tex_adj = {t: (adjs[t], min(150, sizes[t] + 10)) for t in TEX}
+    lead_rules(f, cfg, "flop", cfg["size_cbet_dry"] + 10, cfg["probe_freq"] / 100.0, cfg["donk_freq"] / 100.0, tex_adj)
     f.others("Check")
 
     facing_groups(f, cfg, "flop", 0.8)
