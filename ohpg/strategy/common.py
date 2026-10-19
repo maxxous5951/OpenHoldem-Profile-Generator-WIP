@@ -123,7 +123,7 @@ def emit_common_helpers(prof: Profile, cfg: dict):
     f = prof.func("f$Gen_EffStack")
     f.comment("Stack effectif en BB (petit stack entre nous et le plus gros adversaire encore en jeu)")
     f.ret("", "EffectiveMaxStacksizeOfActiveOpponents")
-    if cfg["pf_max_stack"] > 0:
+    if cfg["pf_max_stack"] > 0 or cfg["openjam_max"] > 0:
         f = prof.func("f$Gen_EffStackFirstIn")
         f.comment("Stack effectif contre les joueurs derrière nous (première action préflop)")
         f.ret("", "(MaxStillToActStackSize < StackSize ? MaxStillToActStackSize : StackSize)")

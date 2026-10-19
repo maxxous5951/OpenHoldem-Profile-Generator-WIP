@@ -66,7 +66,7 @@ _IDENT = re.compile(r"\$\$[a-z]{2}\d|(?:hand|board)\$[A-Za-z0-9]+|[A-Za-z_][A-Za
 _PT_STAT = re.compile(r"^pt_(hands|vpip|pfr|aggr_factor|total_af|rfi|3bet|4bet|fold_to_3bet|fold_to_4bet|steal_attempt|"
                       r"bb_fold_to_steal|sb_fold_to_steal|flop_cbet|flop_fold_to_cbet|flop_checkraise|flop_donkbet|"
                       r"turn_cbet|turn_fold_to_cbet|turn_checkraise|river_fold_to_cbet|river_bet|wtsd|wssd)_"
-                      r"(headsupchair|lastraiserchair|firstraiserchair|firstcallerchair|lastcallerchair|"
+                      r"(headsupchair|raischair|lastraiserchair|firstraiserchair|firstcallerchair|lastcallerchair|"
                       r"smallblindchair|bigblindchair|dealerchair|cutoffchair)$")
 _HAND_TOKEN = re.compile(r"^[AKQJT2-9]{2}[so]?$")
 

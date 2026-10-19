@@ -225,7 +225,8 @@ def facing_groups(f, cfg, street: str, t_raised: float, t_mw: float = 0.85):
     facing_rules(f, cfg, street, "f$Gen_Multiway", tighten=t_mw)
 
 
-def lead_rules(f, cfg, street: str, size: float, probe: float, donk: float, tex_adj: dict | None = None):
+def lead_rules(f, cfg, street: str, size: float, probe: float, donk: float, tex_adj: dict | None = None,
+               draw: float = 0.0):
     """Personne n'a misé et nous n'avons pas l'initiative : IP (heads-up ou multiway) et OOP (lead/donk)."""
     agg = min(1.5, cfg["aggression_scale"] / 100.0)
     probe, donk = clamp01(probe), clamp01(donk)
@@ -243,6 +244,11 @@ def lead_rules(f, cfg, street: str, size: float, probe: float, donk: float, tex_
     bet_rules(f, cfg, join("f$Gen_IP", "f$Gen_Multiway"), size, mw_freq)
     for cat in ("Monster", "Strong"):
         _act(f, cfg, "NOT f$Gen_IP", cat, donk, f"RaiseBy {fmt(size)}%")
+    # OOP sans initiative : semi-bluff lead avec les tirages (heads-up), le reste checke puis check-raise / call
+    draw = clamp01(draw * min(1.3, agg))
+    nm = join("NOT f$Gen_IP", "NOT f$Gen_Multiway")
+    _act(f, cfg, nm, "StrongDraw", draw, f"RaiseBy {fmt(size)}%")
+    _act(f, cfg, nm, "WeakDraw", draw * 0.3, f"RaiseBy {fmt(size)}%")
 
 
 # ------------------------------------------------------------------------------ rues
@@ -285,7 +291,8 @@ def _flop(prof, cfg):
     f.comment("--- Nous n'avons pas relancé préflop et personne n'a misé ---")
     f.group("AmountToCall = 0")
     tex_adj = {t: (adjs[t], min(150, sizes[t] + 10)) for t in TEX}
-    lead_rules(f, cfg, "flop", cfg["size_cbet_dry"] + 10, cfg["probe_freq"] / 100.0, cfg["donk_freq"] / 100.0, tex_adj)
+    lead_rules(f, cfg, "flop", cfg["size_cbet_dry"] + 10, cfg["probe_freq"] / 100.0, cfg["donk_freq"] / 100.0, tex_adj,
+              draw=cfg["donk_semibluff"] / 100.0)
     f.others("Check")
 
     facing_groups(f, cfg, "flop", 0.8)
@@ -331,7 +338,7 @@ def _turn(prof, cfg):
 
     f.comment("--- Autres situations sans mise devant nous ---")
     f.group("AmountToCall = 0")
-    lead_rules(f, cfg, "turn", cfg["size_turn"], cfg["turn_probe"] / 100.0, 0.8)
+    lead_rules(f, cfg, "turn", cfg["size_turn"], cfg["turn_probe"] / 100.0, 0.8, draw=cfg["donk_semibluff"] / 100.0 * 0.7)
     f.others("Check")
 
     facing_groups(f, cfg, "turn", 0.75)

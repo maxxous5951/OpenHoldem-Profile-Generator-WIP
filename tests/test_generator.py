@@ -152,3 +152,48 @@ def test_raise_sizes_use_total_bet_not_call_amount(sim):
               RaisesSinceLastPlay=1, AmountToCall=5.5, ncurrentbets=2.5, PotSize=12, EffectiveMaxStacksizeOfActiveOpponents=100)
     a = decide(sim, "AA", **f3)
     assert a.startswith("RaiseTo") and 16 <= float(a.split()[1]) <= 24, a
+
+
+# ---------------------------------------------------------------- v2.2 : open-jam, limp SB, limp-raise, lead OOP, stats multiway
+@pytest.fixture(scope="module")
+def spin():
+    return Sim(generator.generate(presets.build("Balanced 6-max", "Spin & Go 3-max", {"randomize": False})))
+
+
+def test_open_jam_zone_above_pushfold(spin):
+    st = dict(BASE, InButton=True, StackSize=18, MaxStillToActStackSize=18, EffectiveMaxStacksizeOfActiveOpponents=18)
+    assert spin.decide("f$preflop", dict(st, hand="AA")) == "RaiseMax"
+    assert spin.decide("f$preflop", dict(st, hand="K9s")).startswith("RaiseTo")  # ouverture normale, pas de jam
+    deep = dict(st, StackSize=60, MaxStillToActStackSize=60, EffectiveMaxStacksizeOfActiveOpponents=60)
+    assert spin.decide("f$preflop", dict(deep, hand="AA")).startswith("RaiseTo")  # au-dessus de la zone
+
+
+def test_bb_raises_vs_sb_limp_and_sb_defends_vs_bb_raise(spin):
+    st = dict(BASE, InBigBlind=True, Calls=1, SmallBlindCalling=True, StackSize=40, MaxStillToActStackSize=0,
+              EffectiveMaxStacksizeOfActiveOpponents=40, AmountToCall=0, PotSize=2)
+    assert spin.decide("f$preflop", dict(st, hand="AKs")).startswith("RaiseTo")
+    assert spin.decide("f$preflop", dict(st, hand="72o")) == "Check"
+    sb = dict(BASE, InSmallBlind=True, BotsActionsOnThisRoundIncludingChecks=1, Raises=1, AmountToCall=2, ncurrentbets=1,
+              PotSize=5, StackSize=40, EffectiveMaxStacksizeOfActiveOpponents=40)
+    assert spin.decide("f$preflop", dict(sb, hand="AA")).startswith("RaiseTo")
+    assert spin.decide("f$preflop", dict(sb, hand="72o")) == "Fold"
+
+
+def test_list_names_unique_per_scenario():
+    t = generator.generate(presets.build("Balanced 6-max", "Spin & Go 3-max"))
+    names = [l[2:-2] for l in t.split("\n") if l.startswith("##list")]
+    assert len(names) == len(set(names))
+    assert any(n.startswith("listLimpRaiseV") for n in names) and not any(n.startswith("listColdF3V") and False for n in names)
+
+
+def test_oop_lead_semibluff_present_and_optional():
+    on = generator.generate({"randomize": False, "donk_semibluff": 100})
+    assert "NOT f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_StrongDraw" in on
+    off = generator.generate({"randomize": False, "donk_semibluff": 0, "donk_freq": 0})
+    assert "NOT f$Gen_IP AND NOT f$Gen_Multiway AND f$Gen_StrongDraw" not in off
+
+
+def test_stats_multiway_uses_bettor_and_any_fish():
+    t = generator.generate({"use_stats": True})
+    assert "pt_vpip_raischair" in t and "f$Gen_AnyFish" in t
+    assert "AmountToCall > 0 AND Opponents >= 2" in t

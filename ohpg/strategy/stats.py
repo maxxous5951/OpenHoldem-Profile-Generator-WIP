@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from ..ppl import Profile, fmt
 
-CHAIRS = {"HU": "headsupchair", "Rs": "lastraiserchair", "Lm": "firstcallerchair"}
+CHAIRS = {"HU": "headsupchair", "Rs": "lastraiserchair", "Lm": "firstcallerchair", "Rz": "raischair"}
 
 
 def _stat_funcs(prof: Profile, chair_tag: str, chair: str):
@@ -21,7 +21,10 @@ def _stat_funcs(prof: Profile, chair_tag: str, chair: str):
         f.ret(f"pt_{sym}_{chair} > 1", f"pt_{sym}_{chair} / 100")
         f.others_ret(f"pt_{sym}_{chair}")
     f = prof.func(f"f$Gen_AF{chair_tag}")
-    f.ret("", f"pt_aggr_factor_{chair}")
+    if chair_tag == "Rz":  # pas de facteur d'agression global fiable pour raischair : on s'appuie sur le PFR
+        f.ret("", "0")
+    else:
+        f.ret("", f"pt_aggr_factor_{chair}")
 
 
 def _classify(prof: Profile, cfg: dict, tag: str, src: dict[str, str] | None, nit: bool = True):
@@ -54,12 +57,19 @@ def emit_postflop(prof: Profile, cfg: dict):
     """Fonctions de classification de l'adversaire postflop + facteurs de bluff / value / call."""
     if cfg["use_stats"]:
         _stat_funcs(prof, "HU", CHAIRS["HU"])
-        # sélection : heads-up -> headsupchair, sinon dernier relanceur
+        _stat_funcs(prof, "Rz", CHAIRS["Rz"])
+        # sélection : face à une mise -> le joueur qui a misé (raischair) ; heads-up -> headsupchair ;
+        # sinon (multiway, personne n'a misé) -> dernier relanceur préflop
         for name in ("Hands", "VPIP", "PFR", "AF"):
             f = prof.func(f"f$Gen_{name}Post")
+            f.ret("AmountToCall > 0 AND Opponents >= 2", f"f$Gen_{name}Rz")
             f.ret("Opponents = 1", f"f$Gen_{name}HU")
             f.others_ret(f"f$Gen_{name}Rs")
         _classify(prof, cfg, "Post", None)
+        f = prof.func("f$Gen_AnyFish")
+        f.comment("Multiway, personne n'a misé : un fish dans le pot (dernier relanceur ou premier caller)")
+        f.ret("Opponents >= 2 AND AmountToCall = 0 AND (f$Gen_RsFish OR f$Gen_LmFish)", "true")
+        f.others_ret("false")
         f = prof.func("f$Gen_OppTol")
         f.comment("Tolérance de call selon l'adversaire (nit : on paye moins, maniaque : on paye plus)")
         f.ret("f$Gen_PostManiac", f"{cfg['exploit_call_maniac'] / 100:.2f}")
@@ -69,12 +79,12 @@ def emit_postflop(prof: Profile, cfg: dict):
         f = prof.func("f$Gen_OppBluff")
         f.comment("Facteur sur la fréquence de bluff selon l'adversaire")
         f.ret("f$Gen_PostManiac", f"{cfg['exploit_bluff_maniac'] / 100:.2f}")
-        f.ret("f$Gen_PostFish", f"{cfg['exploit_bluff_fish'] / 100:.2f}")
+        f.ret("f$Gen_PostFish OR f$Gen_AnyFish", f"{cfg['exploit_bluff_fish'] / 100:.2f}")
         f.ret("f$Gen_PostNit", f"{cfg['exploit_bluff_nit'] / 100:.2f}")
         f.others_ret("1")
         f = prof.func("f$Gen_OppValue")
         f.comment("Facteur sur la value fine : un fish paye trop, on value plus souvent")
-        f.ret("f$Gen_PostFish", f"{cfg['exploit_value_fish'] / 100:.2f}")
+        f.ret("f$Gen_PostFish OR f$Gen_AnyFish", f"{cfg['exploit_value_fish'] / 100:.2f}")
         f.others_ret("1")
     # type de pot
     f = prof.func("f$Gen_PotType")

@@ -31,6 +31,9 @@ class Sim:
         e = re.sub(r"(?<![<>=!])=(?!=)", "==", e)
         e = re.sub(r"\btrue\b", "True", e, flags=re.I)
         e = re.sub(r"\bfalse\b", "False", e, flags=re.I)
+        m = re.fullmatch(r"\s*\((.+?)\?(.+?):(.+?)\)\s*", e)  # ternaire C : (c ? a : b)
+        if m:
+            e = f"(({m.group(2)}) if ({m.group(1)}) else ({m.group(3)}))"
         e = e.replace("$", "_S_")
         return e
 

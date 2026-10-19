@@ -84,6 +84,8 @@ def generate(prof: Profile, cfg: dict):
         pushfold.emit(prof, f, cfg)
 
     _open(prof, f, cfg)
+    if cfg["table_size"] <= 3 and cfg["bb_iso_vs_sblimp"] > 0:
+        _bb_vs_sb_limp(prof, f, cfg)
     _limpers(prof, f, cfg)
     _vs_open(prof, f, cfg, agg)
     _squeeze(prof, f, cfg, agg)
@@ -102,6 +104,17 @@ def generate(prof: Profile, cfg: dict):
 def _open(prof, f, cfg):
     f.comment("=== OUVERTURE (personne n'est entré dans le pot) ===")
     f.group(join(FIRST, "Raises = 0", "Calls = 0"))
+    jm = cfg["openjam_max"]
+    if jm > 0:
+        f.comment(f"Zone open-jam : stack effectif <= {jm} BB, mains premium all-in (au-dessus, ouverture normale)")
+        for pos in actives():
+            for lo_f, hi_f, k in ((0.0, 0.5, 1.3), (0.5, 1.0, 1.0)):
+                hi = int(round(jm * hi_f)) if hi_f < 1.0 else jm
+                lo = int(round(jm * lo_f)) if lo_f > 0 else 0
+                pct = min(25.0, cfg["openjam_pct"] * JAM_POS_MULT[pos] * k * cfg["range_scale"] / 100.0)
+                lj = prof.add_list(f"OpenJam{pos}{hi}", R.top_equity(round(pct, 1)))
+                if lj != "false":
+                    f.act(join(HERO[pos], f"f$Gen_EffStackFirstIn >= {lo}", f"f$Gen_EffStackFirstIn <= {hi}", lj), "RaiseMax")
     for pos in actives():
         hands = open_set(cfg, pos)
         size = cfg["open_size_ep"] if pos in ("EP", "MP") else cfg["open_size_late"] if pos in ("CO", "BTN") else cfg["open_size_sb"]
@@ -125,6 +138,23 @@ def _open(prof, f, cfg):
         if ll != "false":
             f.act(join(HERO[pos], ll), "Call")
     f.others("Fold")
+
+
+def _bb_vs_sb_limp(prof, f, cfg):
+    f.comment("=== BB FACE A UN LIMP DU SB (3-max / heads-up) : relance ou check ===")
+    f.group(join(FIRST, "Raises = 0", "Calls = 1", "InBigBlind", "SmallBlindCalling"))
+    pct = cfg["bb_iso_vs_sblimp"] * cfg["aggression_scale"] / 100.0
+    hands = R.open_range(round(min(100.0, pct), 1))
+    full, part = tiers(hands, 0.8)
+    size = f"RaiseTo {fmt(cfg['size_iso_sblimp'])}"
+    lf = prof.add_list("IsoBBvsSBlimp", full)
+    if lf != "false":
+        f.act(lf, size)
+    lp = prof.add_list("IsoBBvsSBlimpEdge", part)
+    m = mix(cfg, 0.5)
+    if lp != "false" and m is not None:
+        f.act(join(lp, m), size)
+    f.others("Check")
 
 
 def _limpers(prof, f, cfg):
@@ -307,32 +337,37 @@ def _cold_facing_4bet(prof, f, cfg):
     f.others("Fold")
 
 
+LIMP_POS_MULT = {"EP": 0.7, "MP": 0.75, "CO": 0.9, "BTN": 1.1, "SB": 0.9, "BB": 1.3}
+JAM_POS_MULT = {"EP": 0.6, "MP": 0.75, "CO": 0.9, "BTN": 1.0, "SB": 1.0}
+
+
 def _acted_then_raised(prof, f, cfg, agg):
-    """Nous avons limpé / payé (sans relancer) puis quelqu'un relance derrière nous."""
-    f.comment("=== NOUS AVONS LIMPE / PAYE PUIS FACE A UNE RELANCE : relance, call (cotes), fold ===")
+    """Nous avons limpe / paye (sans relancer) puis quelqu'un relance derriere nous (dont SB qui complete puis BB relance)."""
+    f.comment("=== NOUS AVONS LIMPE / PAYE PUIS FACE A UNE RELANCE : relance, call (cotes + position), fold ===")
     base = join("NOT BotRaisedBeforeFlop", "BotsActionsOnThisRoundIncludingChecks >= 1", "AmountToCall > 0")
-    # une seule relance devant nous (isolation / 3bet sur notre limp)
     f.group(join(base, "Raises = 1"))
-    value = R.top_equity(round(cfg["threebet_value"] * 1.2 * agg, 2))
-    lv = prof.add_list("LimpRaiseV", value)
-    if lv != "false":
-        f.act(lv, f"RaiseTo (f$Gen_Facing * {fmt(cfg['threebet_size_oop'])})")
-    for odds, pct in ((0.20, 30.0), (0.30, 20.0), (1.00, 11.0)):
-        hands = [h for h in R.top_play(round(pct * cfg["range_scale"] / 100.0, 2)) if h not in value]
-        lc = prof.add_list(f"LimpRaiseC{int(odds * 100)}", hands)
-        if lc != "false":
-            f.act(join(f"f$Gen_RawOdds <= {fmt(odds)}", lc), "Call")
+    for hero in ORDER:
+        pm = LIMP_POS_MULT[hero]
+        value = R.top_equity(round(cfg["threebet_value"] * 1.2 * agg * min(1.0, pm + 0.1), 2))
+        lv = prof.add_list(f"LimpRaiseV{hero}", value)
+        if lv != "false":
+            f.act(join(HERO[hero], lv), f"RaiseTo (f$Gen_Facing * {fmt(cfg['threebet_size_oop'])})")
+        for odds, pct in ((0.20, 30.0), (0.30, 20.0), (1.00, 11.0)):
+            hands = [h for h in R.top_play(round(min(60.0, pct * pm * cfg["range_scale"] / 100.0), 2)) if h not in value]
+            lc = prof.add_list(f"LimpRaiseC{hero}{int(odds * 100)}", hands)
+            if lc != "false":
+                f.act(join(HERO[hero], f"f$Gen_RawOdds <= {fmt(odds)}", lc), "Call")
     f.others("Fold")
-    # deux relances ou plus devant nous (squeeze / 3bet après notre call)
+    # deux relances ou plus devant nous (squeeze / 3bet apres notre call)
     f.group(join(base, "Raises = 2"))
     jam = R.top_equity(round(cfg["fivebet_value"] * 0.9, 2))
     call_h = [h for h in R.top_equity(round(cfg["call_4bet_pct"] + cfg["fivebet_value"], 2)) if h not in jam]
-    lj = prof.add_list("ColdF3V", jam)
+    lj = prof.add_list("LimpF3V", jam)
     if lj != "false":
         if cfg["fourbet_shove_stack"] > 0:
             f.act(join(lj, f"f$Gen_EffStack <= {cfg['fourbet_shove_stack']}"), "RaiseMax")
         f.act(lj, f"RaiseTo (f$Gen_Facing * {fmt(cfg['fourbet_size_oop'])})")
-    lc = prof.add_list("ColdF3C", call_h)
+    lc = prof.add_list("LimpF3C", call_h)
     if lc != "false":
         f.act(lc, "Call")
     f.others("Fold")

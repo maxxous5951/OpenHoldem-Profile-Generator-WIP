@@ -97,19 +97,15 @@ class Profile:
 
     # --- handlists
     def add_list(self, name: str, hands: Iterable[str]) -> str:
-        """Ajoute une handlist (nom commençant par 'list'). Réutilise une liste identique existante."""
+        """Ajoute une handlist (nom commençant par 'list'). Un nom = une liste (pas de fusion par contenu : noms lisibles par scénario)."""
         hands = list(hands)
         if not hands:
             return "false"  # jamais de handlist vide : l'appelant saute la règle
-        key = tuple(sorted(hands))
-        if key in self._list_by_content:
-            return self._list_by_content[key]
         if not name.startswith("list"):
             name = "list" + name
         if name in self.lists:
             raise ValueError(f"handlist en double : {name}")
         self.lists[name] = hands
-        self._list_by_content[key] = name
         return name
 
     # --- fonctions
