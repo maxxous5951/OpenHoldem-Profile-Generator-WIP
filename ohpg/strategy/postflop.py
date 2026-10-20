@@ -88,6 +88,13 @@ def emit_helpers(prof: Profile):
     f.others_ret(TEX["low"])
 
 
+def RB(cfg, size) -> str:
+    """Action RaiseBy en % du pot ; avec les stats, la taille est modulee par f$Gen_SizeMult."""
+    if cfg["use_stats"] and (cfg["exploit_size_fish"], cfg["exploit_size_nit"], cfg["exploit_size_maniac"]) != (100, 100, 100):
+        return f"RaiseBy ({fmt(size)} * f$Gen_SizeMult)%"
+    return f"RaiseBy {fmt(size)}%"
+
+
 def _cat_cond(cat):
     return f"f$Gen_{cat}"
 
@@ -119,9 +126,9 @@ def commit_rules(f, cfg, street: str):
 # ------------------------------------------------------------------------------ règles de mise
 def bet_rules(f, cfg, cond, size_pct, freq: dict, nuts_size=None):
     """Écrit les règles de mise par catégorie (ordre de priorité), puis check."""
-    act = f"RaiseBy {fmt(size_pct)}%"
+    act = RB(cfg, size_pct)
     if nuts_size:
-        f.act(join(cond, "HaveNuts"), f"RaiseBy {fmt(nuts_size)}%")
+        f.act(join(cond, "HaveNuts"), RB(cfg, nuts_size))
     for cat in ("Monster", "Strong", "Medium", "StrongDraw", "WeakDraw", "WeakSD", "Air"):
         fr = freq.get(cat, 0.0)
         _act(f, cfg, cond, cat, fr, act)
@@ -154,7 +161,7 @@ def facing_rules(f, cfg, street: str, base_cond: str, tighten: float = 1.0, rais
     eq = EQ[street]
     scale = (cfg["river_call_scale"] if street == "river" else cfg["call_scale"]) / 100.0 * tighten
     rsize = raise_size or cfg["size_raise_postflop"]
-    raise_act = "Call" if allin else f"RaiseBy {fmt(rsize)}%"
+    raise_act = "Call" if allin else RB(cfg, rsize)
     rv = clamp01((cfg["xr_value"] if xr else cfg["raise_vs_bet_value"]) / 100.0)
     rv_strong = rv * (0.25 if xr else 0.35)
     agg = min(1.5, cfg["aggression_scale"] / 100.0)
@@ -243,12 +250,12 @@ def lead_rules(f, cfg, street: str, size: float, probe: float, donk: float, tex_
                "WeakSD": 0.0, "Air": 0.0}
     bet_rules(f, cfg, join("f$Gen_IP", "f$Gen_Multiway"), size, mw_freq)
     for cat in ("Monster", "Strong"):
-        _act(f, cfg, "NOT f$Gen_IP", cat, donk, f"RaiseBy {fmt(size)}%")
+        _act(f, cfg, "NOT f$Gen_IP", cat, donk, RB(cfg, size))
     # OOP sans initiative : semi-bluff lead avec les tirages (heads-up), le reste checke puis check-raise / call
     draw = clamp01(draw * min(1.3, agg))
     nm = join("NOT f$Gen_IP", "NOT f$Gen_Multiway")
-    _act(f, cfg, nm, "StrongDraw", draw, f"RaiseBy {fmt(size)}%")
-    _act(f, cfg, nm, "WeakDraw", draw * 0.3, f"RaiseBy {fmt(size)}%")
+    _act(f, cfg, nm, "StrongDraw", draw, RB(cfg, size))
+    _act(f, cfg, nm, "WeakDraw", draw * 0.3, RB(cfg, size))
 
 
 # ------------------------------------------------------------------------------ rues
@@ -360,12 +367,12 @@ def _river(prof, cfg):
     for mw in (False, True):
         mwc = "f$Gen_Multiway" if mw else "NOT f$Gen_Multiway"
         k = 0.4 if mw else 1.0
-        f.act(join(mwc, "HaveNuts", "f$Gen_IP"), f"RaiseBy {fmt(cfg['size_river_nuts'])}%")
-        f.act(join(mwc, "f$Gen_Monster"), f"RaiseBy {fmt(size)}%")
-        f.act(join(mwc, "f$Gen_Strong"), f"RaiseBy {fmt(size)}%")
-        _act(f, cfg, mwc, "Medium", thin * k * (1.0 if True else 0), f"RaiseBy {fmt(cfg['size_thin'])}%")
-        _act(f, cfg, join(mwc, "f$Gen_Blockers"), "Air", clamp01((bluff + bonus) * agg) * k, f"RaiseBy {fmt(size)}%")
-        _act(f, cfg, mwc, "Air", clamp01(bluff * agg) * k, f"RaiseBy {fmt(size)}%")
+        f.act(join(mwc, "HaveNuts", "f$Gen_IP"), RB(cfg, cfg['size_river_nuts']))
+        f.act(join(mwc, "f$Gen_Monster"), RB(cfg, size))
+        f.act(join(mwc, "f$Gen_Strong"), RB(cfg, size))
+        _act(f, cfg, mwc, "Medium", thin * k * (1.0 if True else 0), RB(cfg, cfg['size_thin']))
+        _act(f, cfg, join(mwc, "f$Gen_Blockers"), "Air", clamp01((bluff + bonus) * agg) * k, RB(cfg, size))
+        _act(f, cfg, mwc, "Air", clamp01(bluff * agg) * k, RB(cfg, size))
         f.act(mwc, "Check")
     f.others("Check")
 
@@ -374,17 +381,17 @@ def _river(prof, cfg):
     for ip in (True, False):
         ipc = join("f$Gen_IP" if ip else "NOT f$Gen_IP", "NOT f$Gen_Multiway")
         if ip:
-            f.act(join(ipc, "HaveNuts"), f"RaiseBy {fmt(cfg['size_river_nuts'])}%")
-        f.act(join(ipc, "f$Gen_Monster"), f"RaiseBy {fmt(size)}%")
-        f.act(join(ipc, "f$Gen_Strong"), f"RaiseBy {fmt(size)}%")
-        _act(f, cfg, ipc, "Medium", thin * (0.9 if ip else 0.35) * probe, f"RaiseBy {fmt(cfg['size_thin'])}%")
-        _act(f, cfg, join(ipc, "f$Gen_Blockers"), "Air", clamp01((bluff + bonus) * 0.6 * agg * (probe + 0.3)), f"RaiseBy {fmt(size)}%")
-        _act(f, cfg, ipc, "Air", clamp01(bluff * 0.4 * agg * (probe + 0.3)), f"RaiseBy {fmt(size)}%")
+            f.act(join(ipc, "HaveNuts"), RB(cfg, cfg['size_river_nuts']))
+        f.act(join(ipc, "f$Gen_Monster"), RB(cfg, size))
+        f.act(join(ipc, "f$Gen_Strong"), RB(cfg, size))
+        _act(f, cfg, ipc, "Medium", thin * (0.9 if ip else 0.35) * probe, RB(cfg, cfg['size_thin']))
+        _act(f, cfg, join(ipc, "f$Gen_Blockers"), "Air", clamp01((bluff + bonus) * 0.6 * agg * (probe + 0.3)), RB(cfg, size))
+        _act(f, cfg, ipc, "Air", clamp01(bluff * 0.4 * agg * (probe + 0.3)), RB(cfg, size))
         f.act(ipc, "Check")
     mwc = "f$Gen_Multiway"
-    f.act(join(mwc, "f$Gen_Monster"), f"RaiseBy {fmt(size)}%")
-    f.act(join(mwc, "f$Gen_Strong"), f"RaiseBy {fmt(size)}%")
-    _act(f, cfg, join(mwc, "f$Gen_IP"), "Medium", thin * 0.3 * probe, f"RaiseBy {fmt(cfg['size_thin'])}%")
+    f.act(join(mwc, "f$Gen_Monster"), RB(cfg, size))
+    f.act(join(mwc, "f$Gen_Strong"), RB(cfg, size))
+    _act(f, cfg, join(mwc, "f$Gen_IP"), "Medium", thin * 0.3 * probe, RB(cfg, cfg['size_thin']))
     f.act(mwc, "Check")
     f.others("Check")
 

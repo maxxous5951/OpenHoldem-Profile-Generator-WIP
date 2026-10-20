@@ -9,6 +9,7 @@ Les valeurs sont normalisées en fraction (0..1) que PokerTracker les renvoie en
 from __future__ import annotations
 
 from ..ppl import Profile, fmt
+from .common import bluff_scaled
 
 CHAIRS = {"HU": "headsupchair", "Rs": "lastraiserchair", "Lm": "firstcallerchair", "Rz": "raischair"}
 
@@ -20,6 +21,11 @@ def _stat_funcs(prof: Profile, chair_tag: str, chair: str):
         f = prof.func(f"f$Gen_{name}{chair_tag}")
         f.ret(f"pt_{sym}_{chair} > 1", f"pt_{sym}_{chair} / 100")
         f.others_ret(f"pt_{sym}_{chair}")
+    if chair_tag in ("HU", "Rs"):
+        f = prof.func(f"f$Gen_Ftc{chair_tag}")
+        f.comment("Fold to c-bet au flop (fraction) ; -1 si inconnu")
+        f.ret(f"pt_flop_fold_to_cbet_{chair} > 1", f"pt_flop_fold_to_cbet_{chair} / 100")
+        f.others_ret(f"pt_flop_fold_to_cbet_{chair}")
     f = prof.func(f"f$Gen_AF{chair_tag}")
     if chair_tag == "Rz":  # pas de facteur d'agression global fiable pour raischair : on s'appuie sur le PFR
         f.ret("", "0")
@@ -66,6 +72,27 @@ def emit_postflop(prof: Profile, cfg: dict):
             f.ret("Opponents = 1", f"f$Gen_{name}HU")
             f.others_ret(f"f$Gen_{name}Rs")
         _classify(prof, cfg, "Post", None)
+        f = prof.func("f$Gen_FtcPost")
+        f.ret("Opponents = 1", "f$Gen_FtcHU")
+        f.others_ret("f$Gen_FtcRs")
+        f = prof.func("f$Gen_PostSticky")
+        f.ret(f"f$Gen_PostKnown AND f$Gen_FtcPost >= 0 AND f$Gen_FtcPost <= {cfg['opp_sticky_fold'] / 100:.2f}", "true")
+        f.others_ret("false")
+        f = prof.func("f$Gen_PostFolder")
+        f.ret(f"f$Gen_PostKnown AND f$Gen_FtcPost >= {cfg['opp_folder_fold'] / 100:.2f}", "true")
+        f.others_ret("false")
+        f = prof.func("f$Gen_FtcMult")
+        f.comment("Facteur de bluff selon le fold to c-bet : collant = on bluffe moins, foldeur = plus")
+        f.ret("f$Gen_PostSticky", f"{cfg['exploit_bluff_sticky'] / 100:.2f}")
+        f.ret("f$Gen_PostFolder", f"{cfg['exploit_bluff_folder'] / 100:.2f}")
+        f.others_ret("1")
+        if (cfg["exploit_size_fish"], cfg["exploit_size_nit"], cfg["exploit_size_maniac"]) != (100, 100, 100):
+            f = prof.func("f$Gen_SizeMult")
+            f.comment("Facteur sur la taille des mises : fish plus gros, nit plus petit")
+            f.ret("f$Gen_PostManiac", f"{cfg['exploit_size_maniac'] / 100:.2f}")
+            f.ret("f$Gen_PostFish OR f$Gen_AnyFish", f"{cfg['exploit_size_fish'] / 100:.2f}")
+            f.ret("f$Gen_PostNit", f"{cfg['exploit_size_nit'] / 100:.2f}")
+            f.others_ret("1")
         f = prof.func("f$Gen_AnyFish")
         f.comment("Multiway, personne n'a misé : un fish dans le pot (dernier relanceur ou premier caller)")
         f.ret("Opponents >= 2 AND AmountToCall = 0 AND (f$Gen_RsFish OR f$Gen_LmFish)", "true")
@@ -76,12 +103,15 @@ def emit_postflop(prof: Profile, cfg: dict):
         f.ret("f$Gen_PostFish", f"{cfg['exploit_call_fish'] / 100:.2f}")
         f.ret("f$Gen_PostNit", f"{cfg['exploit_call_nit'] / 100:.2f}")
         f.others_ret("1")
-        f = prof.func("f$Gen_OppBluff")
-        f.comment("Facteur sur la fréquence de bluff selon l'adversaire")
+        f = prof.func("f$Gen_OppBluffClass")
+        f.comment("Facteur sur la fréquence de bluff selon le type d'adversaire")
         f.ret("f$Gen_PostManiac", f"{cfg['exploit_bluff_maniac'] / 100:.2f}")
         f.ret("f$Gen_PostFish OR f$Gen_AnyFish", f"{cfg['exploit_bluff_fish'] / 100:.2f}")
         f.ret("f$Gen_PostNit", f"{cfg['exploit_bluff_nit'] / 100:.2f}")
         f.others_ret("1")
+        f = prof.func("f$Gen_OppBluff")
+        f.comment("Facteur de bluff : type d'adversaire x fold to c-bet")
+        f.others_ret("f$Gen_OppBluffClass * f$Gen_FtcMult")
         f = prof.func("f$Gen_OppValue")
         f.comment("Facteur sur la value fine : un fish paye trop, on value plus souvent")
         f.ret("f$Gen_PostFish OR f$Gen_AnyFish", f"{cfg['exploit_value_fish'] / 100:.2f}")
@@ -104,6 +134,16 @@ def emit_postflop(prof: Profile, cfg: dict):
     f.comment("Équité nécessaire pour payer : AmountToCall / (PotSize + AmountToCall)")
     f.ret("AmountToCall <= 0", 0)
     f.others_ret("AmountToCall / (PotSize + AmountToCall)")
+    icm = cfg["icm_postflop"] / 100.0
+    if icm > 0:
+        f = prof.func("f$Gen_IcmCall")
+        f.comment("ICM postflop : a la bulle on paie moins large")
+        f.ret("IsBubble", f"{1.0 - icm * 0.25:.2f}")
+        f.others_ret("1")
+        f = prof.func("f$Gen_IcmBluff")
+        f.comment("ICM postflop : a la bulle on bluffe moins")
+        f.ret("IsBubble", f"{1.0 - icm * 0.3:.2f}")
+        f.others_ret("1")
     tol = cfg["call_3bet_pot_scale"] / 100.0
     k = cfg["tex_dynamic_pct"] / 100.0
 
@@ -132,6 +172,8 @@ def emit_postflop(prof: Profile, cfg: dict):
     f.comment("Tolérance de call globale : type de pot x adversaire x texture")
     opp = "f$Gen_OppTol" if cfg["use_stats"] else "1"
     base = f"{opp} * {texf}" if texf != "1" else opp
+    if icm > 0:
+        base = f"{base} * f$Gen_IcmCall" if base != "1" else "f$Gen_IcmCall"
     if tol != 1:
         f.ret("f$Gen_PotType >= 2", f"{tol:.2f} * {base}")
     f.others_ret(base)
@@ -139,13 +181,15 @@ def emit_postflop(prof: Profile, cfg: dict):
     f.comment("Cotes du pot ajustées (plus bas = on paye plus large) : sert aux seuils de call postflop")
     f.ret("AmountToCall <= 0", 0)
     f.others_ret("f$Gen_RawOdds / f$Gen_CallTol")
-    if cfg["randomize"] and (cfg["use_stats"] or cfg["cbet_3bet_pot_scale"] != 100 or k > 0):
+    if cfg["randomize"] and bluff_scaled(cfg):
         ps = cfg["cbet_3bet_pot_scale"] / 100.0
         f = prof.func("f$Gen_BluffMult")
         f.comment("Facteur sur les bluffs : type de pot x adversaire")
         opp = "f$Gen_OppBluff" if cfg["use_stats"] else "1"
         if k > 0:
             opp = f"{opp} * f$Gen_TexBluff" if opp != "1" else "f$Gen_TexBluff"
+        if icm > 0:
+            opp = f"{opp} * f$Gen_IcmBluff" if opp != "1" else "f$Gen_IcmBluff"
         if ps != 1:
             f.ret("f$Gen_PotType >= 2", f"{ps:.2f} * {opp}")
         f.others_ret(opp)

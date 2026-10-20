@@ -197,3 +197,30 @@ def test_stats_multiway_uses_bettor_and_any_fish():
     t = generator.generate({"use_stats": True})
     assert "pt_vpip_raischair" in t and "f$Gen_AnyFish" in t
     assert "AmountToCall > 0 AND Opponents >= 2" in t
+
+
+# ---------------------------------------------------------------- v2.3 : Nash, tailles stats, fold to c-bet, ICM postflop, explain
+def test_nash_hu_tables_match_known_values():
+    from ohpg.data import nash_hu
+    assert 55 <= nash_hu.SB_PUSH[10] <= 61 and 34 <= nash_hu.BB_CALL[10] <= 40  # Nash HU a 10 BB : ~58 % / ~37 %
+    assert all(nash_hu.SB_PUSH[a] >= nash_hu.SB_PUSH[b] for a, b in zip([3, 4, 5, 6, 7, 8, 10, 12, 15], [4, 5, 6, 7, 8, 10, 12, 15, 20]))
+
+
+def test_stats_size_and_fold_to_cbet_and_icm_postflop():
+    t = generator.generate({"use_stats": True})
+    assert "RaiseBy (" in t and "f$Gen_SizeMult" in t and "f$Gen_FtcMult" in t
+    assert "pt_flop_fold_to_cbet_headsupchair" in t
+    off = generator.generate({"use_stats": True, "exploit_size_fish": 100, "exploit_size_nit": 100})
+    assert "f$Gen_SizeMult" not in off
+    icm = generator.generate({"icm_postflop": 80, "randomize": True})
+    assert "f$Gen_IcmCall" in icm and "f$Gen_IcmBluff" in icm and "IsBubble" in icm
+    none = generator.generate({"icm_postflop": 0})
+    assert "f$Gen_IcmCall" not in none
+
+
+def test_explain_matches_decisions():
+    from ohpg.scenarios import explain
+    t = generator.generate({"randomize": False})
+    r = explain(t, "BTN", "Premiere action (ouverture)", 100, 6, "AA")
+    assert r["action"].startswith("RaiseTo") and "InButton" in r["rule"]
+    assert explain(t, "BTN", "Premiere action (ouverture)", 100, 6, "72o")["action"] == "Fold"

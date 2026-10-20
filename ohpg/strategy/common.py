@@ -80,9 +80,15 @@ def mix(cfg: dict, freq: float):
     return f"randomhand < {freq:.2f}"
 
 
+def bluff_scaled(cfg: dict) -> bool:
+    """Vrai si la frequence de bluff postflop est modulee (stats, pot 3bet, texture, ICM) -> f$Gen_RRBluff existe."""
+    return bool(cfg["use_stats"] or cfg["cbet_3bet_pot_scale"] != 100 or cfg["tex_dynamic_pct"] > 0
+                or cfg["icm_postflop"] > 0)
+
+
 def rr_symbol(cfg: dict, kind: str | None) -> str:
     """Symbole d'aléatoire constant pendant la street. 'bluff' / 'value' passent par un facteur d'exploitation."""
-    if kind == "bluff" and (cfg["use_stats"] or cfg["cbet_3bet_pot_scale"] != 100 or cfg["tex_dynamic_pct"] > 0):
+    if kind == "bluff" and bluff_scaled(cfg):
         return "f$Gen_RRBluff"
     if kind == "value" and cfg["use_stats"]:
         return "f$Gen_RRValue"

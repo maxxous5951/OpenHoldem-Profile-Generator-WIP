@@ -70,6 +70,8 @@ class MainWindow(QMainWindow):
             else:
                 tabs.addTab(page, top_name)
 
+        tabs.addTab(self._build_sim_page(), "Simulateur")
+
         self._timer = QTimer(self)
         self._timer.setSingleShot(True)
         self._timer.setInterval(350)
@@ -100,6 +102,50 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(central)
         self.apply_preset()
         self.generate()
+
+    # ------------------------------------------------------------------ simulateur
+    def _build_sim_page(self) -> QWidget:
+        from .. import scenarios
+        page = QWidget()
+        lay = QVBoxLayout(page)
+        lay.addWidget(QLabel("Teste une decision preflop du profil actuel, sans OpenHoldem (postflop non simule)."))
+        row = QHBoxLayout()
+        self.sim_scenario = QComboBox()
+        self.sim_scenario.addItems(list(scenarios.SCENARIOS))
+        self.sim_pos = QComboBox()
+        self.sim_pos.addItems(["EP", "MP", "CO", "BTN", "SB", "BB"])
+        self.sim_pos.setCurrentText("BTN")
+        self.sim_opener = QComboBox()
+        self.sim_opener.addItems(["(auto)", "EP", "MP", "CO", "BTN", "SB"])
+        self.sim_hand = QLineEdit("AKs")
+        self.sim_stack = QSpinBox()
+        self.sim_stack.setRange(2, 300)
+        self.sim_stack.setValue(100)
+        for label, w in (("Situation", self.sim_scenario), ("Position", self.sim_pos), ("Ouvreur", self.sim_opener),
+                         ("Main", self.sim_hand), ("Stack (BB)", self.sim_stack)):
+            row.addWidget(QLabel(label))
+            row.addWidget(w)
+        btn = QPushButton("Tester")
+        btn.clicked.connect(self.run_sim)
+        row.addWidget(btn)
+        lay.addLayout(row)
+        self.sim_out = QPlainTextEdit()
+        self.sim_out.setReadOnly(True)
+        lay.addWidget(self.sim_out)
+        return page
+
+    def run_sim(self):
+        from ..scenarios import explain
+        cfg = dict(self.config())
+        cfg["randomize"] = False
+        op = self.sim_opener.currentText()
+        try:
+            r = explain(generator.generate(cfg), self.sim_pos.currentText(), self.sim_scenario.currentText(),
+                        float(self.sim_stack.value()), int(cfg["table_size"]), self.sim_hand.text().strip(),
+                        opener=None if op.startswith("(") else op)
+            self.sim_out.setPlainText(f"Action : {r['action']}\n\nGroupe : {r['group']}\n\nRegle  : {r['rule']}")
+        except Exception as exc:  # noqa: BLE001
+            self.sim_out.setPlainText(f"Impossible : {exc}")
 
     # ------------------------------------------------------------------ widgets
     def _build_page(self, group: str) -> QScrollArea:

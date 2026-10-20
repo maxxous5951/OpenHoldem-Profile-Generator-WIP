@@ -44,6 +44,23 @@ def main(argv=None) -> int:
     d.add_argument("--set", action="append")
     d.add_argument("--config")
 
+    ps = sub.add_parser("pt-symbols", help="liste les symboles PokerTracker (pt_*) utilises par le profil genere")
+    ps.add_argument("--style", default="Balanced 6-max", choices=list(presets.STYLES))
+    ps.add_argument("--format", default="Cash 6-max", choices=list(presets.FORMATS))
+    ps.add_argument("--set", action="append")
+    ps.add_argument("--config")
+
+    e = sub.add_parser("explain", help="decision du profil pour une main preflop dans une situation donnee")
+    e.add_argument("--style", default="Balanced 6-max", choices=list(presets.STYLES))
+    e.add_argument("--format", default="Cash 6-max", choices=list(presets.FORMATS))
+    e.add_argument("--set", action="append")
+    e.add_argument("--config")
+    e.add_argument("--hand", required=True, help="ex. AKs, 77, T9o")
+    e.add_argument("--pos", default="BTN", help="EP, MP, CO, BTN, SB, BB")
+    e.add_argument("--scenario", default="Premiere action (ouverture)")
+    e.add_argument("--stack", type=float, default=100.0)
+    e.add_argument("--opener", default=None)
+
     gui = sub.add_parser("gui", help="lance l'interface graphique")
 
     a = ap.parse_args(argv)
@@ -77,6 +94,24 @@ def main(argv=None) -> int:
         return 0
     if a.cmd == "dump-config":
         print(json.dumps(_cfg_from_args(a), indent=2, ensure_ascii=False))
+        return 0
+    if a.cmd == "pt-symbols":
+        import re
+        cfg = _cfg_from_args(a)
+        cfg["use_stats"] = True
+        syms = sorted(set(re.findall(r"\bpt_\w+", generator.generate(cfg))))
+        print("\n".join(syms))
+        print(f"{len(syms)} symboles : verifie qu'ils s'affichent dans la fenetre des symboles d'OpenHoldem (PokerTracker connecte).")
+        return 0
+    if a.cmd == "explain":
+        from .scenarios import SCENARIOS, explain
+        if a.scenario not in SCENARIOS:
+            print("Scenarios :", *SCENARIOS, sep="\n  ")
+            return 2
+        cfg = _cfg_from_args(a)
+        cfg["randomize"] = False
+        r = explain(generator.generate(cfg), a.pos, a.scenario, a.stack, int(cfg["table_size"]), a.hand, opener=a.opener)
+        print(f"Action : {r['action']}\nGroupe : {r['group']}\nRegle  : {r['rule']}")
         return 0
     if a.cmd == "gui":
         from .gui.app import run

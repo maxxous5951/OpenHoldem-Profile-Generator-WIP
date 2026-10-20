@@ -38,12 +38,12 @@ FORMATS = {
                       "threebet_value": 7, "threebet_bluff_ratio": 1.0, "open_size_sb": 2.3, "call_ip_pct": 20},
     "MTT 9-max (push/fold 15BB)": {"game": "tournament", "table_size": 9, "pf_max_stack": 15, "ante_bb": 0.12,
                                    "open_ep": 11, "open_mp": 16, "open_co": 24, "open_btn": 42, "open_sb": 36,
-                                   "icm_pressure": 25, "openjam_max": 22, "threebet_shove_stack": 24, "fourbet_shove_stack": 34},
-    "SNG bubble": {"game": "tournament", "table_size": 6, "pf_max_stack": 14, "icm_pressure": 70, "ante_bb": 0.0,
+                                   "icm_pressure": 25, "icm_postflop": 25, "openjam_max": 22, "threebet_shove_stack": 24, "fourbet_shove_stack": 34},
+    "SNG bubble": {"game": "tournament", "table_size": 6, "pf_max_stack": 14, "icm_pressure": 70, "icm_postflop": 60, "ante_bb": 0.0,
                    "pf_call_scale": 90},
     "Spin & Go 3-max": {"game": "tournament", "table_size": 3, "pf_max_stack": 12, "open_ep": 40, "open_mp": 40,
                         "open_co": 40, "open_btn": 55, "open_sb": 60, "bb_defend_pct": 50, "icm_pressure": 40,
-                        "sb_limp_pct": 30, "openjam_max": 20, "openjam_pct": 8},
+                        "icm_postflop": 40, "sb_limp_pct": 30, "openjam_max": 20, "openjam_pct": 8},
 }
 
 

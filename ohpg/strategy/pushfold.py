@@ -6,11 +6,19 @@ from .. import ranges as R
 from ..ppl import Profile, fmt
 from .common import ORDER, actives, HERO, OPENER, OPEN_WIDTH, join, mix, tiers
 
+from ..data import nash_hu
+
 BUCKETS = [3, 4, 5, 6, 7, 8, 10, 12, 15, 20, 25, 30]
-BTN_PUSH = {3: 80, 4: 68, 5: 58, 6: 50, 7: 44, 8: 40, 10: 34, 12: 28, 15: 22, 20: 15, 25: 11, 30: 8}
-SB_PUSH = {3: 100, 4: 100, 5: 95, 6: 85, 7: 75, 8: 68, 10: 58, 12: 50, 15: 42, 20: 30, 25: 22, 30: 16}
+_OLD_BTN = {3: 80, 4: 68, 5: 58, 6: 50, 7: 44, 8: 40, 10: 34, 12: 28, 15: 22, 20: 15, 25: 11, 30: 8}
+_OLD_SB = {3: 100, 4: 100, 5: 95, 6: 85, 7: 75, 8: 68, 10: 58, 12: 50, 15: 42, 20: 30, 25: 22, 30: 16}
+_OLD_BB_CALL = {3: 70, 4: 58, 5: 50, 6: 43, 7: 38, 8: 34, 10: 28, 12: 23, 15: 18, 20: 13, 25: 9, 30: 7}
+NASH_MAX = 15  # Nash HU exact jusqu'a 15 BB ; au-dela, tables prudentes (raise/fold reel plus serre que push/fold)
+# SB : Nash HU (equite 169x169 Monte Carlo, tools/nash_pushfold.py) ; BTN : meme forme que la table historique
+SB_PUSH = {b: (nash_hu.SB_PUSH[b] if b <= NASH_MAX else _OLD_SB[b]) for b in BUCKETS}
+BTN_PUSH = {b: (min(100.0, nash_hu.SB_PUSH[b] * _OLD_BTN[b] / _OLD_SB[b]) if b <= NASH_MAX else _OLD_BTN[b]) for b in BUCKETS}
+# BB : le Nash HU est un call contre le SB (x1.3 dans OPENER_CALL_MULT) ; la base est donc le call contre un BTN
 POS_PUSH_MULT = {"EP": 0.38, "MP": 0.55, "CO": 0.75, "BTN": 1.0}
-BB_CALL = {3: 70, 4: 58, 5: 50, 6: 43, 7: 38, 8: 34, 10: 28, 12: 23, 15: 18, 20: 13, 25: 9, 30: 7}
+BB_CALL = {b: (min(100.0, nash_hu.BB_CALL[b] / 1.3) if b <= NASH_MAX else _OLD_BB_CALL[b]) for b in BUCKETS}
 OPENER_CALL_MULT = {"EP": 0.45, "MP": 0.6, "CO": 0.8, "BTN": 1.0, "SB": 1.3}
 HERO_CALL_MULT = {"BB": 1.0, "SB": 0.8, "BTN": 0.5, "CO": 0.45, "MP": 0.4, "EP": 0.35}
 
@@ -40,7 +48,7 @@ def call_pct(cfg, hero, opener, ref, bubble=False):
     pct *= 1.0 + cfg["ante_bb"] * 1.2
     if bubble:
         pct *= 1.0 - cfg["icm_pressure"] / 100.0 * 0.45
-    return min(70.0, pct)
+    return min(95.0, pct)
 
 
 def emit(prof: Profile, f, cfg: dict):

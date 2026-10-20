@@ -1,6 +1,6 @@
 //*****************************************************************************
 //  OHPG TAG / MTT 9-max (push/fold 15BB)
-//  Genere par OpenHoldem Profile Generator (ohpg) v2.1.0 le 2026-10-19
+//  Genere par OpenHoldem Profile Generator (ohpg) v2.2.0 le 2026-10-20
 //
 //  Format : tournament, 9 joueurs, ante 0.12 BB
 //  Prerequis : charger la bibliotheque OpenPPL officielle (OpenPPL_Library) avant ce fichier.
@@ -11,30 +11,27 @@
 ##listPushEP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s
+    A4o K6s
 
 ##listPushEP3Edge##
-    J8s T9s K3s Q8o Q6s 33 J9o
+    K5s Q8s J9s A3o K8o JTo
 
 ##listPushMP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o
 
 ##listPushMP3Edge##
-    22 J7o T8o J5s Q4o 97s J4s T6s Q3o 87s
+    K2s Q5s T8s K4o Q7o J7s T9o Q4s
 
 ##listPushCO3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s
 
 ##listPushCO3Edge##
-    96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 74s
+    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s
 
 ##listPushBTN3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -42,11 +39,10 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o
-    75o 82s 73s 53s 93o 65o 63s 84o 92o 74o 43s
+    T2s 85s 96o J2o T5o 94s
 
 ##listPushBTN3Edge##
-    64o 72s 54o 62s 52s 83o 82o 42s 73o 63o 53o 32s 43o 72o 52o 62o 42o
+    T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o
 
 ##listPushSB3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -55,48 +51,44 @@
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
     T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o
-    75o 82s 73s 53s 93o 65o 63s 84o 92o 74o 43s 64o
+    75o 82s 73s 53s 93o 65o 63s 84o 92o
 
 ##listPushSB3Edge##
-    72s 54o 62s 52s 83o 82o 42s 73o 63o 53o 32s 43o 72o 52o 62o 42o 32o
+    74o 43s 64o 72s 54o 62s 52s 83o 82o 42s 73o 63o 53o 32s 43o 72o 52o
 
 ##listPushEP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o
 
 ##listPushEP4Edge##
-    A3o K8o JTo K7o K4s Q9o
+    A6o K7s Q9s K9o QTo
 
 ##listPushMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o
 
 ##listPushMP4Edge##
-    T9o Q4s K3o J8o Q6o Q3s 98s J6s
+    K4s Q9o A2o K6o Q7s J8s
 
 ##listPushCO4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o
+    Q5s T8s K4o Q7o J7s T9o
 
 ##listPushCO4Edge##
-    J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o
+    Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s
 
 ##listPushBTN4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o
+    J4s T6s Q3o T7o 87s 98o J6o
 
 ##listPushBTN4Edge##
-    74s T2o 64s 85o 54s 83s 94o 75o 82s 73s 53s 93o 65o 63s 84o
+    J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 95s
 
 ##listPushSB4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -105,44 +97,42 @@
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
     T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o
-    75o 82s 73s 53s 93o 65o 63s 84o 92o 74o 43s 64o
+    75o 82s 73s 53s
 
 ##listPushSB4Edge##
-    72s 54o 62s 52s 83o 82o 42s 73o 63o 53o 32s 43o 72o 52o 62o 42o 32o
+    93o 65o 63s 84o 92o 74o 43s 64o 72s 54o 62s 52s 83o 82o 42s 73o
 
 ##listPushEP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o
 
 ##listPushEP5Edge##
-    A4o K6s K5s Q8s J9s
+    K8s A3s QJo A5o
 
 ##listPushMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o
+    A4o K6s
 
 ##listPushMP5Edge##
-    Q6s 33 J9o K5o K2s Q5s T8s
+    K5s Q8s J9s A3o K8o JTo
 
 ##listPushCO5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s
 
 ##listPushCO5Edge##
-    K2o 22 J7o T8o J5s Q4o 97s J4s T6s Q3o
+    33 J9o K5o K2s Q5s T8s K4o
 
 ##listPushBTN5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o
 
 ##listPushBTN5Edge##
-    J3o 87o 76s T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o
+    K2o 22 J7o T8o J5s Q4o 97s J4s T6s Q3o
 
 ##listPushSB5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -150,45 +140,41 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o
-    75o 82s 73s 53s 93o 65o 63s 84o 92o 74o 43s 64o
+    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s
 
 ##listPushSB5Edge##
-    72s 54o 62s 52s 83o 82o 42s 73o 63o 53o 32s 43o 72o 52o 62o 42o 32o
+    94o 75o 82s 73s 53s 93o 65o 63s 84o 92o 74o 43s 64o 72s 54o
 
 ##listPushEP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs
 
 ##listPushEP6Edge##
-    A6o K7s Q9s K9o 44
+    A4s A7o K8s A3s
 
 ##listPushMP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo
 
 ##listPushMP6Edge##
-    K7o K4s Q9o A2o K6o Q7s
+    A4o K6s K5s Q8s J9s
 
 ##listPushCO6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s
 
 ##listPushCO6Edge##
-    T9o Q4s K3o J8o Q6o Q3s 98s J6s
+    J8s T9s K3s Q8o Q6s 33 J9o
 
 ##listPushBTN6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o
 
 ##listPushBTN6Edge##
-    J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o 95s
+    Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o
 
 ##listPushSB6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -196,43 +182,41 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o
-    75o 82s 73s 53s 93o 65o 63s 84o 92o 74o 43s 64o
+    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o
 
 ##listPushSB6Edge##
-    72s 54o 62s 52s 83o 82o 42s 73o 63o 53o 32s 43o 72o 52o 62o 42o 32o
+    74s T2o 64s 85o 54s 83s 94o 75o 82s 73s 53s 93o 65o 63s 84o
 
 ##listPushEP7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o
+    A9o 55 K9s A8o QJs A5s KTo
 
 ##listPushEP7Edge##
-    K8s A3s QJo A5o
+    A6s QTs A4s A7o
 
 ##listPushMP7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo
 
 ##listPushMP7Edge##
-    K5s Q8s J9s A3o K8o JTo
+    44 JTs A2s A4o K6s
 
 ##listPushCO7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o
 
 ##listPushCO7Edge##
-    J9o K5o K2s Q5s T8s K4o Q7o
+    A2o K6o Q7s J8s T9s K3s Q8o
 
 ##listPushBTN7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o
 
 ##listPushBTN7Edge##
-    22 J7o T8o J5s Q4o 97s J4s T6s Q3o 87s
+    J8o Q6o Q3s 98s J6s T7s Q2s Q5o 22
 
 ##listPushSB7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -240,42 +224,41 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o
-    75o 82s 73s 53s 93o
+    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s
 
 ##listPushSB7Edge##
-    65o 63s 84o 92o 74o 43s 64o 72s 54o 62s 52s 83o 82o 42s 73o 63o
+    T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o 75o 82s 73s 53s 93o
 
 ##listPushEP8##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s
+    A9o 55 K9s A8o QJs A5s
 
 ##listPushEP8Edge##
-    QTs A4s A7o K8s
+    KTo A6s QTs
 
 ##listPushMP8##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s
 
 ##listPushMP8Edge##
-    A4o K6s K5s Q8s J9s
+    Q9s K9o QTo 44 JTs
 
 ##listPushCO8##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s
+    A4o K6s K5s Q8s J9s A3o K8o JTo
 
 ##listPushCO8Edge##
-    J8s T9s K3s Q8o Q6s 33 K2s
+    K7o K4s Q9o A2o K6o Q7s
 
 ##listPushBTN8##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o
+    Q5s T8s
 
 ##listPushBTN8Edge##
-    Q3s 98s J6s T7s Q2s Q5o K2o 22 J5s
+    K4o Q7o J7s T9o Q4s K3o J8o Q6o
 
 ##listPushSB8##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -283,10 +266,10 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o
+    T2s 85s 96o J2o T5o
 
 ##listPushSB8Edge##
-    74s T2o 64s 85o 54s 83s 94o 75o 82s 73s 53s 93o 65o 63s 84o
+    94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s
 
 ##listPushEP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -308,7 +291,7 @@
     A4o K6s K5s Q8s J9s
 
 ##listPushCO10Edge##
-    A3o K8o JTo K7o K4s Q7s
+    A3o K8o JTo K7o K4s Q9o
 
 ##listPushBTN10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -329,104 +312,101 @@
     J3o 87o 76s T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o
 
 ##listPushEP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
 
 ##listPushEP12Edge##
-    KJo A7s A9o
+    A7s A9o 55
 
 ##listPushMP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s
 
 ##listPushMP12Edge##
-    A4s A7o K8s A3s
+    A7o K8s A3s QJo
 
 ##listPushCO12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs
 
 ##listPushCO12Edge##
-    QTo 44 JTs A2s A4o
+    A2s A4o K6s K5s Q8s
 
 ##listPushBTN12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o
 
 ##listPushBTN12Edge##
-    Q9o A2o K6o Q7s J8s T9s
+    A2o K6o Q7s J8s T9s K3s Q8o
 
 ##listPushSB12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o
+    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s
 
 ##listPushSB12Edge##
-    J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o 95s
+    T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s 76s
 
 ##listPushEP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s
 
 ##listPushEP15Edge##
-    A8s KTs
+    KQo KTs
 
 ##listPushMP15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o
+    A9o 55 K9s A8o
 
 ##listPushMP15Edge##
-    55 K9s A8o
+    QJs A5s KTo
 
 ##listPushCO15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo
 
 ##listPushCO15Edge##
-    K8s A3s QJo A5o
+    A5o A6o K7s Q9s
 
 ##listPushBTN15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
+    A4o K6s
 
 ##listPushBTN15Edge##
-    A4o K6s K5s Q8s J9s
+    K5s Q8s J9s A3o K8o JTo
 
 ##listPushSB15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o
 
 ##listPushSB15Edge##
-    T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o
+    J5s Q4o 97s J4s T6s Q3o T7o 87s 98o J6o
 
 ##listPushLimpEP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K4s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo
 
 ##listPushLimpMP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s
 
 ##listPushLimpCO3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o T4s
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s
 
 ##listPushLimpBTN3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o
+    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o
 
 ##listPushLimpSB3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -434,39 +414,33 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o
-    82s
+    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o
 
 ##listPushLimpBB3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o T4s
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s
 
 ##listPushLimpEP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    K6s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s
 
 ##listPushLimpMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 K2s
+    A4o K6s K5s Q8s J9s K4s
 
 ##listPushLimpCO4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o J5s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o
 
 ##listPushLimpBTN4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o
 
 ##listPushLimpSB4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -474,36 +448,31 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o
-    82s
+    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o
 
 ##listPushLimpBB4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o J5s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o
 
 ##listPushLimpEP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s
+    A9o 55 K9s A8o QJs A5s KTo
 
 ##listPushLimpMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q7s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo
 
 ##listPushLimpCO5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s Q3s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o Q7s
 
 ##listPushLimpBTN5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s
+    Q5s T8s K4o Q7o J7s T9o Q4s Q3s
 
 ##listPushLimpSB5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -511,34 +480,31 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o
-    82s
+    T2s 85s 96o J2o T5o 94s T4o
 
 ##listPushLimpBB5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s Q3s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o Q7s
 
 ##listPushLimpEP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s
+    A9o 55 K9s A8o
 
 ##listPushLimpMP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s
 
 ##listPushLimpCO6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 K2s
+    A4o K6s K5s Q8s J9s A3o K8o JTo
 
 ##listPushLimpBTN6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J5s
+    Q5s T8s J7s
 
 ##listPushLimpSB6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -546,77 +512,72 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o
-    82s
+    T2s 85s 96o
 
 ##listPushLimpBB6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 K2s
+    A4o K6s K5s Q8s J9s A3o K8o JTo
 
 ##listPushLimpEP7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo
+    A9o 55 K9s QJs
 
 ##listPushLimpMP7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o K7s
 
 ##listPushLimpCO7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o
+    A4o K6s K5s Q8s J9s A3o K8o
 
 ##listPushLimpBTN7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o
 
 ##listPushLimpSB7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 74s
+    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o
 
 ##listPushLimpBB7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o
+    A4o K6s K5s Q8s J9s A3o K8o
 
 ##listPushLimpEP8##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o
+    A9o 55
 
 ##listPushLimpMP8##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo
 
 ##listPushLimpCO8##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo
+    A4o K6s K5s Q8s J9s
 
 ##listPushLimpBTN8##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s J7s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s
 
 ##listPushLimpSB8##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o
+    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o 95s
 
 ##listPushLimpBB8##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo
+    A4o K6s K5s Q8s J9s
 
 ##listPushLimpEP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -651,60 +612,61 @@
 
 ##listPushLimpMP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs
+    A9o 55 K9s A8o QJs A5s A6s
 
 ##listPushLimpCO12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o
 
 ##listPushLimpBTN12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o
+    A4o K6s K5s Q8s J9s A3o K8o
 
 ##listPushLimpSB12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J5s
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s
 
 ##listPushLimpBB12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o
 
 ##listPushLimpEP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs A8s
 
 ##listPushLimpMP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
+    A9o
 
 ##listPushLimpCO15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s K8s
 
 ##listPushLimpBTN15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo
 
 ##listPushLimpSB15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o
 
 ##listPushLimpBB15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s K8s
 
 ##listCallJamBBBEP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o Q7s
 
 ##listCallJamBBEP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s
 
 ##listReshoveBBEP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -714,13 +676,13 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o
+    Q5s T8s K4o Q7o J7s T9o Q4s Q3s
 
 ##listCallJamBBMP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o
 
 ##listReshoveBBMP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -731,14 +693,14 @@
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o
+    J4s T6s Q3o T7o 87s 98o J6o J3s
 
 ##listCallJamBBCO3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s
+    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o
 
 ##listReshoveBBCO3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -750,7 +712,7 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s 75s
+    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o
 
 ##listCallJamBBBTN3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -758,7 +720,8 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s 75s
+    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o
+    75o 82s
 
 ##listReshoveBBBTN3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -770,7 +733,8 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s 75s
+    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o
+    75o 82s 73s 53s 93o 65o 63s 84o 92o 74o 43s 64o 72s 54o 62s 52s 83o 82o 42s 73o 63o
 
 ##listCallJamBBSB3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -778,7 +742,8 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s 75s
+    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o
+    75o 82s 73s 53s 93o 65o 63s 84o 92o 74o 43s 64o 72s 54o 62s 52s 83o 82o 42s 73o 63o 53o 32s
 
 ##listReshoveBBSB3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -787,7 +752,7 @@
 ##listCallJamBSBEP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    K6s
+    A4o
 
 ##listCallJamSBEP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -801,12 +766,12 @@
 ##listCallJamBSBMP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s
 
 ##listCallJamSBMP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
 
 ##listReshoveSBMP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -816,13 +781,13 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s
 
 ##listCallJamSBCO3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s 97s
 
 ##listReshoveSBCO3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -833,14 +798,14 @@
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o
+    J4s T6s Q3o T7o 87s 98o J6o J3s
 
 ##listCallJamSBBTN3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s
+    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o
 
 ##listReshoveSBBTN3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -863,7 +828,7 @@
 
 ##listCallJamBTNMP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo JTs
 
 ##listReshoveBTNMP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo
@@ -871,12 +836,12 @@
 ##listCallJamBBTNCO3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K4s
+    A4o K6s K5s Q8s J9s A3o K8o
 
 ##listCallJamBTNCO3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o Q7s
 
 ##listReshoveBTNCO3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
@@ -930,6 +895,7 @@
 
 ##listCallJamEPEP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
+    K9s
 
 ##listReshoveEPEP3##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs A8s
@@ -937,12 +903,12 @@
 ##listCallJamBBBEP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s
+    K6s
 
 ##listCallJamBBEP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo
+    A4o K6s K5s Q8s J9s A3o K8o
 
 ##listReshoveBBEP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -951,13 +917,12 @@
 ##listCallJamBBBMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q6s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s
 
 ##listCallJamBBMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s J7s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o
 
 ##listReshoveBBMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -967,14 +932,13 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o
 
 ##listCallJamBBCO4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s
 
 ##listReshoveBBCO4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -985,15 +949,14 @@
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o
+    J4s T6s Q3o T7o 87s 98o J6o
 
 ##listCallJamBBBTN4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s
+    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s
 
 ##listReshoveBBBTN4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1005,7 +968,7 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s 75s
+    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o
 
 ##listCallJamBBSB4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1013,7 +976,8 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s 75s
+    T2s 85s 96o J2o T5o 94s T4o 75s 93s 86o 65s 92s 84s T3o 95o 76o 74s T2o 64s 85o 54s 83s 94o
+    75o 82s 73s 53s 93o 65o
 
 ##listReshoveBBSB4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1021,11 +985,11 @@
 
 ##listCallJamBSBEP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o K7s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o
 
 ##listCallJamSBEP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o
 
 ##listReshoveSBEP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1034,12 +998,12 @@
 ##listCallJamBSBMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o
+    A4o K6s K5s Q8s J9s
 
 ##listCallJamSBMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o
 
 ##listReshoveSBMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1048,13 +1012,13 @@
 ##listCallJamBSBCO4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s
 
 ##listCallJamSBCO4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o
+    Q5s T8s K4o Q7o
 
 ##listReshoveSBCO4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1064,14 +1028,13 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o
 
 ##listCallJamSBBTN4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s
 
 ##listReshoveSBBTN4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1079,40 +1042,40 @@
 
 ##listCallJamBBTNEP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o
+    55
 
 ##listCallJamBTNEP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o
+    A9o 55 K9s QJs
 
 ##listReshoveBTNEP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs
 
 ##listCallJamBBTNMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s K8s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs
 
 ##listCallJamBTNMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s K7s
 
 ##listReshoveBTNMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
 
 ##listCallJamBBTNCO4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o 44
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o
 
 ##listCallJamBTNCO4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s
+    A4o
 
 ##listReshoveBTNCO4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs A7s
 
 ##listCallJamBCOEP4##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs A7s
 
 ##listCallJamCOEP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1123,52 +1086,51 @@
 
 ##listCallJamBCOMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s A6s
+    A9o 55 K9s A8o QJs
 
 ##listCallJamCOMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s K8s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs
 
 ##listReshoveCOMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
 
 ##listCallJamBMPEP4##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s
 
 ##listCallJamMPEP4##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs A7s
 
 ##listReshoveMPEP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs
 
 ##listCallJamBMPMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s
+    A9o 55
 
 ##listCallJamMPMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s A6s
+    A9o 55 K9s A8o QJs
 
 ##listReshoveMPMP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
 
 ##listCallJamBEPEP4##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs A8s
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs
 
 ##listCallJamEPEP4##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s
 
 ##listReshoveEPEP4##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs
 
 ##listCallJamBBBEP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o
 
 ##listCallJamBBEP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44
 
 ##listReshoveBBEP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1177,12 +1139,12 @@
 ##listCallJamBBBMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o
+    A4o K6s K5s Q8s J9s A3o K8o
 
 ##listCallJamBBMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o
 
 ##listReshoveBBMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1191,14 +1153,13 @@
 ##listCallJamBBBCO5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o J7s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o
 
 ##listCallJamBBCO5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o
 
 ##listReshoveBBCO5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1208,14 +1169,14 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o 22
 
 ##listCallJamBBBTN5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o
+    J4s T6s Q3o 87s
 
 ##listReshoveBBBTN5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1226,7 +1187,7 @@
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o
+    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o
 
 ##listCallJamBBSB5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1234,7 +1195,7 @@
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
     J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s T3s J3o 87o 76s
-    T2s 85s 96o J2o T5o 94s 75s
+    T2s 85s 96o J2o T5o 94s T4o
 
 ##listReshoveBBSB5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1242,11 +1203,11 @@
 
 ##listCallJamBSBEP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s
 
 ##listCallJamSBEP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo
 
 ##listReshoveSBEP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1254,12 +1215,12 @@
 
 ##listCallJamBSBMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o
 
 ##listCallJamSBMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s K4s
+    A4o
 
 ##listReshoveSBMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1268,12 +1229,12 @@
 ##listCallJamBSBCO5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o Q7s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o
 
 ##listCallJamSBCO5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s
 
 ##listReshoveSBCO5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1282,86 +1243,84 @@
 ##listCallJamBSBBTN5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o J7s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o
 
 ##listCallJamSBBTN5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o
 
 ##listReshoveSBBTN5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o K7s
 
 ##listCallJamBBTNEP5##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo
 
 ##listCallJamBTNEP5##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    55
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
 
 ##listReshoveBTNEP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s
 
 ##listCallJamBBTNMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o
+    A9o 55 K9s QJs
 
 ##listCallJamBTNMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs
+    A9o 55 K9s A8o QJs A5s KTo
 
 ##listReshoveBTNMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s
 
 ##listCallJamBBTNCO5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo K7s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s K7s
 
 ##listCallJamBTNCO5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o
 
 ##listReshoveBTNCO5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs
 
 ##listCallJamBCOEP5##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo
 
 ##listCallJamCOEP5##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs A7s
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo
 
 ##listReshoveCOEP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s
 
 ##listCallJamBCOMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55
+    A9o
 
 ##listCallJamCOMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs
+    A9o 55 K9s A8o
 
 ##listReshoveCOMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s
 
 ##listCallJamBMPEP5##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs A8s
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s
 
 ##listCallJamMPEP5##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo
 
 ##listReshoveMPEP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s
 
 ##listCallJamBMPMP5##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs A7s
 
 ##listCallJamMPMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55
+    A9o
 
 ##listReshoveMPMP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s
@@ -1370,18 +1329,18 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
 
 ##listCallJamEPEP5##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s
 
 ##listReshoveEPEP5##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s
 
 ##listCallJamBBBEP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s
 
 ##listCallJamBBEP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o
 
 ##listReshoveBBEP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
@@ -1389,12 +1348,12 @@
 ##listCallJamBBBMP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o
+    K6s
 
 ##listCallJamBBMP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o K4s
+    A4o K6s K5s Q8s J9s A3o K4s
 
 ##listReshoveBBMP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1403,13 +1362,12 @@
 ##listCallJamBBBCO6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o
 
 ##listCallJamBBCO6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o
 
 ##listReshoveBBCO6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1419,13 +1377,13 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o
+    Q5s T8s K4o Q7o J7s T9o
 
 ##listCallJamBBBTN6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o
 
 ##listReshoveBBBTN6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1436,14 +1394,14 @@
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o
+    J4s T6s Q3o T7o
 
 ##listCallJamBBSB6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o T6o 97o 95s
+    J4s T6s Q3o T7o 87s 98o J6o J3s J2s 96s T5s Q2o J5o T4s 86s J4o 95s
 
 ##listReshoveBBSB6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1451,22 +1409,22 @@
 
 ##listCallJamBSBEP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s
+    A9o 55 K9s A8o
 
 ##listCallJamSBEP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s K8s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs
 
 ##listReshoveSBEP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
 
 ##listCallJamBSBMP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o K7s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo K7s
 
 ##listCallJamSBMP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o 44
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o
 
 ##listReshoveSBMP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1475,12 +1433,12 @@
 ##listCallJamBSBCO6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o
+    A4o K6s K5s Q8s
 
 ##listCallJamSBCO6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q7s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o
 
 ##listReshoveSBCO6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1489,13 +1447,12 @@
 ##listCallJamBSBBTN6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o
 
 ##listCallJamSBBTN6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o
 
 ##listReshoveSBBTN6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1512,41 +1469,41 @@
 
 ##listCallJamBBTNMP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o
+    K9s
 
 ##listCallJamBTNMP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o
+    A9o 55 K9s
 
 ##listReshoveBTNMP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo
 
 ##listCallJamBBTNCO6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s
+    A9o 55 K9s A8o QJs A5s KTo A6s
 
 ##listCallJamBTNCO6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s
 
 ##listReshoveBTNCO6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo
 
 ##listCallJamBCOEP6##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s
 
 ##listCallJamCOEP6##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo
 
 ##listReshoveCOEP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
 
 ##listCallJamBCOMP6##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs
 
 ##listCallJamCOMP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o
+    55
 
 ##listReshoveCOMP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo
@@ -1555,36 +1512,36 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
 
 ##listCallJamMPEP6##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s
 
 ##listReshoveMPEP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
 
 ##listCallJamBMPMP6##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s
 
 ##listCallJamMPMP6##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs
 
 ##listReshoveMPMP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo
 
 ##listCallJamBEPEP6##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs
 
 ##listCallJamEPEP6##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 KQs
 
 ##listReshoveEPEP6##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
 
 ##listCallJamBBBEP7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs
 
 ##listCallJamBBEP7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s K7s
 
 ##listReshoveBBEP7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs A7s
@@ -1605,12 +1562,12 @@
 ##listCallJamBBBCO7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o
+    A4o K6s K5s Q8s J9s A3o K8o JTo K4s
 
 ##listCallJamBBCO7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s
 
 ##listReshoveBBCO7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1619,13 +1576,13 @@
 ##listCallJamBBBBTN7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K2s
 
 ##listCallJamBBBTN7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o
+    Q5s T8s K4o Q7o J7s T9o Q4s
 
 ##listReshoveBBBTN7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1635,14 +1592,14 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o
+    Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22
 
 ##listCallJamBBSB7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
     Q5s T8s K4o Q7o J7s T9o Q4s K3o J8o Q6o Q3s 98s J6s T7s Q2s Q5o K2o 22 J7o T8o J5s Q4o 97s
-    J4s T6s Q3o T7o 87s 98o J3s
+    J4s T6s Q3o T7o 87s J3s
 
 ##listReshoveBBSB7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1654,7 +1611,7 @@
 
 ##listCallJamSBEP7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s
+    A9o 55 K9s A8o QJs
 
 ##listReshoveSBEP7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs A7s
@@ -1673,12 +1630,12 @@
 
 ##listCallJamBSBCO7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo JTs
 
 ##listCallJamSBCO7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o
+    A4o K6s K5s Q8s J9s
 
 ##listReshoveSBCO7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1687,12 +1644,12 @@
 ##listCallJamBSBBTN7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o
+    A4o K6s K5s Q8s J9s A3o K8o JTo K4s
 
 ##listCallJamSBBTN7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s
 
 ##listReshoveSBBTN7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -1708,22 +1665,22 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
 
 ##listCallJamBBTNMP7##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs A7s
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs
 
 ##listCallJamBTNMP7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o
+    55
 
 ##listReshoveBTNMP7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo
 
 ##listCallJamBBTNCO7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs
+    A9o 55 K9s A8o
 
 ##listCallJamBTNCO7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs
 
 ##listReshoveBTNCO7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
@@ -1732,13 +1689,13 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
 
 ##listCallJamCOEP7##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s
 
 ##listReshoveCOEP7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
 
 ##listCallJamBCOMP7##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s
 
 ##listCallJamCOMP7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs A7s
@@ -1747,7 +1704,7 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo
 
 ##listCallJamBMPEP7##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs KQs
 
 ##listCallJamMPEP7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
@@ -1768,7 +1725,7 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
 
 ##listCallJamEPEP7##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs KQs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs
 
 ##listReshoveEPEP7##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
@@ -1964,34 +1921,34 @@
 
 ##listCallJamBBBEP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    55
+    A9o
 
 ##listCallJamBBEP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s QJs
+    A9o 55 K9s A8o
 
 ##listReshoveBBEP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s
 
 ##listCallJamBBBMP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s
 
 ##listCallJamBBMP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s K7s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo
 
 ##listReshoveBBMP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
 
 ##listCallJamBBBCO10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s 44
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o
 
 ##listCallJamBBCO10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    K6s
+    A4o K6s
 
 ##listReshoveBBCO10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -2000,12 +1957,12 @@
 ##listCallJamBBBBTN10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K4s
+    A4o K6s K5s Q8s J9s A3o K8o
 
 ##listCallJamBBBTN10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o
 
 ##listReshoveBBBTN10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -2014,45 +1971,45 @@
 ##listCallJamBBBSB10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 K2s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K2s
 
 ##listCallJamBBSB10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
     A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o K5o K2s
-    Q5s T8s K4o Q7o J7s
+    Q5s T8s K4o Q7o J7s T9o Q4s
 
 ##listReshoveBBSB10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o
 
 ##listCallJamBSBEP10##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
 
 ##listCallJamSBEP10##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs A7s
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
 
 ##listReshoveSBEP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s
 
 ##listCallJamBSBMP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o K9s
+    A9o 55
 
 ##listCallJamSBMP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs
+    A9o 55 K9s A8o QJs A5s
 
 ##listReshoveSBMP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
 
 ##listCallJamBSBCO10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s
 
 ##listCallJamSBCO10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o K7s
 
 ##listReshoveSBCO10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -2060,22 +2017,22 @@
 
 ##listCallJamBSBBTN10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s 44
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o
 
 ##listCallJamSBBTN10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    K6s
+    A4o K6s
 
 ##listReshoveSBBTN10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s
 
 ##listCallJamBBTNEP10##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs
 
 ##listCallJamBTNEP10##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 KQs
 
 ##listReshoveBTNEP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs KQs
@@ -2090,17 +2047,17 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs
 
 ##listCallJamBBTNCO10##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs A7s
 
 ##listCallJamBTNCO10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    55
+    A9o
 
 ##listReshoveBTNCO10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs A8s
 
 ##listCallJamBCOEP10##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo ATs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
 
 ##listCallJamCOEP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs
@@ -2112,7 +2069,7 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
 
 ##listCallJamCOMP10##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs
 
 ##listReshoveCOMP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs
@@ -2121,13 +2078,13 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo
 
 ##listCallJamMPEP10##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo ATs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
 
 ##listReshoveMPEP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs KQs
 
 ##listCallJamBMPMP10##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs KQs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66
 
 ##listCallJamMPMP10##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
@@ -2145,44 +2102,46 @@
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs KQs
 
 ##listCallJamBBBEP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs A7s
 
 ##listCallJamBBEP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
+    A9o
 
 ##listReshoveBBEP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs A8s
 
 ##listCallJamBBBMP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55
+    A9o 55 K9s A8o QJs
 
 ##listCallJamBBMP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s
 
 ##listReshoveBBMP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo
 
 ##listCallJamBBBCO12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o
 
 ##listCallJamBBCO12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o K7s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o
 
 ##listReshoveBBCO12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
 
 ##listCallJamBBBBTN12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o JTs
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
+    A4o
 
 ##listCallJamBBBTN12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s
+    A4o K6s K5s Q8s J9s A3o K8o
 
 ##listReshoveBBBTN12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -2191,166 +2150,169 @@
 ##listCallJamBBBSB12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K4s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o Q7s
 
 ##listCallJamBBSB12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s Q9o A2o K6o Q7s J8s T9s K3s Q8o Q6s 33 J9o
 
 ##listReshoveBBSB12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo
 
 ##listCallJamBSBEP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs A8s
 
 ##listCallJamSBEP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
 
 ##listReshoveSBEP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs A8s
 
 ##listCallJamBSBMP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
 
 ##listCallJamSBMP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
+    A9o 55
 
 ##listReshoveSBMP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo
 
 ##listCallJamBSBCO12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o
+    A9o 55 K9s A8o QJs A5s KTo
 
 ##listCallJamSBCO12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o
 
 ##listReshoveSBCO12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo
 
 ##listCallJamBSBBTN12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o
 
 ##listCallJamSBBTN12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o K7s
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o
 
 ##listReshoveSBBTN12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs
 
 ##listCallJamBBTNEP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo ATs
 
 ##listCallJamBTNEP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs
 
 ##listReshoveBTNEP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
 
 ##listCallJamBBTNMP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
 
 ##listCallJamBTNMP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s
 
 ##listReshoveBTNMP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 KQs
 
 ##listCallJamBBTNCO12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs A8s
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
 
 ##listCallJamBTNCO12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs A7s
 
 ##listReshoveBTNCO12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs
 
 ##listCallJamBCOEP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs ATs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo
 
 ##listCallJamCOEP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
 
 ##listReshoveCOEP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
 
 ##listCallJamBCOMP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66
 
 ##listCallJamCOMP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
 
 ##listReshoveCOMP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 KQs
 
 ##listCallJamBMPEP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs
 
 ##listCallJamMPEP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs ATs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo
 
 ##listReshoveMPEP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
 
 ##listCallJamBMPMP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo ATs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
 
 ##listCallJamMPMP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66
 
 ##listReshoveMPMP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 KQs
 
 ##listCallJamBEPEP12##
-    AA KK QQ JJ TT 99 88 AKs AQs
+    AA KK QQ JJ TT 99 88 AKs AQs 77
 
 ##listCallJamEPEP12##
-    AA KK QQ JJ TT 99 88 AKs AQs 77
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs
 
 ##listReshoveEPEP12##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
 
 ##listCallJamBBBEP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo
 
 ##listCallJamBBEP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs A8s
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo
 
 ##listReshoveBBEP15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
 
 ##listCallJamBBBMP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
+    55
 
 ##listCallJamBBMP15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
+    A9o 55 K9s QJs
 
 ##listReshoveBBMP15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs A8s
 
 ##listCallJamBBBCO15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s QJs
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs
 
 ##listCallJamBBCO15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s K7s
 
 ##listReshoveBBCO15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
 
 ##listCallJamBBBBTN15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o
 
 ##listCallJamBBBTN15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo
 
 ##listReshoveBBBTN15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
@@ -2358,125 +2320,127 @@
 
 ##listCallJamBBBSB15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
+    A4o K6s K5s Q8s J9s K4s
 
 ##listCallJamBBSB15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s QJo A5o A6o K7s Q9s K9o QTo 44 JTs A2s
-    A4o K6s K5s
+    A4o K6s K5s Q8s J9s A3o K8o JTo K7o K4s
 
 ##listReshoveBBSB15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     A9o 55
 
 ##listCallJamBSBEP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
 
 ##listCallJamSBEP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 KQs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s
 
 ##listReshoveSBEP15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo
 
 ##listCallJamBSBMP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s
 
 ##listCallJamSBMP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs A7s
 
 ##listReshoveSBMP15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs A8s
 
 ##listCallJamBSBCO15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs A7s
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
+    A9o K9s
 
 ##listCallJamSBCO15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o
+    A9o 55 K9s A8o QJs
 
 ##listReshoveSBCO15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KTs
 
 ##listCallJamBSBBTN15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s QJs
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs
 
 ##listCallJamSBBTN15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
-    A9o 55 K9s A8o QJs A5s KTo
+    A9o 55 K9s A8o QJs A5s KTo A6s QTs A4s A7o K8s A3s K7s
 
 ##listReshoveSBBTN15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo A8s KQo KTs KJo A7s
     55
 
 ##listCallJamBBTNEP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs ATs
 
 ##listCallJamBTNEP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo
 
 ##listReshoveBTNEP15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo
 
 ##listCallJamBBTNMP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
 
 ##listCallJamBTNMP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66
 
 ##listReshoveBTNMP15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
 
 ##listCallJamBBTNCO15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 KQs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s
 
 ##listCallJamBTNCO15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66 AJo KQs A9s KJs ATo
 
 ##listReshoveBTNCO15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs 66
 
 ##listCallJamBCOEP15##
-    AA KK QQ JJ TT 99 88 AKs AQs
+    AA KK QQ JJ TT 99 88 AKs AQs 77
 
 ##listCallJamCOEP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs ATs
 
 ##listReshoveCOEP15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo
 
 ##listCallJamBCOMP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs ATs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo ATs
 
 ##listCallJamCOMP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo ATs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo ATs
 
 ##listReshoveCOMP15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
 
 ##listCallJamBMPEP15##
-    AA KK QQ JJ TT 99 88
+    AA KK QQ JJ TT 99 88 AKs AQs
 
 ##listCallJamMPEP15##
-    AA KK QQ JJ TT 99 88 AKs AQs
+    AA KK QQ JJ TT 99 88 AKs AQs 77
 
 ##listReshoveMPEP15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo
 
 ##listCallJamBMPMP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo
 
 ##listCallJamMPMP15##
-    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs ATs
+    AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo ATs
 
 ##listReshoveMPMP15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo AQo
 
 ##listCallJamBEPEP15##
-    AA KK QQ JJ TT 99 AKs
+    AA KK QQ JJ TT 99 88 AKs
 
 ##listCallJamEPEP15##
-    AA KK QQ JJ TT 99 88
+    AA KK QQ JJ TT 99 88 AKs AQs
 
 ##listReshoveEPEP15##
     AA KK QQ JJ TT 99 88 AKs AQs 77 AJs AKo
@@ -4655,6 +4619,16 @@ WHEN Others RETURN false FORCE
 WHEN AmountToCall <= 0 RETURN 0 FORCE
 WHEN Others RETURN AmountToCall / (PotSize + AmountToCall) FORCE
 
+##f$Gen_IcmCall##
+// ICM postflop : a la bulle on paie moins large
+WHEN IsBubble RETURN 0.94 FORCE
+WHEN Others RETURN 1 FORCE
+
+##f$Gen_IcmBluff##
+// ICM postflop : a la bulle on bluffe moins
+WHEN IsBubble RETURN 0.93 FORCE
+WHEN Others RETURN 1 FORCE
+
 ##f$Gen_TexTol##
 // Tolerance de call selon la texture : plus bas sur board humide (les tirages arrivent)
 WHEN f$Gen_Tex = 1 RETURN 0.88 FORCE
@@ -4677,8 +4651,8 @@ WHEN Others RETURN 1 FORCE
 
 ##f$Gen_CallTol##
 // Tolerance de call globale : type de pot x adversaire x texture
-WHEN f$Gen_PotType >= 2 RETURN 1.10 * 1 * f$Gen_TexTol FORCE
-WHEN Others RETURN 1 * f$Gen_TexTol FORCE
+WHEN f$Gen_PotType >= 2 RETURN 1.10 * 1 * f$Gen_TexTol * f$Gen_IcmCall FORCE
+WHEN Others RETURN 1 * f$Gen_TexTol * f$Gen_IcmCall FORCE
 
 ##f$Gen_PotOdds##
 // Cotes du pot ajustees (plus bas = on paye plus large) : sert aux seuils de call postflop
@@ -4687,8 +4661,8 @@ WHEN Others RETURN f$Gen_RawOdds / f$Gen_CallTol FORCE
 
 ##f$Gen_BluffMult##
 // Facteur sur les bluffs : type de pot x adversaire
-WHEN f$Gen_PotType >= 2 RETURN 0.80 * f$Gen_TexBluff FORCE
-WHEN Others RETURN f$Gen_TexBluff FORCE
+WHEN f$Gen_PotType >= 2 RETURN 0.80 * f$Gen_TexBluff * f$Gen_IcmBluff FORCE
+WHEN Others RETURN f$Gen_TexBluff * f$Gen_IcmBluff FORCE
 
 ##f$Gen_RRBluff##
 // randomround divise par le facteur : frequence effective = frequence x facteur
