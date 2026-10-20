@@ -43,9 +43,10 @@ def emit_helpers(prof: Profile):
         "HaveFlush AND NOT FlushOnBoard", "HaveStraight AND NOT StraightOnBoard", "HaveSet",
         "HaveTrips AND NOT TripsOnBoard"], "Mains monstrueuses (value maximale)")
     boolfunc("f$Gen_Strong", [
-        "f$Gen_Monster", "HaveTwoPair", "HaveOverPair",
+        "f$Gen_Monster", "HaveTwoPair AND NOT PairOnBoard AND nsuitedcommon < 3", "HaveOverPair",
         "HaveTopPair AND (HaveBestKicker OR HaveSecondBestKicker)"], "Mains fortes")
-    boolfunc("f$Gen_Medium", ["HaveTopPair", "HaveSecondTopPair"], "Paires moyennes / top pair kicker faible")
+    boolfunc("f$Gen_Medium", ["HaveTwoPair", "HaveTopPair", "HaveSecondTopPair"],
+             "Paires moyennes / top pair kicker faible ; double paire sur board paire ou a 3 cartes de couleur (fragile)")
     boolfunc("f$Gen_WeakSD", ["HavePair"], "Petites paires (valeur de showdown)")
     boolfunc("f$Gen_StrongDraw", [
         "(betround < river) AND (HaveFlushDraw OR HaveOpenEndedStraightDraw OR HaveDoubleGutshotDraw)"],
@@ -60,7 +61,8 @@ def emit_helpers(prof: Profile):
     f.comment("Rien : ni main faite ni tirage (exclusif avec les autres catégories)")
     f.ret("f$Gen_Strong OR f$Gen_Medium OR f$Gen_WeakSD OR f$Gen_StrongDraw OR f$Gen_WeakDraw", "false")
     f.others_ret("true")
-    boolfunc("f$Gen_Blockers", ["HaveNutFlushCard", "TopHoleCard = ace"], "Blockers des nuts (bonus de bluff river)")
+    boolfunc("f$Gen_Blockers", ["nsuitedcommon >= 3 AND HaveNutFlushCard", "nsuitedcommon < 3 AND TopHoleCard = ace"],
+             "Blockers utiles au bluff : carte du nut flush sur board a 3 couleurs, sinon As (bloque les meilleures paires)")
     boolfunc("f$Gen_Scare", [
         "(FlushPossibleOnTurn AND NOT FlushPossibleOnFlop)", "(StraightPossibleOnTurn AND NOT StraightPossibleOnFlop)"],
         "La carte du turn complète un tirage (dangereuse pour les bluffs)")
@@ -114,9 +116,14 @@ def commit_rules(f, cfg, street: str):
     if spr <= 0:
         return
     f.comment(f"Engagement : SPR (tapis / pot) <= {fmt(spr)} -> on met le tapis avec les mains fortes")
-    cats = ("Monster",) if street == "river" else ("Monster", "Strong")
-    for cat in cats:
-        f.act(join(f"f$Gen_SPR <= {fmt(spr)}", _cat_cond(cat)), "RaiseMax")
+    f.act(join(f"f$Gen_SPR <= {fmt(spr)}", "f$Gen_Monster"), "RaiseMax")
+    if street != "river":
+        # main forte : jamais en multiway ; sur board dangereux (monotone / humide / connecte) seulement a SPR demi
+        safe = "NOT f$Gen_Multiway AND f$Gen_Tex != 1 AND f$Gen_Tex != 2 AND f$Gen_Tex != 4"
+        f.act(join(f"f$Gen_SPR <= {fmt(spr)}", safe, "f$Gen_Strong"), "RaiseMax")
+        f.act(join(f"f$Gen_SPR <= {fmt(spr / 2)}", "NOT f$Gen_Multiway", "f$Gen_Strong"), "RaiseMax")
+    else:
+        f.act(join(f"f$Gen_SPR <= {fmt(spr)}", "NOT f$Gen_Multiway", "f$Gen_Strong"), "RaiseMax")
     if street != "river":
         low = fmt(spr / 2)
         f.act(join(f"f$Gen_SPR <= {low}", "AmountToCall > 0", "f$Gen_StrongDraw", "f$Gen_PotOdds <= 0.45"), "Call")

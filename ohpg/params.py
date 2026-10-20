@@ -96,6 +96,10 @@ SCHEMA: list[P] = [
     P("pf_scale", "Échelle des ranges de push (%)", G_SHORT, "int", 100, 50, 150, 1),
     P("pf_call_scale", "Échelle des calls de push (%)", G_SHORT, "int", 100, 40, 160, 1),
     P("reshove_stack", "Reshove vs ouverture sous (BB)", G_SHORT, "int", 22, 0, 40, 1),
+    P("payout", "Structure des gains (module l'ICM)", G_SHORT, "choice", "standard",
+      choices=("standard", "top2", "wta"),
+      help="standard = plusieurs places payees (ICM plein) ; top2 = deux payes (ICM x0.6) ; "
+           "wta = le gagnant prend tout (Spin & Go : chip EV, ICM desactive)"),
     P("icm_pressure", "Pression ICM (0-100)", G_SHORT, "int", 0, 0, 100, 1,
       help="resserre les calls de push à la bulle (IsBubble)"),
     # ------------------------------------------------------------------ flop

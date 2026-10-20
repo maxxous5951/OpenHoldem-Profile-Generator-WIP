@@ -43,7 +43,7 @@ FORMATS = {
                    "pf_call_scale": 90},
     "Spin & Go 3-max": {"game": "tournament", "table_size": 3, "pf_max_stack": 12, "open_ep": 40, "open_mp": 40,
                         "open_co": 40, "open_btn": 55, "open_sb": 60, "bb_defend_pct": 50, "icm_pressure": 40,
-                        "icm_postflop": 40, "sb_limp_pct": 30, "openjam_max": 20, "openjam_pct": 8},
+                        "icm_postflop": 40, "payout": "wta", "sb_limp_pct": 30, "openjam_max": 20, "openjam_pct": 8},
 }
 
 

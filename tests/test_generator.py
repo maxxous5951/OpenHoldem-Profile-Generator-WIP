@@ -224,3 +224,30 @@ def test_explain_matches_decisions():
     r = explain(t, "BTN", "Premiere action (ouverture)", 100, 6, "AA")
     assert r["action"].startswith("RaiseTo") and "InButton" in r["rule"]
     assert explain(t, "BTN", "Premiere action (ouverture)", 100, 6, "72o")["action"] == "Fold"
+
+
+# ---------------------------------------------------------------- v2.4 : payout, engagement, Nash 3-max
+def test_payout_wta_disables_icm():
+    wta = generator.generate(presets.build("Balanced 6-max", "Spin & Go 3-max"))
+    assert "IsBubble" not in wta and "f$Gen_IcmCall" not in wta
+    std = generator.generate(presets.build("Balanced 6-max", "Spin & Go 3-max", {"payout": "standard"}))
+    assert "IsBubble" in std and "f$Gen_IcmCall" in std
+
+
+def test_commit_rules_exclude_multiway_and_wet_boards():
+    t = generator.generate({"randomize": False})
+    assert "NOT f$Gen_Multiway AND f$Gen_Tex != 1 AND f$Gen_Tex != 2 AND f$Gen_Tex != 4 AND f$Gen_Strong RaiseMax" in t
+    assert "f$Gen_SPR <= 2.5 AND f$Gen_Strong RaiseMax" not in t
+
+
+def test_two_pair_on_paired_board_is_not_strong():
+    t = generator.generate({})
+    assert "HaveTwoPair AND NOT PairOnBoard" in t
+
+
+def test_nash_3max_tables_sane():
+    from ohpg.data import nash_3max as n
+    assert n.SB_PUSH[10] == pytest.approx(58, abs=3)  # BTN fold : heads-up SB vs BB
+    assert n.BTN_PUSH[10] < n.SB_PUSH[10] and n.BB_CALL_BTN_SB[10] < n.BB_CALL_BTN[10]
+    t = generator.generate(presets.build("Balanced 6-max", "Spin & Go 3-max"))
+    assert "listCallJam3WBBBTN" in t

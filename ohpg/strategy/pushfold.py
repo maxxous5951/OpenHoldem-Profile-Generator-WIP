@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from .. import ranges as R
 from ..ppl import Profile, fmt
-from .common import ORDER, actives, HERO, OPENER, OPEN_WIDTH, join, mix, tiers
+from .common import icm, ORDER, actives, HERO, OPENER, OPEN_WIDTH, join, mix, tiers
 
-from ..data import nash_hu
+from ..data import nash_3max, nash_hu
 
 BUCKETS = [3, 4, 5, 6, 7, 8, 10, 12, 15, 20, 25, 30]
 _OLD_BTN = {3: 80, 4: 68, 5: 58, 6: 50, 7: 44, 8: 40, 10: 34, 12: 28, 15: 22, 20: 15, 25: 11, 30: 8}
@@ -38,16 +38,34 @@ def _cond(lo, hi, var="f$Gen_EffStack"):
     return join(f"{var} >= {lo}", f"{var} <= {hi}")
 
 
+def _n3(cfg, ref):
+    """Tables Nash 3 joueurs utilisables (3-max, profondeur <= 15 BB)."""
+    return cfg["table_size"] == 3 and ref <= NASH_MAX
+
+
 def push_pct(cfg, pos, ref):
+    if _n3(cfg, ref) and pos in ("BTN", "SB"):
+        base = nash_3max.BTN_PUSH[ref] if pos == "BTN" else nash_3max.SB_PUSH[ref]
+        return min(100.0, base * cfg["pf_scale"] / 100.0 * (1.0 + cfg["ante_bb"] * 2.0))
     base = SB_PUSH[ref] if pos == "SB" else BTN_PUSH[ref] * POS_PUSH_MULT.get(pos, 1.0)
     return min(100.0, base * cfg["pf_scale"] / 100.0 * (1.0 + cfg["ante_bb"] * 2.0))
 
 
-def call_pct(cfg, hero, opener, ref, bubble=False):
-    pct = BB_CALL[ref] * OPENER_CALL_MULT[opener] * HERO_CALL_MULT[hero] * cfg["pf_call_scale"] / 100.0
+def call_pct(cfg, hero, opener, ref, bubble=False, multi=False):
+    """% de combos payes face a un jam. multi=True : un autre joueur a deja paye le jam (3-max, BB)."""
+    if _n3(cfg, ref) and (hero, opener) in (("BB", "BTN"), ("BB", "SB"), ("SB", "BTN")):
+        if hero == "SB":
+            pct = nash_3max.SB_CALL[ref]
+        elif opener == "SB":
+            pct = nash_3max.BB_CALL_SB[ref]
+        else:
+            pct = nash_3max.BB_CALL_BTN_SB[ref] if multi else nash_3max.BB_CALL_BTN[ref]
+        pct *= cfg["pf_call_scale"] / 100.0
+    else:
+        pct = BB_CALL[ref] * OPENER_CALL_MULT[opener] * HERO_CALL_MULT[hero] * cfg["pf_call_scale"] / 100.0
     pct *= 1.0 + cfg["ante_bb"] * 1.2
     if bubble:
-        pct *= 1.0 - cfg["icm_pressure"] / 100.0 * 0.45
+        pct *= 1.0 - icm(cfg, "icm_pressure") / 100.0 * 0.45
     return min(95.0, pct)
 
 
@@ -92,10 +110,14 @@ def emit(prof: Profile, f, cfg: dict):
             from .common import openers_before
             for opener in (openers_before(hero)):
                 cond = join(band, HERO[hero], OPENER[opener])
-                if cfg["icm_pressure"] > 0:
+                if icm(cfg, "icm_pressure") > 0:
                     lb = prof.add_list(f"CallJamB{hero}{opener}{hi}", R.top_equity(round(call_pct(cfg, hero, opener, ref, True), 1)))
                     if lb != "false":
                         f.act(join(cond, jam_like, "IsBubble", lb), "Call")
+                if _n3(cfg, ref) and (hero, opener) == ("BB", "BTN"):  # SB a deja paye le jam : range plus serree
+                    lm = prof.add_list(f"CallJam3W{hero}{opener}{hi}", R.top_equity(round(call_pct(cfg, hero, opener, ref, multi=True), 1)))
+                    if lm != "false":
+                        f.act(join(cond, jam_like, "CallsSinceLastRaise >= 1", lm), "Call")
                 lc = prof.add_list(f"CallJam{hero}{opener}{hi}", R.top_equity(round(call_pct(cfg, hero, opener, ref), 1)))
                 if lc != "false":
                     f.act(join(cond, jam_like, lc), "Call")

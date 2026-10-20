@@ -80,10 +80,18 @@ def mix(cfg: dict, freq: float):
     return f"randomhand < {freq:.2f}"
 
 
+ICM_K = {"standard": 1.0, "top2": 0.6, "wta": 0.0}
+
+
+def icm(cfg: dict, key: str) -> float:
+    """Valeur effective (0-100) d'un reglage ICM apres prise en compte de la structure des gains."""
+    return cfg[key] * ICM_K[cfg["payout"]]
+
+
 def bluff_scaled(cfg: dict) -> bool:
     """Vrai si la frequence de bluff postflop est modulee (stats, pot 3bet, texture, ICM) -> f$Gen_RRBluff existe."""
     return bool(cfg["use_stats"] or cfg["cbet_3bet_pot_scale"] != 100 or cfg["tex_dynamic_pct"] > 0
-                or cfg["icm_postflop"] > 0)
+                or icm(cfg, "icm_postflop") > 0)
 
 
 def rr_symbol(cfg: dict, kind: str | None) -> str:

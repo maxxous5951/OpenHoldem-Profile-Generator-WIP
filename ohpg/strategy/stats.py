@@ -9,7 +9,7 @@ Les valeurs sont normalisées en fraction (0..1) que PokerTracker les renvoie en
 from __future__ import annotations
 
 from ..ppl import Profile, fmt
-from .common import bluff_scaled
+from .common import bluff_scaled, icm as icm_eff
 
 CHAIRS = {"HU": "headsupchair", "Rs": "lastraiserchair", "Lm": "firstcallerchair", "Rz": "raischair"}
 
@@ -134,7 +134,7 @@ def emit_postflop(prof: Profile, cfg: dict):
     f.comment("Équité nécessaire pour payer : AmountToCall / (PotSize + AmountToCall)")
     f.ret("AmountToCall <= 0", 0)
     f.others_ret("AmountToCall / (PotSize + AmountToCall)")
-    icm = cfg["icm_postflop"] / 100.0
+    icm = icm_eff(cfg, "icm_postflop") / 100.0
     if icm > 0:
         f = prof.func("f$Gen_IcmCall")
         f.comment("ICM postflop : a la bulle on paie moins large")

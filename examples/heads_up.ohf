@@ -1,6 +1,6 @@
 //*****************************************************************************
 //  OHPG Balanced 6-max / Cash Heads-Up
-//  Genere par OpenHoldem Profile Generator (ohpg) v2.2.0 le 2026-10-20
+//  Genere par OpenHoldem Profile Generator (ohpg) v2.4.0 le 2026-10-20
 //
 //  Format : cash, 2 joueurs, ante 0.0 BB
 //  Prerequis : charger la bibliotheque OpenPPL officielle (OpenPPL_Library) avant ce fichier.
@@ -870,13 +870,14 @@ WHEN Others RETURN false FORCE
 ##f$Gen_Strong##
 // Mains fortes
 WHEN f$Gen_Monster RETURN true FORCE
-WHEN HaveTwoPair RETURN true FORCE
+WHEN HaveTwoPair AND NOT PairOnBoard AND nsuitedcommon < 3 RETURN true FORCE
 WHEN HaveOverPair RETURN true FORCE
 WHEN HaveTopPair AND (HaveBestKicker OR HaveSecondBestKicker) RETURN true FORCE
 WHEN Others RETURN false FORCE
 
 ##f$Gen_Medium##
-// Paires moyennes / top pair kicker faible
+// Paires moyennes / top pair kicker faible ; double paire sur board paire ou a 3 cartes de couleur (fragile)
+WHEN HaveTwoPair RETURN true FORCE
 WHEN HaveTopPair RETURN true FORCE
 WHEN HaveSecondTopPair RETURN true FORCE
 WHEN Others RETURN false FORCE
@@ -907,9 +908,9 @@ WHEN f$Gen_Strong OR f$Gen_Medium OR f$Gen_WeakSD OR f$Gen_StrongDraw OR f$Gen_W
 WHEN Others RETURN true FORCE
 
 ##f$Gen_Blockers##
-// Blockers des nuts (bonus de bluff river)
-WHEN HaveNutFlushCard RETURN true FORCE
-WHEN TopHoleCard = ace RETURN true FORCE
+// Blockers utiles au bluff : carte du nut flush sur board a 3 couleurs, sinon As (bloque les meilleures paires)
+WHEN nsuitedcommon >= 3 AND HaveNutFlushCard RETURN true FORCE
+WHEN nsuitedcommon < 3 AND TopHoleCard = ace RETURN true FORCE
 WHEN Others RETURN false FORCE
 
 ##f$Gen_Scare##
@@ -946,7 +947,8 @@ WHEN Others RETURN 9 FORCE
 // OHPG : flop. Blocs : c-bet (agresseur preflop), mise du non-agresseur, relance subie, mise subie.
 // Engagement : SPR (tapis / pot) <= 2.5 -> on met le tapis avec les mains fortes
 WHEN f$Gen_SPR <= 2.5 AND f$Gen_Monster RaiseMax FORCE
-WHEN f$Gen_SPR <= 2.5 AND f$Gen_Strong RaiseMax FORCE
+WHEN f$Gen_SPR <= 2.5 AND NOT f$Gen_Multiway AND f$Gen_Tex != 1 AND f$Gen_Tex != 2 AND f$Gen_Tex != 4 AND f$Gen_Strong RaiseMax FORCE
+WHEN f$Gen_SPR <= 1.25 AND NOT f$Gen_Multiway AND f$Gen_Strong RaiseMax FORCE
 WHEN f$Gen_SPR <= 1.25 AND AmountToCall > 0 AND f$Gen_StrongDraw AND f$Gen_PotOdds <= 0.45 Call FORCE
 WHEN f$Gen_SPR <= 1.25 AND AmountToCall > 0 AND f$Gen_Medium AND f$Gen_PotOdds <= 0.40 Call FORCE
 // --- C-BET : nous avons relance preflop et personne n'a mise ---
@@ -1740,7 +1742,8 @@ WHEN AmountToCall > 0
 // OHPG : turn. Blocs : 2e barrel, c-bet retarde / probe, mise, relance subie, mise subie.
 // Engagement : SPR (tapis / pot) <= 2.5 -> on met le tapis avec les mains fortes
 WHEN f$Gen_SPR <= 2.5 AND f$Gen_Monster RaiseMax FORCE
-WHEN f$Gen_SPR <= 2.5 AND f$Gen_Strong RaiseMax FORCE
+WHEN f$Gen_SPR <= 2.5 AND NOT f$Gen_Multiway AND f$Gen_Tex != 1 AND f$Gen_Tex != 2 AND f$Gen_Tex != 4 AND f$Gen_Strong RaiseMax FORCE
+WHEN f$Gen_SPR <= 1.25 AND NOT f$Gen_Multiway AND f$Gen_Strong RaiseMax FORCE
 WHEN f$Gen_SPR <= 1.25 AND AmountToCall > 0 AND f$Gen_StrongDraw AND f$Gen_PotOdds <= 0.45 Call FORCE
 WHEN f$Gen_SPR <= 1.25 AND AmountToCall > 0 AND f$Gen_Medium AND f$Gen_PotOdds <= 0.40 Call FORCE
 // --- 2e BARREL : nous avons mise au flop ---
@@ -1996,6 +1999,7 @@ WHEN AmountToCall > 0
 // OHPG : river. Value fine, bluffs avec blockers, probe, defense par cotes (MDF).
 // Engagement : SPR (tapis / pot) <= 2.5 -> on met le tapis avec les mains fortes
 WHEN f$Gen_SPR <= 2.5 AND f$Gen_Monster RaiseMax FORCE
+WHEN f$Gen_SPR <= 2.5 AND NOT f$Gen_Multiway AND f$Gen_Strong RaiseMax FORCE
 WHEN f$Gen_SPR <= 1.25 AND AmountToCall > 0 AND f$Gen_Medium AND f$Gen_PotOdds <= 0.40 Call FORCE
 // --- 3e BARREL : nous avons mise au turn ---
 WHEN AmountToCall = 0 AND BotRaisedOnTurn

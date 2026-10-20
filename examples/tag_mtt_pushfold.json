@@ -51,6 +51,7 @@
   "pf_scale": 100,
   "pf_call_scale": 100,
   "reshove_stack": 22,
+  "payout": "standard",
   "icm_pressure": 25,
   "cbet_bluff_ip": 50.0,
   "cbet_bluff_oop": 35,

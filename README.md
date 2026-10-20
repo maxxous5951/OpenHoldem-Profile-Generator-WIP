@@ -12,7 +12,7 @@ Générateur de profils **OpenHoldem / OpenPPL** : tu règles des paramètres de
 - **Tournoi** : push/fold par profondeur et poste, reshove, **zone open-jam** au-dessus du push/fold (`openjam_max`), ante, pression ICM à la bulle (`IsBubble`), limp du SB et réponse du BB en 3-max.
 - **Situations couvertes, vérifiées par balayage exhaustif** (`tests/test_coverage.py`) : ouverture, limpers, vs ouverture, squeeze, vs 3bet/4bet/5bet/all-in, limp/call puis relance, pots ouverts/3bet/4bet (SPR et engagement du tapis), c-bet / 2e et 3e barrel / probe / lead OOP (value + semi-bluffs), check-raise planifié, face à un all-in, multiway, heads-up. Positions adaptées à la taille de table (2 à 10 joueurs).
 - **Exploitation des adversaires** (option `use_stats`) : classification nit / fish / maniaque via les stats PokerTracker d'OpenHoldem (`pt_*`) et ajustement des ranges préflop, des bluffs et de la tolérance de call.
-- **132 paramètres** décrits dans un schéma unique (`ohpg/params.py`) qui alimente la CLI, les presets et la GUI.
+- **133 paramètres** décrits dans un schéma unique (`ohpg/params.py`) qui alimente la CLI, les presets et la GUI.
 
 ## Installation
 ```bash
@@ -56,6 +56,7 @@ examples/             profils générés prêts à charger
 
 - **Stats PokerTracker multiway** : face à une mise on lit le joueur qui a misé (`raischair`) ; heads-up `headsupchair` ; sinon le dernier relanceur. Un fish dans le pot (relanceur ou premier caller) augmente la value et réduit les bluffs. Les symboles `pt_*` ne sont pas testés au runtime.
 - ICM : approximation par facteurs (`icm_pressure` préflop, `icm_postflop` après le flop, actifs à la bulle via `IsBubble`), pas de calcul ICM complet.
+- **Push/fold 3-max (Spin)** : Nash à 3 joueurs en chip EV jusqu'à 15 BB (`tools/nash_3max.py`, équités à 3 joueurs approchées par produit normalisé, sans effacement des cartes). `payout = wta` (Spin gagnant-prend-tout) désactive l'ICM ; `top2` / `standard` le réactivent.
 - **Push/fold** : SB et BB reprennent le Nash heads-up exact jusqu'à 15 BB (`tools/nash_pushfold.py`, équités Monte Carlo 169x169 de `tools/equity.c`) ; les autres positions en sont dérivées par facteurs, et au-delà de 15 BB les tables restent prudentes.
 - Non testé **dans OpenHoldem lui-même** (Windows) : la validation garantit que les symboles existent dans la bibliothèque officielle, pas leur comportement exact sur chaque table. Charge le profil et utilise le vérificateur de syntaxe d'OpenHoldem.
 - Les ranges de push/fold sont des **approximations** de Nash sans ICM complet, pas des solutions solveur. Règle-les avec `pf_scale`, `pf_call_scale`, `icm_pressure`.
