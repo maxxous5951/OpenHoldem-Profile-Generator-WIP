@@ -34,6 +34,10 @@ Formats : Cash 6-max, Full Ring, Heads-Up, MTT 9-max, SNG bubble, Spin & Go 3-ma
 
 Dans OpenHoldem : charger la **bibliothèque OpenPPL officielle**, puis le `.ohf` généré (il définit `f$preflop`, `f$flop`, `f$turn`, `f$river` et les hooks optionnels).
 
+## Optimisation automatique
+
+Le dossier [`optimizer/`](optimizer/README.md) contient des scripts qui cherchent un profil gagnant par simulation massive (pool de 15 bots, évolution, validation sur bots jamais vus) avec le simulateur PokerSim.
+
 ## Architecture
 ```
 ohpg/params.py        schéma des paramètres (source de vérité)
