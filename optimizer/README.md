@@ -27,7 +27,8 @@ python validate.py --pokersim /chemin/pokersim --oh-root /chemin/OH15-by-nolog -
 
 - **Pool** : Balanced (2), TAG (3), LAG (3), Nit (2), Maniac (2), Calling Station (3). Chaque variante perturbe ~85 paramètres de style de ±15 à ±35 %. Validation : BAL_2, TAG_3, LAG_3, NIT_2, FISH_3 (jamais utilisés par `optimize.py`). Détail : `pool/pool.json`.
 - **Boucle** : génération 0 = les 6 presets + copies mutées ; ensuite croisement + mutation, étape 1 (tables courtes) sur tous les enfants, étape 2 (gros volume) sur les `--refine` meilleurs. Score = moyenne - k x erreur-type (`--k`, défaut 1).
-- **Gènes** : 23 paramètres de style par défaut (ouvertures, 3bet, défense, c-bet, barrels, bluffs river, tolérance de call, tailles). `--genes a,b,c` pour choisir ; `--use-stats` active `use_stats` et ajoute 16 paramètres d'exploitation.
+- **Gènes** : `--groups base` (23 paramètres, défaut), `all` (87) ou une liste de groupes : `open, defense, big, flop, turn, river, sizes, global, exploit` (`--list-groups` les affiche). `--stages "open,defense,big;flop,turn,river;sizes,global"` optimise par étapes : `--gens` générations par étape, chaque étape repart des meilleurs de la précédente (ré-évalués sur de nouvelles tables). `--genes a,b,c` choisit à la main ; `--use-stats` active `use_stats` et ajoute les 16 paramètres `exploit` (une étape de plus en mode par étapes).
+- **Sélection** : élimination successive (un enfant n'est classé que s'il a été affiné sur beaucoup de mains). Un nouveau run efface l'ancien `history.jsonl` et `validation.json`.
 - **Rake** : 0 par défaut (somme nulle : bb/100 > 0 = bat le champ). `--rake 5 --rake-cap 30` pour un rake réaliste.
 - **Sorties** (dans `--run`) : `best.ohf` (meilleur profil), `best.json` (ses paramètres), `history.jsonl`, `state.json` (reprise), `validation.json`.
 
